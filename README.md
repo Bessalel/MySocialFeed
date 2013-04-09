@@ -1,3 +1,4 @@
+![Alt Logo (clic me)](http://npic.imagup.com/1/1180200573.png)
 MySocialFeed
 ============
 Autors: Bessalel Cohen, Julien Bernard, Vincent Ricard<br>
