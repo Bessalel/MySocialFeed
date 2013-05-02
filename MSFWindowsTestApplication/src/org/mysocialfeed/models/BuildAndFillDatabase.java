@@ -51,7 +51,7 @@ public class BuildAndFillDatabase {
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         // Listing statements
-        public static final String LIST_USERS = "SELECT * FROM users";  
+        public static final String LIST_USER = "SELECT * FROM users WHERE username = ?";  
         
         // Delete statements
         public static final String DELETE_USER = "DELETE FROM users WHERE id = ?";

@@ -28,17 +28,20 @@ public class MSFWindowsTestApplication extends Application {
     public static Connection conn;
     public static Statement stmt;
     
-    public static String welcomeScreenID = "WelcomeScreen";
-    public static String welcomeScreenFile = "WelcomeScreen.fxml";
+    public static final String welcomeScreenID = "WelcomeScreen";
+    public static final String welcomeScreenFile = "WelcomeScreen.fxml";
     
-    public static String userMainScreenID = "UserMainScreen";
-    public static String userMainScreenFile = "UserMainScreen.fxml";
+    public static final String userMainScreenID = "UserMainScreen";
+    public static final String userMainScreenFile = "UserMainScreen.fxml";
     
-    public static String userTwitterTabScreenID = "UserTwitterTabScreenID";
-    public static String userTwitterTabScreenFile = "UserTwitterTabScreen.fxml";
+    public static final String userTwitterTabScreenID = "UserTwitterTabScreenID";
+    public static final String userTwitterTabScreenFile = "UserTwitterTabScreen.fxml";
     
-    public static String userSignUpScreenID = "UserSignUpScreen";
-    public static String userSignUpScreenFile = "UserSignUpScreen.fxml";
+    public static final String userSignUpScreenID = "UserSignUpScreen";
+    public static final String userSignUpScreenFile = "UserSignUpScreen.fxml";
+    
+    public static final String userAccountCreatedScreenID = "UserAccountCreatedScreen";
+    public static final String userAccountCreatedScreenFile = "UserAccountCreatedScreen.fxml";
     
     public static void accessSQL(){
         
@@ -67,16 +70,15 @@ public class MSFWindowsTestApplication extends Application {
         mainController.loadScreen(MSFWindowsTestApplication.userMainScreenID, MSFWindowsTestApplication.userMainScreenFile);
         mainController.loadScreen(MSFWindowsTestApplication.userTwitterTabScreenID, MSFWindowsTestApplication.userTwitterTabScreenFile);
         mainController.loadScreen(MSFWindowsTestApplication.userSignUpScreenID, MSFWindowsTestApplication.userSignUpScreenFile);
+        mainController.loadScreen(MSFWindowsTestApplication.userAccountCreatedScreenID, MSFWindowsTestApplication.userAccountCreatedScreenFile);
         mainController.setScreen(welcomeScreenID);
         
         Group root = new Group();
         root.getChildren().addAll(mainController);
         Scene scene = new Scene(root);
-        primaryStage.setHeight(350);
-        primaryStage.setWidth(400);
+
         primaryStage.setScene(scene);
         primaryStage.show();
-        
     }
 
     /**

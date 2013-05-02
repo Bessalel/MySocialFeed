@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserSignUpScreenController">
+<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="390.0000999999975" prefWidth="598.0000999999975" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserSignUpScreenController">
   <children>
     <Text layoutX="174.0" layoutY="46.0" scaleX="2.1846949635604838" scaleY="2.5663487657138186" strokeType="INSIDE" strokeWidth="0.0" text="Welcome to MySocialFeed where taking control" />
     <Text layoutX="205.0" layoutY="94.0" scaleX="2.5261416107379246" scaleY="2.2530592266275087" strokeType="INSIDE" strokeWidth="0.0" text="of your social life hasn't been easier !" />
@@ -16,7 +16,7 @@
     <TextField fx:id="lastNameTextField" layoutX="24.0" layoutY="281.0" prefWidth="200.0" promptText="LastName" />
     <TextField fx:id="emailAddrTextField" layoutX="24.0" layoutY="337.0" prefWidth="200.0" promptText="E-mail Address" />
     <PasswordField fx:id="passwordField" layoutX="337.0" layoutY="222.0" prefWidth="200.0" promptText="password" />
-    <PasswordField fx:id="confirmPasswordField" layoutX="337.0" layoutY="281.0" prefWidth="200.0" promptText="confirm password" />
+    <PasswordField fx:id="confirmPasswordField" layoutX="337.0" layoutY="281.0" onAction="#createUserAccount" prefWidth="200.0" promptText="confirm password" />
     <Button layoutX="493.0" layoutY="349.0" mnemonicParsing="false" onAction="#createUserAccount" text="Confirm" />
     <Button layoutX="341.0" layoutY="349.0" mnemonicParsing="false" text="Go back" />
     <Label layoutX="28.0" layoutY="140.0" text="Choose a username" />

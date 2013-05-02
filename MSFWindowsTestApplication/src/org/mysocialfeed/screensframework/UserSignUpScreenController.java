@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import org.mysocialfeed.models.BuildAndFillDatabase;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 
@@ -47,13 +48,16 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML
     private PasswordField confirmPasswordField;
     
+    @FXML
+    AnchorPane mainAnchorPane;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        //MSFWindowsTestApplication.
+        ;
     }    
 
     public void setScreenParent(ScreensController screenParent){
@@ -90,7 +94,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
                 MSFWindowsTestApplication.conn.commit();
                 System.out.println("inserting done ! And now closing...");
                 MSFWindowsTestApplication.conn.close();
-                accountCreatedOKMessage.setVisible(true);
+                myController.setScreen(MSFWindowsTestApplication.userAccountCreatedScreenID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
