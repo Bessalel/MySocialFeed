@@ -29,17 +29,18 @@ public class BuildAndFillDatabase {
 	// Create statements (skipped, if already done !)
 	public static final String CREATE_TABLE_USERS_SQL = "" +
                 "CREATE TABLE IF NOT EXISTS users (" +
-		"id INTEGER PRIMARY KEY AUTO_INCREMENT," +
-		"username VARCHAR(255)" +
-                "password VARCHAR(255)" +
-                "firstname VARCHAR(255)" +
-                "lastname VARCHAR(255)" +
-                "email VARCHAR(50)" +
-                "facebook TINYINT" +
-                "twitter TINYINT" +
-                "googleplus TINYINT" +
-                "pinterest TINYINT" +
-		")";
+		"id INT NOT NULL AUTO_INCREMENT," +
+		"username VARCHAR(255), " +
+                "password VARCHAR(255), " +
+                "firstname VARCHAR(255), " +
+                "lastname VARCHAR(255), " +
+                "email VARCHAR(50), " +
+                "facebook TINYINT, " +
+                "twitter TINYINT, " +
+                "googleplus TINYINT, " +
+                "pinterest TINYINT, "
+                + "PRIMARY KEY (id)" +
+		");";
     
         // Insert statements
         public static final String INSERT_USER = "" + 

@@ -11,13 +11,9 @@ import javafx.stage.Stage;
 
 // for SQL :
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.models.BuildAndFillDatabase;
@@ -28,10 +24,6 @@ import org.mysocialfeed.models.BuildAndFillDatabase;
  */
 public class MSFWindowsTestApplication extends Application {
  
-    private Connection conn;
-    private Statement stmt;
-    private DataSource ds;
-    private ResultSet rslt;
     
     public static String welcomeScreenID = "WelcomeScreen";
     //public static String welcomeScreenFile = ScreensController.class.getResource("WelcomeScreen.fxml").getPath();
@@ -52,20 +44,23 @@ public class MSFWindowsTestApplication extends Application {
       
         System.out.println("test");
         
-       try {
+ try {
            // this.ds = (DataSource) BuildAndFillDatabase.ctx.get("jdbc/MySocialFeed");
-           ds = (DataSource) BuildAndFillDatabase.ctx.get("jdbc/MySocialFeed");
-            conn = this.ds.getConnection("root", "");
-        
+           //DataSource ds = (DataSource) BuildAndFillDatabase.ctx.get("jdbc/MySocialFeed");
+            //Connection conn = ds.getConnection("root", "");
+     
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/mysocialfeed","root",""); 
+     
             conn.setAutoCommit(false);
+ 
         
-            stmt = conn.createStatement();
+            Statement stmt = conn.createStatement();
             stmt.execute(BuildAndFillDatabase.CREATE_TABLE_USERS_SQL);
             stmt.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+              
         ScreensController mainController = new ScreensController();
         mainController.loadScreen(MSFWindowsTestApplication.welcomeScreenID, MSFWindowsTestApplication.welcomeScreenFile);
         mainController.loadScreen(MSFWindowsTestApplication.userMainScreenID, MSFWindowsTestApplication.userMainScreenFile);
