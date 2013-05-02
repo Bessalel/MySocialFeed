@@ -64,7 +64,7 @@ public class ScreensController extends StackPane {
             }
             return true;
         } else {
-            System.err.println("screen hasn't been loaded. Screen name :" + screens.get(name) + "\n");
+            System.err.println("screen hasn't been loaded. Screen name : " + screens.get(name) + "\n");
             return false;
         }
     }

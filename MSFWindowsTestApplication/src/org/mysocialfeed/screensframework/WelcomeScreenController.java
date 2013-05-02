@@ -25,7 +25,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
         // TODO
     } 
     
-    public void setScreenParent(ScreensController screenParent){
+    public void setScreenParent(ScreensController screenParent){   
         myController = screenParent;
     }
    
@@ -33,8 +33,14 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     private Label label;
     
     @FXML
-    private void logUserIn(ActionEvent event) {
+    private void SignUserIn(ActionEvent event) {
         myController.setScreen(MSFWindowsTestApplication.userMainScreenID);
         System.out.println("going to user main screen");
-    }   
+    }
+    
+    @FXML
+    private void SignUserUp(ActionEvent event) {
+        myController.setScreen(MSFWindowsTestApplication.userSignUpScreenID);
+        System.out.println("user singing up");
+    }
 }

@@ -34,7 +34,7 @@ public class BuildAndFillDatabase {
                 "password VARCHAR(255), " +
                 "firstname VARCHAR(255), " +
                 "lastname VARCHAR(255), " +
-                "email VARCHAR(50), " +
+                "email VARCHAR(255), " +
                 "facebook TINYINT, " +
                 "twitter TINYINT, " +
                 "googleplus TINYINT, " +
@@ -48,11 +48,12 @@ public class BuildAndFillDatabase {
                 "username, password, firstname, lastname, email," +
                 " facebook, twitter, googleplus, pinterest" +
                 ")" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         
         // Listing statements
         public static final String LIST_USERS = "SELECT * FROM users";  
         
         // Delete statements
         public static final String DELETE_USER = "DELETE FROM users WHERE id = ?";
+        public static final String DELETE_USERSTABLES = "DROP TABLE IF EXISTS users";
 }
