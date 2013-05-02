@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
+  <children>
+    <Label layoutX="87.0" layoutY="20.0" prefHeight="80.0" prefWidth="147.0" text="My Social Feed" textAlignment="CENTER">
+      <font>
+        <Font name="System Bold" size="20.0" />
+      </font>
+    </Label>
+    <Button layoutX="241.0" layoutY="166.0" mnemonicParsing="false" onAction="#logUserIn" text="Log in" />
+  </children>
+</AnchorPane>
