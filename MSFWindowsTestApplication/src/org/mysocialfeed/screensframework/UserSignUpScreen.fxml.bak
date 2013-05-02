@@ -14,10 +14,10 @@
     <TextField id="usernameField" fx:id="userNameTextField" layoutX="24.0" layoutY="163.0" prefWidth="200.0" promptText="username" />
     <TextField fx:id="firstNameTextField" layoutX="24.0" layoutY="222.0" prefWidth="200.0" promptText="FirstName" />
     <TextField fx:id="lastNameTextField" layoutX="24.0" layoutY="281.0" prefWidth="200.0" promptText="LastName" />
-    <TextField fx:id="emailAddrNameTextField" layoutX="24.0" layoutY="337.0" prefWidth="200.0" promptText="E-mail Address" />
+    <TextField fx:id="emailAddrTextField" layoutX="24.0" layoutY="337.0" prefWidth="200.0" promptText="E-mail Address" />
     <PasswordField fx:id="passwordField" layoutX="337.0" layoutY="222.0" prefWidth="200.0" promptText="password" />
     <PasswordField fx:id="confirmPasswordField" layoutX="337.0" layoutY="281.0" prefWidth="200.0" promptText="confirm password" />
-    <Button layoutX="493.0" layoutY="349.0" mnemonicParsing="false" text="Confirm" />
+    <Button layoutX="493.0" layoutY="349.0" mnemonicParsing="false" onAction="#createUserAccount" text="Confirm" />
     <Button layoutX="341.0" layoutY="349.0" mnemonicParsing="false" text="Go back" />
     <Label layoutX="28.0" layoutY="140.0" text="Choose a username" />
     <Label layoutX="28.0" layoutY="200.0" text="Your First Name" />
@@ -25,5 +25,10 @@
     <Label layoutX="28.0" layoutY="314.0" text="Your e-mail Address" />
     <Label layoutX="341.0" layoutY="200.0" text="Choose a password" />
     <Label layoutX="341.0" layoutY="256.0" text="Confirm password" />
+    <Label fx:id="accountCreatedOKMessage" layoutX="370.0" layoutY="141.0" text="Account created" textFill="#41cc00" visible="false">
+      <font>
+        <Font name="System Bold" size="16.0" />
+      </font>
+    </Label>
   </children>
 </AnchorPane>

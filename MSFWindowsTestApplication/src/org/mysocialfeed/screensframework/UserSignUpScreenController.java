@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.mysocialfeed.models.BuildAndFillDatabase;
@@ -25,6 +26,8 @@ import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 public class UserSignUpScreenController implements Initializable, ControlledScreen {
 
     ScreensController myController;
+    
+    @FXML Label accountCreatedOKMessage;
     
     @FXML
     private TextField userNameTextField;
@@ -87,6 +90,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
                 MSFWindowsTestApplication.conn.commit();
                 System.out.println("inserting done ! And now closing...");
                 MSFWindowsTestApplication.conn.close();
+                accountCreatedOKMessage.setVisible(true);
             }
         } catch (SQLException e) {
             e.printStackTrace();
