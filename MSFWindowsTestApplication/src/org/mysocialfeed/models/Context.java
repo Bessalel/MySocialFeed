@@ -9,12 +9,18 @@ package org.mysocialfeed.models;
  * @author Windows
  */
 public class Context {
-    private final static Context instance = new Context();
+    //private final static Context instance = new Context();
 
-    public static String currentUser = null;
-    
-    public static Context getInstance() {
-        return instance;
+    private static UserData currentUser = null;
+
+    // public static Context getInstance() {
+    //   return instance;
+    // }
+    public static void setCurrentUser(UserData currentUser) {
+        Context.currentUser = currentUser;
     }
-    
+
+    public static UserData getCurrentUser() {
+        return Context.currentUser;
+    }
 }

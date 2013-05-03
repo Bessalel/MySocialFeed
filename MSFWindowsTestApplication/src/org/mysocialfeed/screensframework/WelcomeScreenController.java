@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.mysocialfeed.models.BuildAndFillDatabase;
 import org.mysocialfeed.models.Context;
+import org.mysocialfeed.models.UserData;
+import org.mysocialfeed.screensframework.UserMainScreenController;
 
 /**
  *
@@ -67,9 +70,19 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                     } else {
                             if ((userName.getText().compareTo(rs.getString(2)) == 0) 
                              && (userPassword.getText().compareTo(rs.getString(3)) == 0)){
-                                Context.currentUser = userName.getText();
+                                UserData currentUser = new UserData(true, rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getInt(7), rs.getBoolean(8), rs.getInt(8), rs.getBoolean(9), rs.getInt(9), rs.getBoolean(10), rs.getInt(10));
                                 rs.close();
-                                System.out.println("Hello : " + userName.getText());
+                                Context.setCurrentUser(currentUser);
+                                if (Context.getCurrentUser() != null) {
+                                     System.out.println("Welcome " + Context.getCurrentUser().getUserName().toString() + " !");
+                                     UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText()
+                                             + " " + Context.getCurrentUser().getUserName().toString() + " !");
+                                     
+                                     UserMainScreenController.socialAccountList.setItems(
+                                             FXCollections.observableArrayList(
+                                                 "Apple", "Apricot", "Banana",
+                                                 "Cherry", "Date", "Kiwi", "Orange", "Pear", "Strawberry"));
+                                   }
                                 myController.setScreen(MSFWindowsTestApplication.userMainScreenID);
                             } else if ((userPassword.getText().compareTo(rs.getString(2)) != 0) 
                                     && (userPassword.getText().compareTo(rs.getString(3)) != 0)){

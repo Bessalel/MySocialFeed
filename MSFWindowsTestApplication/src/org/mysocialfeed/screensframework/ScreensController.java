@@ -44,7 +44,7 @@ public class ScreensController extends StackPane {
             addScreen(name, loadScreen);
             return true;
         } catch (Exception e) {
-            System.err.println("Error while loading screen : " + e.getMessage());
+            System.err.println("Error while loading screen \"" + name + "\" : " + e.getMessage());
             return false;
         }
     }
