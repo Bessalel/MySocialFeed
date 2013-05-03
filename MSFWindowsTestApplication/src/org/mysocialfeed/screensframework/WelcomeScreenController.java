@@ -69,13 +69,14 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                              && (userPassword.getText().compareTo(rs.getString(3)) == 0)){
                                 Context.currentUser = userName.getText();
                                 rs.close();
+                                System.out.println("Hello : " + userName.getText());
+                                myController.setScreen(MSFWindowsTestApplication.userMainScreenID);
                             } else if ((userPassword.getText().compareTo(rs.getString(2)) != 0) 
                                     && (userPassword.getText().compareTo(rs.getString(3)) != 0)){
                                 System.out.println(rs.getString(3));
                                 errorMessage.setVisible(true);
                         }
                     }
-                    
                 } catch(SQLException e){
                     e.printStackTrace();
                 }
@@ -83,9 +84,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                 MSFWindowsTestApplication.conn.close();
         }catch (SQLException e){
             e.printStackTrace();
-        }
-        System.out.println("Hello : " + userName.getText());
-        myController.setScreen(MSFWindowsTestApplication.userMainScreenID);
+        } 
     }
     
     @FXML
