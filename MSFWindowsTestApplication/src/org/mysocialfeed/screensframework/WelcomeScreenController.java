@@ -40,7 +40,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     }
     
     @FXML
-    Label errorMessage;
+    public static Label errorMessage;
     
     @FXML
     TextField userName;
@@ -52,7 +52,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     private void SignUserIn(ActionEvent event) {
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                MSFWindowsTestApplication.accessAndSetupSQLServer();
+                MSFWindowsTestApplication.accessAndSetupSQLServer(false);
                 }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 try(PreparedStatement getUserData = 
@@ -60,9 +60,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                         BuildAndFillDatabase.LIST_USER, 
                         Statement.RETURN_GENERATED_KEYS)) {
                     getUserData.setString(1, userName.getText());
-                    System.out.println(getUserData.toString());
                     ResultSet rs = getUserData.executeQuery();
-                   // MSFWindowsTestApplication.conn.commit();
                     if (!(rs.next())) {
                         errorMessage.setVisible(true);
                     } else {
@@ -72,16 +70,31 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                 rs.close();
                                 Context.setCurrentUser(currentUser);
                                 if (Context.getCurrentUser() != null) {
-                                     System.out.println("Welcome " + Context.getCurrentUser().getUserName().toString() + " !");
                                      UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText()
-                                             + " " + Context.getCurrentUser().getUserName().toString() + " !");
+                                             + " " + Context.getCurrentUser().getUserFirstName() + " !");
                                      
-                                     
+                                     if (Context.getCurrentUser() != null) {
+                                           if (!(Context.getCurrentUser().hasFacebook())
+                                                   && !(Context.getCurrentUser().hasTwitter())
+                                                   && !(Context.getCurrentUser().hasGooglePlus())
+                                                   && !(Context.getCurrentUser().hasPinterest())) {
+
+                                               UserMainScreenController.userHasAccount.setVisible(false);
+                                               UserMainScreenController.noAccountAvailable.setVisible(true);
+                                               UserMainScreenController.accessFacebook.setVisible(false);
+                                               UserMainScreenController.accessTwitter.setVisible(false);
+                                               UserMainScreenController.accessGooglePlus.setVisible(false);
+                                               UserMainScreenController.accessPinterest.setVisible(false);
+                                               UserMainScreenController.addAccount.setVisible(false);
+                                               UserMainScreenController.addFirstAccount.setVisible(true);
+                                           } else {
+                                               UserMainScreenController.addAccount.setVisible(true);
+                                           }
+                                        }
                                    }
                                 myController.setScreen(FXMLGetResourcer.userMainScreenID);
-                            } else if ((userPassword.getText().compareTo(rs.getString(2)) != 0) 
-                                    && (userPassword.getText().compareTo(rs.getString(3)) != 0)){
-                                System.out.println(rs.getString(3));
+                            } else if ((userName.getText().compareTo(rs.getString(2)) != 0) 
+                                    || (userPassword.getText().compareTo(rs.getString(3)) != 0)){
                                 errorMessage.setVisible(true);
                         }
                     }

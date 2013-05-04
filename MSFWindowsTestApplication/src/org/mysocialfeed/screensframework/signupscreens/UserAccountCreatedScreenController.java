@@ -9,9 +9,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
+import org.mysocialfeed.screensframework.WelcomeScreenController;
 
 /**
  * FXML Controller class
@@ -36,6 +39,10 @@ public class UserAccountCreatedScreenController implements Initializable, Contro
 
     @FXML
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setWidth(515);
+        stage.setHeight(440);
+        WelcomeScreenController.errorMessage.setVisible(false);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 }

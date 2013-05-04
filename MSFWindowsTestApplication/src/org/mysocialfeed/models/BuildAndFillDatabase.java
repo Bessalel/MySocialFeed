@@ -49,7 +49,6 @@ public class BuildAndFillDatabase {
                 "firstname VARCHAR(255), " +
                 "lastname VARCHAR(255), " +
                 "email VARCHAR(255), " +
-                "friends INT, " +
                 "CONSTRAINT users_fk FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE" +
 		");";
         
@@ -61,8 +60,6 @@ public class BuildAndFillDatabase {
                 "firstname VARCHAR(255), " +
                 "lastname VARCHAR(255), " +
                 "email VARCHAR(255), " +
-                "followers INT, " +
-                "following INT, " +
                 "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE" +
 		");";
         
@@ -73,7 +70,6 @@ public class BuildAndFillDatabase {
                 "firstname VARCHAR(255), " +
                 "lastname VARCHAR(255), " +
                 "email VARCHAR(255), " +
-                "friends INT, " +
                 "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE" +
 		");";
         
@@ -84,7 +80,6 @@ public class BuildAndFillDatabase {
                 "firstname VARCHAR(255), " +
                 "lastname VARCHAR(255), " +
                 "email VARCHAR(255), " +
-                "friends INT, " +
                 "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE" +
 		");";
         
@@ -93,7 +88,7 @@ public class BuildAndFillDatabase {
         public static final String INSERT_USER = "" + 
                 "INSERT INTO users(" +
                 "username, password, firstname, lastname, email," +
-                " facebook, twitter, googleplus, pinterest" +
+                "facebook, twitter, googleplus, pinterest" +
                 ")" +
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         

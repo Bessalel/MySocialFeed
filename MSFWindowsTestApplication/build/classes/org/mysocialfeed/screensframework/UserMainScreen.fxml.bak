@@ -14,11 +14,26 @@
         <Font name="System Bold Italic" size="18.0" />
       </font>
     </Label>
-    <Button layoutX="419.0" layoutY="365.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
-    <Button layoutX="38.0" layoutY="216.0" mnemonicParsing="false" onAction="#userChooseTwitter" prefWidth="91.0" text="My Twitter" />
-    <Label layoutX="38.0" layoutY="101.0" text="You cannot access to your social account(s) here :" />
-    <Button layoutX="38.0" layoutY="253.0" mnemonicParsing="false" prefWidth="91.0" text="My Google +" />
-    <Button layoutX="38.0" layoutY="179.0" mnemonicParsing="false" text="My Facebook" />
-    <Button layoutX="38.0" layoutY="290.0" mnemonicParsing="false" prefWidth="91.0" text="My Pinterest" />
+    <Button layoutX="428.0" layoutY="365.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
+    <Button fx:id="accessTwitter" layoutX="36.0" layoutY="200.0" mnemonicParsing="false" onAction="#userChooseTwitter" prefWidth="91.0" text="My Twitter" />
+    <Label fx:id="noAccountAvailable" layoutX="38.0" layoutY="101.0" text="You have not added any account yet. Why not add one ?" textFill="#ff7a00" visible="false">
+      <font>
+        <Font name="System Bold" size="12.0" />
+      </font>
+    </Label>
+    <Button fx:id="accessGooglePlus" layoutX="36.0" layoutY="241.0" mnemonicParsing="false" onAction="#userChooseGooglePlus" prefWidth="91.0" text="My Google +" />
+    <Button fx:id="accessFacebook" layoutX="37.0" layoutY="155.0" mnemonicParsing="false" onAction="#userChooseFacebook" text="My Facebook" />
+    <Button fx:id="accessPinterest" layoutX="37.0" layoutY="286.0" mnemonicParsing="false" onAction="#userChoosePinterest" prefWidth="91.0" text="My Pinterest" />
+    <Button id="addFirstAccount" fx:id="addAccount" layoutX="38.0" layoutY="365.0" mnemonicParsing="false" onAction="#addUserAccount" text="Add account" />
+    <Label fx:id="noFacebookAccount" layoutX="161.0" layoutY="158.0" text="No Facebook account added !" textFill="RED" visible="false">
+      <font>
+        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label fx:id="noTwitterAccount" font="$x1" layoutX="161.0" layoutY="202.0" text="No Twitter account added !" textFill="RED" visible="false" />
+    <Label fx:id="noGooglePlusAccount" font="$x1" layoutX="161.0" layoutY="244.0" text="No Google + account added !" textFill="RED" visible="false" />
+    <Label id="noPinterestAcount" fx:id="noPinterestAccount" font="$x1" layoutX="161.0" layoutY="289.0" text="No Pinterest account added !" textFill="RED" visible="false" />
+    <Button fx:id="addFirstAccount" layoutX="206.0" layoutY="200.0" mnemonicParsing="false" text="Add account" visible="false" />
+    <Label fx:id="userHasAccount" layoutX="38.0" layoutY="94.0" text="Use on of the following button to access your desired social account :" />
   </children>
 </AnchorPane>

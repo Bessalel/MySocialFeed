@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddFacebookAccountScreenController">
+  <children>
+    <ImageView id="Facebook-banner.png" fitHeight="150.0" fitWidth="495.0" layoutX="53.0" layoutY="29.0">
+      <image>
+        <Image url="@Facebook-banner.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <TextField fx:id="userFirstName" layoutX="55.0" layoutY="249.0" prefWidth="200.0" promptText="fistname in your Facebook account" />
+    <TextField fx:id="userLastName" layoutX="348.0" layoutY="249.0" prefWidth="200.0" promptText="last name in your Facebook account" />
+    <Button layoutX="523.0" layoutY="365.0" mnemonicParsing="false" onAction="#addUserFacebookAccount" text="Confirm" />
+    <Button layoutX="14.0" layoutY="365.0" mnemonicParsing="false" text="Cancel" />
+    <Label id="noFirstName" layoutX="55.0" layoutY="231.0" text="Insert your First Name" />
+    <Label id="noLastName" layoutX="348.0" layoutY="228.0" text="Insert your Last Name" />
+    <Label layoutX="201.0" layoutY="308.0" text="Insert your E-mail Address" />
+    <Label fx:id="noFirstName" layoutX="56.0" layoutY="271.0" text="You must insert a valid First Name !" textFill="RED" visible="false">
+      <font>
+        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label id="userLastName" fx:id="noLastName" font="$x1" layoutX="348.0" layoutY="271.0" text="You must insert a valid Last Name !" textFill="RED" visible="false" />
+    <Label fx:id="noEmailAddr" font="$x1" layoutX="201.0" layoutY="346.0" text="You must insert E-mail Address !" textFill="RED" visible="false" />
+    <Label layoutX="140.0" layoutY="192.0" text="Please fill up these fields in order to add a Facebook account">
+      <font>
+        <Font name="System Italic" size="12.0" />
+      </font>
+    </Label>
+    <TextField fx:id="userEmailAddr" layoutX="200.0" layoutY="331.0" prefWidth="200.0" promptText="e-mail address of your Facebook account" />
+  </children>
+</AnchorPane>

@@ -12,34 +12,48 @@ import java.net.URL;
  */
 public class FXMLGetResourcer {
     
+    // Shortcuts to differents packages where screens are stored and organized :
     private final static String SIGNUPS_SCREENS_LOCATOR = 
             "/org/mysocialfeed/screensframework/signupscreens/";
     private final static String SOCIAL_ACCOUNTS_SCREENS_LOCATOR = 
             "/org/mysocialfeed/screensframework/socialaccountstabs/";
+    private final static String ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR =
+            "/org/mysocialfeed/screensframework/socialaccountstabs/addsocialaccounts/";
     
+    // Main screens :
     public final static String welcomeScreenID = "WelcomeScreen";
     private URL welcomeScreenFile;
-    
     public final static String userMainScreenID = "UserMainScree";
     private URL userMainScreenFile;
-    
     public final static String userSignUpScreenID = "UserSignUpScreen";
     private URL userSignUpScreenFile;
-    
     public final static String userAccountCreatedScreenID = "UserAccountCreatedScreenID";
     private URL userAccountCreatedScreenFile;
 
+    // Screens for social accounts display :
     public final static String userFacebookScreenID = "UserFacebookScreen";
     private URL userFacebookScreenFile;
-    
     public final static String userGooglePlusScreenID = "UserGooglePlusScreen";
     private URL userGooglePlusScreenFile;
-    
     public final static String userPinterestScreenID = "UserPinterestScreen";
     private URL userPinterestScreenFile;
-    
     public final static String userTwitterScreenID = "UserTwitterScreen";
     private URL userTwitterScreenFile;
+    public final static String userAddAccountScreenID = "UserAddAccountScreen";
+    private URL userAddAccountScreenFile;
+    
+    // Screens for adding social network accounts :
+    public final static String addFacebookAccountScreenID = "AddFacebookAccountScreen";
+    private URL addFacebookAccountScreenFile;
+    public final static String addGooglePlusAccountScreenID = "AddGooglePluskAccountScreen";
+    private URL addGooglePlusAccountScreenFile;
+    public final static String addPinterestAccountScreenID = "AddPinterestAccountScreen";
+    private URL addPinterestAccountScreenFile;
+    public final static String addTwitterAccountScreenID = "AddTwitterAccountScreen";
+    private URL addTwitterAccountScreenFile;
+    public final static String accountSuccessfullyAddedScreenID = "AddSuccessfullyAddedScreen";
+    private URL accountSuccessfullyAddedScreenFile;
+    
     
     public FXMLGetResourcer() {
         welcomeScreenFile = FXMLGetResourcer.class.getResource("WelcomeScreen.fxml");
@@ -52,6 +66,14 @@ public class FXMLGetResourcer {
         userGooglePlusScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserGooglePlusScreen.fxml");
         userPinterestScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserPinterestScreen.fxml");
         userTwitterScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserTwitterScreen.fxml");
+        userAddAccountScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserAddAccountScreen.fxml");
+        
+        addFacebookAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddFacebookAccountScreen.fxml");
+        addGooglePlusAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddGooglePlusAccountScreen.fxml");
+        addPinterestAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddPinterestAccountScreen.fxml");
+        addTwitterAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddTwitterAccountScreen.fxml");
+        accountSuccessfullyAddedScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AccountSuccessfullyAddedScreen.fxml");
+        
     }
 
     public URL getWelcomeScreenFile() {
@@ -60,10 +82,6 @@ public class FXMLGetResourcer {
 
     public URL getUserMainScreenFile() {
         return userMainScreenFile;
-    }
-
-    public URL getUserSignUpScreenFile() {
-        return userSignUpScreenFile;
     }
 
     public URL getUserAccountCreatedScreenFile() {
@@ -84,5 +102,34 @@ public class FXMLGetResourcer {
 
     public URL getUserTwitterScreenFile() {
         return userTwitterScreenFile;
-    }   
+    }
+
+    public URL getUserAddAccountScreenFile() {
+        return userAddAccountScreenFile;
+    }
+
+    public URL getAddFacebookScreenAccountScreenFile() {
+        return addFacebookAccountScreenFile;
+    }
+
+    public URL getAddGooglePlusAccountScreenFile() {
+        return addGooglePlusAccountScreenFile;
+    }
+
+    public URL getAddPinterestAccountScreenFile() {
+        return addPinterestAccountScreenFile;
+    }
+
+    public URL getAddTwitterAccountScreenFile() {
+        return addTwitterAccountScreenFile;
+    }
+
+    public URL getAccountSuccessfullyAddedScreenFile() {
+        return accountSuccessfullyAddedScreenFile;
+    }
+
+    public URL getUserSignUpScreenFile() {
+        return userSignUpScreenFile;
+    }
+
  }

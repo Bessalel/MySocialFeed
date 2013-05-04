@@ -12,14 +12,17 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.mysocialfeed.models.BuildAndFillDatabase;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
+import org.mysocialfeed.screensframework.WelcomeScreenController;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 
 /**
@@ -34,44 +37,33 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     // Error Messages labels
     
     @FXML
-    Label usernameEmpty;
-    
+    private Label usernameEmpty;
     @FXML
-    Label firstNameEmpty;
-    
+    private Label firstNameEmpty;
     @FXML
-    Label lastNameEmpty;
-    
+    private Label lastNameEmpty;
     @FXML
-    Label emailAddrEmpty;
-    
+    private Label emailAddrEmpty;
     @FXML
-    Label passwordEmpty;
-    
+    private Label passwordEmpty;
     @FXML
-    Label confirmPwdEmpty;
-    
+    private Label confirmPwdEmpty;
     @FXML
-    Label pwdDifferent;
+    private Label pwdDifferent;
       
     
     // Field variables
     
     @FXML
     private TextField userNameTextField;
-   
     @FXML
     private TextField firstNameTextField;
-   
     @FXML
     private TextField lastNameTextField;
-   
     @FXML
     private TextField emailAddrTextField;
-   
     @FXML
     private PasswordField passwordField;
-    
     @FXML
     private PasswordField confirmPasswordField;
     
@@ -97,25 +89,31 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
             lastNameEmpty.setVisible(false);
             emailAddrEmpty.setVisible(false);
             passwordEmpty.setVisible(false);
-            confirmPwdEmpty.setVisible(false);
+            confirmPwdEmpty.setVisible(false);  
             pwdDifferent.setVisible(false);
 
             if (userNameTextField.getText().isEmpty()) {
                 usernameEmpty.setVisible(true);
-            } if (firstNameTextField.getText().isEmpty()) {
+            } 
+            if (firstNameTextField.getText().isEmpty()) {
                 firstNameEmpty.setVisible(true);
-            } if (lastNameTextField.getText().isEmpty()) {
+            } 
+            if (lastNameTextField.getText().isEmpty()) {
                 lastNameEmpty.setVisible(true);
-            } if(emailAddrTextField.getText().isEmpty()) {
+            } 
+            if(emailAddrTextField.getText().isEmpty()) {
                 emailAddrEmpty.setVisible(true);
-            } if (passwordField.getText().isEmpty()) { 
+            } 
+            if (passwordField.getText().isEmpty()) { 
                 passwordEmpty.setVisible(true);
-            } if (confirmPasswordField.getText().isEmpty()) {
+            } 
+            if (confirmPasswordField.getText().isEmpty()) {
                 confirmPwdEmpty.setVisible(true);
-            } if (passwordField.getText().compareTo(confirmPasswordField.getText()) != 0){
+            } 
+            if (passwordField.getText().compareTo(confirmPasswordField.getText()) != 0){
                 pwdDifferent.setVisible(true);
             } else if (
-                    !(userNameTextField.getText().isEmpty())
+                   !(userNameTextField.getText().isEmpty())
                 && !(firstNameTextField.getText().isEmpty())
                 && !(lastNameTextField.getText().isEmpty())
                 && !(emailAddrTextField.getText().isEmpty())
@@ -129,13 +127,17 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
 
     @FXML
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setWidth(515);
+        stage.setHeight(440);
+        WelcomeScreenController.errorMessage.setVisible(false);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
     
     private void insertUserIntoDatabase() {
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                MSFWindowsTestApplication.accessAndSetupSQLServer();
+                MSFWindowsTestApplication.accessAndSetupSQLServer(false);
                 }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                     try (PreparedStatement insertNewUser = 
