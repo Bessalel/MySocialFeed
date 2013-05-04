@@ -25,16 +25,16 @@
     <Label layoutX="23.0" layoutY="314.0" text="Your e-mail Address" />
     <Label layoutX="337.0" layoutY="166.0" text="Choose a password" />
     <Label layoutX="337.0" layoutY="256.0" text="Confirm password" />
-    <Label fx:id="usernameEmpty" layoutX="138.0" layoutY="140.0" text="You must provide an username !" textFill="RED" visible="false">
+    <Label fx:id="usernameEmpty" layoutX="138.0" layoutY="140.0" text="You must provide an username !" textFill="RED">
       <font>
         <Font name="System Bold" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label fx:id="firstNameEmpty" font="$x1" layoutX="138.0" layoutY="197.0" text="You must provide a first name !" textFill="RED" visible="false" />
-    <Label fx:id="lastNameEmpty" font="$x1" layoutX="138.0" layoutY="262.0" text="You must provide a last name !" textFill="RED" visible="false" />
-    <Label fx:id="emailAddrEmpty" font="$x1" layoutX="138.0" layoutY="314.0" text="You must provide a valid e-mail address !" textFill="RED" visible="false" />
-    <Label fx:id="passwordEmpty" font="$x1" layoutX="337.0" layoutY="140.0" text="You must provide a password !" textFill="RED" visible="false" />
-    <Label fx:id="confirmPwdEmpty" font="$x1" layoutX="337.0" layoutY="233.0" text="You must confirm the password !" textFill="RED" visible="false" />
+    <Label fx:id="firstNameEmpty" font="$x1" layoutX="138.0" layoutY="197.0" text="You must provide a first name !" textFill="RED" />
+    <Label fx:id="lastNameEmpty" font="$x1" layoutX="138.0" layoutY="262.0" text="You must provide a last name !" textFill="RED" />
+    <Label fx:id="emailAddrEmpty" font="$x1" layoutX="138.0" layoutY="314.0" text="You must provide a valid e-mail address !" textFill="RED" />
+    <Label fx:id="passwordEmpty" font="$x1" layoutX="337.0" layoutY="140.0" text="You must provide a password !" textFill="RED" />
+    <Label fx:id="confirmPwdEmpty" font="$x1" layoutX="337.0" layoutY="233.0" text="You must confirm the password !" textFill="RED" />
     <Label fx:id="pwdDifferent" font="$x1" layoutX="440.0" layoutY="314.0" text="Passwords don't match !" textFill="RED" visible="false" />
   </children>
 </AnchorPane>

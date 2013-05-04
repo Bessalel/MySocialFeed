@@ -31,7 +31,31 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
 
     ScreensController myController;
     
-    @FXML Label accountCreatedOKMessage;
+    // Error Messages labels
+    
+    @FXML
+    Label usernameEmpty;
+    
+    @FXML
+    Label firstNameEmpty;
+    
+    @FXML
+    Label lastNameEmpty;
+    
+    @FXML
+    Label emailAddrEmpty;
+    
+    @FXML
+    Label passwordEmpty;
+    
+    @FXML
+    Label confirmPwdEmpty;
+    
+    @FXML
+    Label pwdDifferent;
+      
+    
+    // Field variables
     
     @FXML
     private TextField userNameTextField;
@@ -51,6 +75,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML
     private PasswordField confirmPasswordField;
     
+    
     @FXML
     AnchorPane mainAnchorPane;
     
@@ -59,8 +84,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //MSFWindowsTestApplication.
-        ;
     }    
 
     public void setScreenParent(ScreensController screenParent){
@@ -69,17 +92,55 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     
     @FXML
     public void createUserAccount(ActionEvent event) {
+            usernameEmpty.setVisible(false);
+            firstNameEmpty.setVisible(false);
+            lastNameEmpty.setVisible(false);
+            emailAddrEmpty.setVisible(false);
+            passwordEmpty.setVisible(false);
+            confirmPwdEmpty.setVisible(false);
+            pwdDifferent.setVisible(false);
+
+            if (userNameTextField.getText().isEmpty()) {
+                usernameEmpty.setVisible(true);
+            } if (firstNameTextField.getText().isEmpty()) {
+                firstNameEmpty.setVisible(true);
+            } if (lastNameTextField.getText().isEmpty()) {
+                lastNameEmpty.setVisible(true);
+            } if(emailAddrTextField.getText().isEmpty()) {
+                emailAddrEmpty.setVisible(true);
+            } if (passwordField.getText().isEmpty()) { 
+                passwordEmpty.setVisible(true);
+            } if (confirmPasswordField.getText().isEmpty()) {
+                confirmPwdEmpty.setVisible(true);
+            } if (passwordField.getText().compareTo(confirmPasswordField.getText()) != 0){
+                pwdDifferent.setVisible(true);
+            } else if (
+                    !(userNameTextField.getText().isEmpty())
+                && !(firstNameTextField.getText().isEmpty())
+                && !(lastNameTextField.getText().isEmpty())
+                && !(emailAddrTextField.getText().isEmpty())
+                && !(passwordField.getText().isEmpty())
+                && !(confirmPasswordField.getText().isEmpty())
+                && !(passwordField.getText().compareTo(confirmPasswordField.getText()) != 0)) {
+                insertUserIntoDatabase();
+            } else
+                return ;
+    }
+
+    @FXML
+    public void returnUserBackToWelcomeScreen(ActionEvent event) {
+        myController.setScreen(FXMLGetResourcer.welcomeScreenID);
+    }
+    
+    private void insertUserIntoDatabase() {
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                System.out.println("accessing SQL");
                 MSFWindowsTestApplication.accessAndSetupSQLServer();
                 }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
-                System.out.println("inserting...");
                     try (PreparedStatement insertNewUser = 
                             MSFWindowsTestApplication.conn.prepareStatement(
-                            BuildAndFillDatabase.INSERT_USER, 
-                            Statement.RETURN_GENERATED_KEYS)) {
+                            BuildAndFillDatabase.INSERT_USER)) {
                                 insertNewUser.setString(1, userNameTextField.getText());
                                 insertNewUser.setString(2, passwordField.getText());
                                 insertNewUser.setString(3, firstNameTextField.getText());
@@ -95,7 +156,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
                         e.printStackTrace();
                     }
                 MSFWindowsTestApplication.conn.commit();
-                System.out.println("inserting done ! And now closing...");
                 MSFWindowsTestApplication.conn.close();
                 myController.setScreen(FXMLGetResourcer.userAccountCreatedScreenID);
             }
@@ -103,10 +163,4 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
             e.printStackTrace();
         }
     }
-
-    @FXML
-    public void returnUserBackToWelcomeScreen(ActionEvent event) {
-        myController.setScreen(FXMLGetResourcer.welcomeScreenID);
-    }
-    
 }
