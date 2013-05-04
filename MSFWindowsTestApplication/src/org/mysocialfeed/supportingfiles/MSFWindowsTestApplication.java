@@ -13,10 +13,12 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.mysocialfeed.models.BuildAndFillDatabase;
+import org.mysocialfeed.screensframework.FXMLGetResourcer;
 
 // for SQL :
 
 import org.mysocialfeed.screensframework.ScreensController;
+
 
 /**
  *
@@ -27,50 +29,48 @@ public class MSFWindowsTestApplication extends Application {
     public static Connection conn;
     public static Statement stmt;
     
-    public static final String welcomeScreenID = "WelcomeScreen";
-    public static final String welcomeScreenFile = "WelcomeScreen.fxml";
-    
-    public static final String userMainScreenID = "UserMainScreen";
-    public static final String userMainScreenFile = "UserMainScreen.fxml";
-    
-    public static final String userTwitterTabScreenID = "UserTwitterTabScreenID";
-    public static final String userTwitterTabScreenFile = "UserTwitterTabScreen.fxml";
-    
-    public static final String userSignUpScreenID = "UserSignUpScreen";
-    public static final String userSignUpScreenFile = "UserSignUpScreen.fxml";
-    
-    public static final String userAccountCreatedScreenID = "UserAccountCreatedScreen";
-    public static final String userAccountCreatedScreenFile = "UserAccountCreatedScreen.fxml";
-    
-    public static void accessSQL(){
-        
+    public static void accessAndSetupSQLServer(){
         try {  
             
             conn = DriverManager.getConnection("jdbc:mysql://localhost/mysocialfeed","root","");
             conn.setAutoCommit(false);
  
             stmt = conn.createStatement();
+            
             stmt.execute(BuildAndFillDatabase.CREATE_TABLE_USERS_SQL);
+            stmt.execute(BuildAndFillDatabase.CREATE_TABLE_FACEBOOK_SQL);
+            stmt.execute(BuildAndFillDatabase.CREATE_TABLE_TWITTER_SQL);
+            stmt.execute(BuildAndFillDatabase.CREATE_TABLE_GOOGLEPLUS_SQL);
+            stmt.execute(BuildAndFillDatabase.CREATE_TABLE_PINTEREST_SQL);
+            
             stmt.close();
             
         } catch (SQLException e){
             e.printStackTrace();
         }
-        
     }
     
     @Override
     public void start(Stage primaryStage) {
         
-        accessSQL();
+        accessAndSetupSQLServer();
+        
+        FXMLGetResourcer myFXMLGetResourcer = new FXMLGetResourcer();
+        
         
         ScreensController mainController = new ScreensController();
-        mainController.loadScreen(MSFWindowsTestApplication.welcomeScreenID, MSFWindowsTestApplication.welcomeScreenFile);
-        mainController.loadScreen(MSFWindowsTestApplication.userMainScreenID, MSFWindowsTestApplication.userMainScreenFile);
-        mainController.loadScreen(MSFWindowsTestApplication.userTwitterTabScreenID, MSFWindowsTestApplication.userTwitterTabScreenFile);
-        mainController.loadScreen(MSFWindowsTestApplication.userSignUpScreenID, MSFWindowsTestApplication.userSignUpScreenFile);
-        mainController.loadScreen(MSFWindowsTestApplication.userAccountCreatedScreenID, MSFWindowsTestApplication.userAccountCreatedScreenFile);
-        mainController.setScreen(welcomeScreenID);
+                
+        mainController.loadScreen(FXMLGetResourcer.welcomeScreenID, myFXMLGetResourcer.getWelcomeScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userMainScreenID, myFXMLGetResourcer.getUserMainScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userSignUpScreenID, myFXMLGetResourcer.getUserSignUpScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userAccountCreatedScreenID, myFXMLGetResourcer.getUserAccountCreatedScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userFacebookScreenID, myFXMLGetResourcer.getUserFacebookScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userGooglePlusScreenID, myFXMLGetResourcer.getUserGooglePlusScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userPinterestScreenID, myFXMLGetResourcer.getUserPinterestScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.userTwitterScreenID, myFXMLGetResourcer.getUserTwitterScreenFile());
+        
+        
+        mainController.setScreen(FXMLGetResourcer.welcomeScreenID);
         
         Group root = new Group();
         root.getChildren().addAll(mainController);

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.mysocialfeed.screensframework;
+package org.mysocialfeed.screensframework.signupscreens;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -17,6 +17,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import org.mysocialfeed.models.BuildAndFillDatabase;
+import org.mysocialfeed.screensframework.ControlledScreen;
+import org.mysocialfeed.screensframework.FXMLGetResourcer;
+import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 
 /**
@@ -69,7 +72,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
                 System.out.println("accessing SQL");
-                MSFWindowsTestApplication.accessSQL();
+                MSFWindowsTestApplication.accessAndSetupSQLServer();
                 }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 System.out.println("inserting...");
@@ -94,7 +97,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
                 MSFWindowsTestApplication.conn.commit();
                 System.out.println("inserting done ! And now closing...");
                 MSFWindowsTestApplication.conn.close();
-                myController.setScreen(MSFWindowsTestApplication.userAccountCreatedScreenID);
+                myController.setScreen(FXMLGetResourcer.userAccountCreatedScreenID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -103,7 +106,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
 
     @FXML
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
-        myController.setScreen(MSFWindowsTestApplication.welcomeScreenID);
+        myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
     
 }

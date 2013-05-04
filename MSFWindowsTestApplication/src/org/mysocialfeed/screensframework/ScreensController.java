@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework;
 
+import java.net.URL;
 import java.util.HashMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,10 +36,11 @@ public class ScreensController extends StackPane {
     
     //Loads the fxml file, add the screen to the screens collection and
     //finally injects the screenPane to the controller.
-    public boolean loadScreen(String name, String resource) {
+    public boolean loadScreen(String name, URL resource) {
         try {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
-            Parent loadScreen = (Parent) myLoader.load();
+            //System.out.println("Let's make sure of it --> " + resource);
+            FXMLLoader myLoader = new FXMLLoader(resource); //getClass().getResource(resource));
+            Parent loadScreen = (Parent) myLoader.load(); //(resource);
             ControlledScreen myScreenController = ((ControlledScreen) myLoader.getController());
             myScreenController.setScreenParent(this);
             addScreen(name, loadScreen);

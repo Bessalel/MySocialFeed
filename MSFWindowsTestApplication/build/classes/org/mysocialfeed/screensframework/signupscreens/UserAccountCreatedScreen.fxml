@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="398.9998779296875" prefWidth="502.0938499999975" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserAccountCreatedScreenController">
+<AnchorPane id="AnchorPane" prefHeight="398.9998779296875" prefWidth="502.0938499999975" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.signupscreens.UserAccountCreatedScreenController">
   <children>
     <Text layoutX="133.0" layoutY="188.0" scaleX="1.8419820608829993" scaleY="2.0651003588375416" strokeType="OUTSIDE" strokeWidth="0.0" text="Your account has been created successfully !" />
     <Button layoutX="223.0" layoutY="242.0" mnemonicParsing="false" onAction="#returnUserBackToWelcomeScreen" text="Sign in" />

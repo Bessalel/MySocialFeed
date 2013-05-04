@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.mysocialfeed.screensframework;
+package org.mysocialfeed.screensframework.signupscreens;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
+import org.mysocialfeed.screensframework.ControlledScreen;
+import org.mysocialfeed.screensframework.FXMLGetResourcer;
+import org.mysocialfeed.screensframework.ScreensController;
 
 /**
  * FXML Controller class
@@ -34,6 +36,6 @@ public class UserAccountCreatedScreenController implements Initializable, Contro
 
     @FXML
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
-        myController.setScreen(MSFWindowsTestApplication.welcomeScreenID);
+        myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="389.9998558593725" prefWidth="597.9998779296875" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserSignUpScreenController">
+<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="389.9998558593725" prefWidth="597.9998779296875" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.signupscreens.UserSignUpScreenController">
   <children>
     <Text layoutX="164.0" layoutY="46.0" scaleX="2.1846949635604838" scaleY="2.5663487657138186" strokeType="INSIDE" strokeWidth="0.0" text="Welcome to MySocialFeed where taking control" />
     <Text layoutX="193.0" layoutY="94.0" scaleX="2.5261416107379246" scaleY="2.2530592266275087" strokeType="INSIDE" strokeWidth="0.0" text="of your social life hasn't been easier !" />

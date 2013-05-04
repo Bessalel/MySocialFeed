@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +22,6 @@ import javafx.stage.Stage;
 import org.mysocialfeed.models.BuildAndFillDatabase;
 import org.mysocialfeed.models.Context;
 import org.mysocialfeed.models.UserData;
-import org.mysocialfeed.screensframework.UserMainScreenController;
 
 /**
  *
@@ -54,7 +52,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     private void SignUserIn(ActionEvent event) {
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                MSFWindowsTestApplication.accessSQL();
+                MSFWindowsTestApplication.accessAndSetupSQLServer();
                 }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 try(PreparedStatement getUserData = 
@@ -78,12 +76,9 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                      UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText()
                                              + " " + Context.getCurrentUser().getUserName().toString() + " !");
                                      
-                                     UserMainScreenController.socialAccountList.setItems(
-                                             FXCollections.observableArrayList(
-                                                 "Apple", "Apricot", "Banana",
-                                                 "Cherry", "Date", "Kiwi", "Orange", "Pear", "Strawberry"));
+                                     
                                    }
-                                myController.setScreen(MSFWindowsTestApplication.userMainScreenID);
+                                myController.setScreen(FXMLGetResourcer.userMainScreenID);
                             } else if ((userPassword.getText().compareTo(rs.getString(2)) != 0) 
                                     && (userPassword.getText().compareTo(rs.getString(3)) != 0)){
                                 System.out.println(rs.getString(3));
@@ -105,6 +100,6 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(600);
         stage.setHeight(430);
-        myController.setScreen(MSFWindowsTestApplication.userSignUpScreenID);
+        myController.setScreen(FXMLGetResourcer.userSignUpScreenID);
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserTwitterTabScreenController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.UserTwitterScreenController">
   <children>
     <Label layoutX="51.0" layoutY="37.0" text="Your Tiwitter Timeline">
       <font>

@@ -14,13 +14,11 @@
         <Font name="System Bold Italic" size="18.0" />
       </font>
     </Label>
-    <Button layoutX="427.0" layoutY="365.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
-    <Button layoutX="389.0" layoutY="305.0" mnemonicParsing="false" onAction="#userChooseTwitter" text="My Twitter" />
-    <Label layoutX="38.0" layoutY="103.0" text="This is the list of account you currently have :">
-      <font>
-        <Font size="13.0" />
-      </font>
-    </Label>
-    <ListView fx:id="socialAccountList" editable="true" layoutX="38.0" layoutY="136.0" prefHeight="200.0" prefWidth="200.0" />
+    <Button layoutX="428.0" layoutY="365.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
+    <Button layoutX="38.0" layoutY="216.0" mnemonicParsing="false" onAction="#userChooseTwitter" prefWidth="91.0" text="My Twitter" />
+    <Label layoutX="38.0" layoutY="101.0" text="You cannot access to your social account(s) here :" />
+    <Button layoutX="38.0" layoutY="253.0" mnemonicParsing="false" prefWidth="91.0" text="My Google +" />
+    <Button layoutX="38.0" layoutY="179.0" mnemonicParsing="false" text="My Facebook" />
+    <Button layoutX="38.0" layoutY="290.0" mnemonicParsing="false" prefWidth="91.0" text="My Pinterest" />
   </children>
 </AnchorPane>

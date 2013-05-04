@@ -11,8 +11,8 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MSFWindowsTestApplication.jar" size="172431" download="eager" />
-    <jar href="lib/mysql-connector-java-5.1.23-bin.jar" size="873923" download="eager" />
+    <jar href="MSFWindowsTestApplication.jar" size="179272" download="eager" />
+    <jar href="lib/mysql-connector-java-5.1.23-bin.jar" size="873922" download="eager" />
   </resources>
 <security>
   <all-permissions/>
