@@ -51,8 +51,8 @@ public class FXMLGetResourcer {
     private URL addPinterestAccountScreenFile;
     public final static String addTwitterAccountScreenID = "AddTwitterAccountScreen";
     private URL addTwitterAccountScreenFile;
-    public final static String accountSuccessfullyAddedScreenID = "AddSuccessfullyAddedScreen";
-    private URL accountSuccessfullyAddedScreenFile;
+    public final static String AccountCreationResultScreenID = "AddSuccessfullyAddedScreen";
+    private URL AccountCreationResultScreenFile;
     
     
     public FXMLGetResourcer() {
@@ -72,7 +72,7 @@ public class FXMLGetResourcer {
         addGooglePlusAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddGooglePlusAccountScreen.fxml");
         addPinterestAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddPinterestAccountScreen.fxml");
         addTwitterAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddTwitterAccountScreen.fxml");
-        accountSuccessfullyAddedScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AccountSuccessfullyAddedScreen.fxml");
+        AccountCreationResultScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AccountCreationResultScreen.fxml");
         
     }
 
@@ -124,12 +124,11 @@ public class FXMLGetResourcer {
         return addTwitterAccountScreenFile;
     }
 
-    public URL getAccountSuccessfullyAddedScreenFile() {
-        return accountSuccessfullyAddedScreenFile;
+    public URL getAccountCreationResultScreenFile() {
+        return AccountCreationResultScreenFile;
     }
 
     public URL getUserSignUpScreenFile() {
         return userSignUpScreenFile;
     }
-
  }

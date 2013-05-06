@@ -68,6 +68,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                              && (userPassword.getText().compareTo(rs.getString(3)) == 0)){
                                 UserData currentUser = new UserData(true, rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getInt(7), rs.getBoolean(8), rs.getInt(8), rs.getBoolean(9), rs.getInt(9), rs.getBoolean(10), rs.getInt(10));
                                 rs.close();
+                                System.out.println(currentUser.toString());
                                 Context.setCurrentUser(currentUser);
                                 if (Context.getCurrentUser() != null) {
                                      UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText()
@@ -79,6 +80,8 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                                    && !(Context.getCurrentUser().hasGooglePlus())
                                                    && !(Context.getCurrentUser().hasPinterest())) {
 
+                                               UserMainScreenController.addFirstAccount.setVisible(true);
+                                               
                                                UserMainScreenController.userHasAccount.setVisible(false);
                                                UserMainScreenController.noAccountAvailable.setVisible(true);
                                                UserMainScreenController.accessFacebook.setVisible(false);
@@ -86,7 +89,6 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                                UserMainScreenController.accessGooglePlus.setVisible(false);
                                                UserMainScreenController.accessPinterest.setVisible(false);
                                                UserMainScreenController.addAccount.setVisible(false);
-                                               UserMainScreenController.addFirstAccount.setVisible(true);
                                            } else {
                                                UserMainScreenController.addAccount.setVisible(true);
                                            }

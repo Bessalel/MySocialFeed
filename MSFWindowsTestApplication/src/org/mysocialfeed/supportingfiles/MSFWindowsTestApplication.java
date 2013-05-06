@@ -86,7 +86,7 @@ public class MSFWindowsTestApplication extends Application {
         mainController.loadScreen(FXMLGetResourcer.addGooglePlusAccountScreenID, myFXMLGetResourcer.getAddGooglePlusAccountScreenFile());
         mainController.loadScreen(FXMLGetResourcer.addPinterestAccountScreenID, myFXMLGetResourcer.getAddPinterestAccountScreenFile());
         mainController.loadScreen(FXMLGetResourcer.addTwitterAccountScreenID, myFXMLGetResourcer.getAddTwitterAccountScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.accountSuccessfullyAddedScreenID, myFXMLGetResourcer.getAccountSuccessfullyAddedScreenFile());
+        mainController.loadScreen(FXMLGetResourcer.AccountCreationResultScreenID, myFXMLGetResourcer.getAccountCreationResultScreenFile());
         
         mainController.setScreen(FXMLGetResourcer.welcomeScreenID); 
     }

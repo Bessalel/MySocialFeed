@@ -56,16 +56,13 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     public static Label noAccountAvailable;
     
     @FXML
-    Label noFacebookAccount;
-    
+    private Label noFacebookAccount;
     @FXML
-    Label noTwitterAccount;
-    
+    private Label noTwitterAccount;
     @FXML
-    Label noGooglePlusAccount;
-    
+    private Label noGooglePlusAccount;
     @FXML
-    Label noPinterestAccount;
+    private Label noPinterestAccount;
      
     /**
      * Initializes the controller class.
@@ -84,52 +81,58 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     private void userChooseFacebook(ActionEvent event) {
         if (Context.getCurrentUser() != null) {
            if (!(Context.getCurrentUser().hasFacebook())) {
-               noFacebookAccount.setVisible(false);
+               noFacebookAccount.setVisible(true);
            }
         }
-        // myController.setScreen(MSFWindowsTestApplication.userTwitterTabScreenID);
     }
     
     @FXML
     private void userChooseTwitter(ActionEvent event) {
         if (Context.getCurrentUser() != null) {
           if (!(Context.getCurrentUser().hasTwitter())) {
-               noTwitterAccount.setVisible(false);
-           }  
+               noTwitterAccount.setVisible(true);
+           } else
+              myController.setScreen(FXMLGetResourcer.userTwitterScreenID);
         }
-        myController.setScreen(FXMLGetResourcer.userTwitterScreenID);
     }
     
     @FXML
     private void userChooseGooglePlus(ActionEvent event) {
         if (Context.getCurrentUser() != null) {
             if (!(Context.getCurrentUser().hasGooglePlus())) {
-               noTwitterAccount.setVisible(false);
+               noGooglePlusAccount.setVisible(true);
            }
         }
-      //  myController.setScreen(MSFWindowsTestApplication.userTwitterTabScreenID);
     }
     
     @FXML
     private void userChoosePinterest(ActionEvent event) {
         if (Context.getCurrentUser() != null) {
             if (!(Context.getCurrentUser().hasPinterest())) {
-               noPinterestAccount.setVisible(false);
+               noPinterestAccount.setVisible(true);
            }
         }
-      //  myController.setScreen(MSFWindowsTestApplication.userTwitterTabScreenID);
     }
     
     @FXML
     private void addUserAccount(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(600);
+        stage.setWidth(605);
         stage.setHeight(430);
         myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
     }
     
     @FXML
     private void logUserOff(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setWidth(515);
+        stage.setHeight(440);
+        
+        noFacebookAccount.setVisible(false);
+        noTwitterAccount.setVisible(false);
+        noGooglePlusAccount.setVisible(false);
+        noPinterestAccount.setVisible(false);
+        
         UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText().substring(0, 7));
         WelcomeScreenController.errorMessage.setVisible(false);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);

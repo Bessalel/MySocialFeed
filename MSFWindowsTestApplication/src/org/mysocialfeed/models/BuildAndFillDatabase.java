@@ -94,29 +94,39 @@ public class BuildAndFillDatabase {
         
         public static final String INSERT_FACEBOOK_ACCOUNT = "" + 
                 "INSERT INTO facebook(" +
-                "userid, firstname, lastname, email, friends" +
+                "userid, firstname, lastname, email" +
                 ")" +
-                " VALUES (?, ?, ?, ?, ?);";
+                " VALUES (?, ?, ?, ?);";
         
         public static final String INSERT_TWITTER_ACCOUNT = "" + 
                 "INSERT INTO twitter(" +
                 "userid, username, firstname, lastname, email, " +
-                "followers, following" +
                 ")" +
                 " VALUES (?, ?, ?, ?, ?);";
         
         public static final String INSERT_GOOGLEPLUS_ACCOUNT = "" + 
                 "INSERT INTO googleplus(" +
-                "userid, firstname, lastname, email, friends" +
+                "userid, firstname, lastname, email" +
                 ")" +
-                " VALUES (?, ?, ?, ?, ?);";
+                " VALUES (?, ?, ?, ?);";
         
         public static final String INSERT_PINTEREST_ACCOUNT = "" + 
                 "INSERT INTO pinterest(" +
-                "userid, firstname, lastname, email, friends" +
+                "userid, firstname, lastname, email" +
                 ")" +
-                " VALUES (?, ?, ?, ?, ?);";
-          
+                " VALUES (?, ?, ?, ?);";
+        
+        
+        // Update statements
+        public static final String UPDATE_USER_ACCOUNT = "" // no password change !
+                + "UPDATE users "
+                + "SET "
+                + "username = ?, firstname = ?, "
+                + "lastname = ?, email = ?, "
+                + "facebook = ?, twitter = ?, "
+                + "googleplus = ?, pinterest = ? "
+                + "WHERE id = ?";
+        
         
         // Listing statements
         public static final String LIST_USER = 

@@ -9,7 +9,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
@@ -38,6 +40,10 @@ public class UserAddAccountScreenController implements Initializable, Controlled
     
     @FXML
     public void addFacebookAccount(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setWidth(615);
+        stage.setHeight(430);
+        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
         myController.setScreen(FXMLGetResourcer.addFacebookAccountScreenID);
     }
     
@@ -58,11 +64,18 @@ public class UserAddAccountScreenController implements Initializable, Controlled
     
     @FXML
     private void backToUserMainScreen(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setWidth(515);
+        stage.setHeight(440);
+        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
         myController.setScreen(FXMLGetResourcer.userMainScreenID);
     }
     
     @FXML
     private void signUserOff(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setWidth(515);
+        stage.setHeight(440);
         UserMainScreenController.welcomeMessage.setText(
                 UserMainScreenController.welcomeMessage.getText().substring(0, 7)); // remove previous added username
         WelcomeScreenController.errorMessage.setVisible(false);

@@ -17,6 +17,7 @@
     </ImageView>
     <TextField fx:id="userFirstName" layoutX="55.0" layoutY="249.0" prefWidth="200.0" promptText="fistname in your Facebook account" />
     <TextField fx:id="userLastName" layoutX="348.0" layoutY="249.0" prefWidth="200.0" promptText="last name in your Facebook account" />
+    <TextField fx:id="userEmailAddr" layoutX="200.0" layoutY="331.0" onAction="#addUserFacebookAccount" prefWidth="200.0" promptText="e-mail address of your Facebook account" />
     <Button layoutX="523.0" layoutY="365.0" mnemonicParsing="false" onAction="#addUserFacebookAccount" text="Confirm" />
     <Button layoutX="14.0" layoutY="365.0" mnemonicParsing="false" text="Cancel" />
     <Label id="noFirstName" layoutX="55.0" layoutY="231.0" text="Insert your First Name" />
@@ -34,6 +35,5 @@
         <Font name="System Italic" size="12.0" />
       </font>
     </Label>
-    <TextField fx:id="userEmailAddr" layoutX="200.0" layoutY="331.0" prefWidth="200.0" />
   </children>
 </AnchorPane>

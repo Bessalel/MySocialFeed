@@ -102,6 +102,36 @@ public class UserData {
     public int getNbPinterest() {
         return nbPinterest;
     }
-    
-    
+
+    public void setHasFacebook(boolean hasFacebook) {
+        this.hasFacebook = hasFacebook;
+    }
+
+    public void setNbFacebook(int nbFacebook) {
+        this.nbFacebook = nbFacebook;
+    }
+
+    public void setHasTwitter(boolean hasTwitter) {
+        this.hasTwitter = hasTwitter;
+    }
+
+    public void setNbTwitter(int nbTwitter) {
+        this.nbTwitter = nbTwitter;
+    }
+
+    public void setHasGooglePlus(boolean hasGooglePlus) {
+        this.hasGooglePlus = hasGooglePlus;
+    }
+
+    public void setNbGooglePlus(int nbGooglePlus) {
+        this.nbGooglePlus = nbGooglePlus;
+    }
+
+    public void setHasPinterest(boolean hasPinterest) {
+        this.hasPinterest = hasPinterest;
+    }
+
+    public void setNbPinterest(int nbPinterest) {
+        this.nbPinterest = nbPinterest;
+    }
 }
