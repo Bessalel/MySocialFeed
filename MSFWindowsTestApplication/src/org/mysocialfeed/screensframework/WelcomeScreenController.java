@@ -92,6 +92,14 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                            } else {
                                                UserMainScreenController.addAccount.setVisible(true);
                                            }
+                                        } else {
+                                               UserMainScreenController.userHasAccount.setVisible(true);
+                                               UserMainScreenController.noAccountAvailable.setVisible(false);
+                                               UserMainScreenController.accessFacebook.setVisible(true);
+                                               UserMainScreenController.accessTwitter.setVisible(true);
+                                               UserMainScreenController.accessGooglePlus.setVisible(true);
+                                               UserMainScreenController.accessPinterest.setVisible(true);
+                                               UserMainScreenController.addAccount.setVisible(true);
                                         }
                                    }
                                 myController.setScreen(FXMLGetResourcer.userMainScreenID);

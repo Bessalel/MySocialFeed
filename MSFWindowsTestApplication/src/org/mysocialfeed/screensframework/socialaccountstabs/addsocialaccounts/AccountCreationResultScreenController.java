@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
+import org.mysocialfeed.screensframework.UserMainScreenController;
 
 /**
  * FXML Controller class
@@ -118,6 +119,14 @@ public class AccountCreationResultScreenController implements Initializable, Con
         AccountCreationResultScreenController.addAnotherAccount.setVisible(false);
         AccountCreationResultScreenController.addAnotherFbAccount.setVisible(false);
         AccountCreationResultScreenController.mainPage.setVisible(false);
+        
+        UserMainScreenController.userHasAccount.setVisible(true);
+        UserMainScreenController.noAccountAvailable.setVisible(false);
+        UserMainScreenController.accessFacebook.setVisible(true);
+        UserMainScreenController.accessTwitter.setVisible(true);
+        UserMainScreenController.accessGooglePlus.setVisible(true);
+        UserMainScreenController.accessPinterest.setVisible(true);
+        UserMainScreenController.addAccount.setVisible(true);
         
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(515);
