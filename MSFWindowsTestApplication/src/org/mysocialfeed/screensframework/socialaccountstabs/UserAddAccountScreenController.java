@@ -38,6 +38,8 @@ public class UserAddAccountScreenController implements Initializable, Controlled
         myController = screenParent;
     }
     
+    public static boolean result = false;
+    
     @FXML
     public void addFacebookAccount(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

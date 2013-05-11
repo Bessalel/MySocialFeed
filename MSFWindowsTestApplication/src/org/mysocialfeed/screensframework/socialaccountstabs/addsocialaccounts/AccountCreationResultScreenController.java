@@ -17,6 +17,7 @@ import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.screensframework.UserMainScreenController;
+import org.mysocialfeed.screensframework.socialaccountstabs.UserAddAccountScreenController;
 
 /**
  * FXML Controller class
@@ -120,14 +121,23 @@ public class AccountCreationResultScreenController implements Initializable, Con
         AccountCreationResultScreenController.addAnotherFbAccount.setVisible(false);
         AccountCreationResultScreenController.mainPage.setVisible(false);
         
-        UserMainScreenController.userHasAccount.setVisible(true);
-        UserMainScreenController.noAccountAvailable.setVisible(false);
-        UserMainScreenController.accessFacebook.setVisible(true);
-        UserMainScreenController.accessTwitter.setVisible(true);
-        UserMainScreenController.accessGooglePlus.setVisible(true);
-        UserMainScreenController.accessPinterest.setVisible(true);
-        UserMainScreenController.addAccount.setVisible(true);
-        
+        if (UserAddAccountScreenController.result == true) {
+            UserMainScreenController.userHasAccount.setVisible(true);
+            UserMainScreenController.noAccountAvailable.setVisible(false);
+            UserMainScreenController.accessFacebook.setVisible(true);
+            UserMainScreenController.accessTwitter.setVisible(true);
+            UserMainScreenController.accessGooglePlus.setVisible(true);
+            UserMainScreenController.accessPinterest.setVisible(true);
+            UserMainScreenController.addAccount.setVisible(true);
+        } else {
+            UserMainScreenController.userHasAccount.setVisible(false);
+            UserMainScreenController.noAccountAvailable.setVisible(true);
+            UserMainScreenController.accessFacebook.setVisible(false);
+            UserMainScreenController.accessTwitter.setVisible(false);
+            UserMainScreenController.accessGooglePlus.setVisible(false);
+            UserMainScreenController.accessPinterest.setVisible(false);
+            UserMainScreenController.addAccount.setVisible(false);    
+        }
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(515);
         stage.setHeight(440);

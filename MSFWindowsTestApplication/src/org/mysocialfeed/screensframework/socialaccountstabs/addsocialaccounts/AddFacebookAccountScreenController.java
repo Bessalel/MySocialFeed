@@ -20,6 +20,7 @@ import org.mysocialfeed.models.Context;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
+import org.mysocialfeed.screensframework.socialaccountstabs.UserAddAccountScreenController;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 
 /**
@@ -135,7 +136,6 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
     }
     
     private void insertUserFacebookAccountIntoDatabase() {
-        boolean result = true;
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
                 MSFWindowsTestApplication.accessAndSetupSQLServer(false);
@@ -151,14 +151,14 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
                                 System.out.println(insertNewFacebookAccount.toString());
                                 insertNewFacebookAccount.execute();
                     } catch (SQLException e) {
-                        result = false;
+                        UserAddAccountScreenController.result = false;
                         e.printStackTrace();
                     }
                 MSFWindowsTestApplication.conn.commit();
                 MSFWindowsTestApplication.conn.close();
-                if (result == true) {
-                    result = updateUserData();
-                    if (result == true) { //if only both queries worked !
+                if (UserAddAccountScreenController.result == true) {
+                    UserAddAccountScreenController.result = updateUserData();
+                    if (UserAddAccountScreenController.result == true) { //if only both queries worked !
                         AccountCreationResultScreenController.retry.setVisible(false);
                         AccountCreationResultScreenController.cancel.setVisible(false);
 
@@ -173,7 +173,7 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
                         AccountCreationResultScreenController.successMessage2.getText() + " facebook account !");
                     }
                 } 
-                if (result == false) {
+                if (UserAddAccountScreenController.result == false) {
                     AccountCreationResultScreenController.retry.setVisible(true);
                     AccountCreationResultScreenController.cancel.setVisible(true);
                     
