@@ -12,15 +12,21 @@ public class Context {
     //private final static Context instance = new Context();
 
     private static UserData currentUser = null;
-
-    // public static Context getInstance() {
-    //   return instance;
-    // }
+    private static UserPosts currentPosts = null;
+    
     public static void setCurrentUser(UserData currentUser) {
         Context.currentUser = currentUser;
     }
 
     public static UserData getCurrentUser() {
         return Context.currentUser;
+    }
+
+    public static UserPosts getCurrentPosts() {
+        return currentPosts;
+    }
+
+    public static void setCurrentPosts(UserPosts currentPosts) {
+        Context.currentPosts = currentPosts;
     }
 }

@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.mysocialfeed.models.Context;
+import org.mysocialfeed.screensframework.socialaccountstabs.UserFacebookScreenController;
 
 /**
  * FXML Controller class
@@ -83,6 +84,8 @@ public class UserMainScreenController implements Initializable, ControlledScreen
            if (!(Context.getCurrentUser().hasFacebook())) {
                noFacebookAccount.setVisible(true);
            }
+        } else {
+            myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
         }
     }
     

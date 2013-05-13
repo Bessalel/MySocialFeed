@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.mysocialfeed.models.BuildAndFillDatabase;
 import org.mysocialfeed.models.Context;
+import org.mysocialfeed.models.UserPosts;
 import org.mysocialfeed.models.UserData;
 
 /**
@@ -41,6 +42,8 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     
     @FXML
     public static Label errorMessage;
+    @FXML
+    public static Label errorMessage2;
     
     @FXML
     TextField userName;
@@ -48,18 +51,14 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     @FXML
     PasswordField userPassword;
 
-    @FXML
-    private void SignUserIn(ActionEvent event) {
+    private boolean loadUserData() {
         try {
-            while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                MSFWindowsTestApplication.accessAndSetupSQLServer(false);
-                }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 try(PreparedStatement getUserData = 
                         MSFWindowsTestApplication.conn.prepareStatement(
                         BuildAndFillDatabase.LIST_USER, 
                         Statement.RETURN_GENERATED_KEYS)) {
-                    getUserData.setString(1, userName.getText());
+                            getUserData.setString(1, userName.getText());
                     ResultSet rs = getUserData.executeQuery();
                     if (!(rs.next())) {
                         errorMessage.setVisible(true);
@@ -68,7 +67,6 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                              && (userPassword.getText().compareTo(rs.getString(3)) == 0)){
                                 UserData currentUser = new UserData(true, rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getBoolean(7), rs.getInt(7), rs.getBoolean(8), rs.getInt(8), rs.getBoolean(9), rs.getInt(9), rs.getBoolean(10), rs.getInt(10));
                                 rs.close();
-                                System.out.println(currentUser.toString());
                                 Context.setCurrentUser(currentUser);
                                 if (Context.getCurrentUser() != null) {
                                      UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText()
@@ -110,12 +108,63 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                     }
                 } catch(SQLException e){
                     e.printStackTrace();
+                    return false;
                 }
             }
                 MSFWindowsTestApplication.conn.close();
         }catch (SQLException e){
             e.printStackTrace();
-        } 
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean loadContent() {
+        try {
+            if (!(MSFWindowsTestApplication.conn.isClosed())){
+                try(PreparedStatement getPosts = 
+                        MSFWindowsTestApplication.conn.prepareStatement(
+                        BuildAndFillDatabase.LIST_USER)) {
+                            getPosts.setInt(1, Context.getCurrentUser().getUserID());
+                    ResultSet rs = getPosts.executeQuery();
+                    if (!(rs.next())) {
+                        errorMessage2.setVisible(true);
+                    } else {
+                        UserPosts currentPosts = new UserPosts(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+                                rs.close();
+                                Context.setCurrentPosts(currentPosts);
+                    }
+                } catch(SQLException e){
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+                MSFWindowsTestApplication.conn.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean loadData() {
+        boolean result = true;
+        result = loadUserData();
+        if (result == true) {
+            result = loadContent();
+        }
+        return result;
+    }
+    
+    @FXML
+    private void SignUserIn(ActionEvent event) {
+        try {
+            while (MSFWindowsTestApplication.conn.isClosed() == true) {
+                MSFWindowsTestApplication.accessAndSetupSQLServer(false);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
     
     @FXML
