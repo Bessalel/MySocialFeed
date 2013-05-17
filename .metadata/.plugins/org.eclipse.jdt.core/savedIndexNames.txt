@@ -1,0 +1,2 @@
+INDEX VERSION 1.126+F:\InTechInfo\Projet\Projet_industriel\MySocialFeed\.metadata\.plugins\org.eclipse.jdt.core
+453557514.index
