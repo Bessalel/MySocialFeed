@@ -4,12 +4,15 @@
  */
 package org.mysocialfeed.screensframework;
 
+import java.lang.reflect.Array;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -124,15 +127,29 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 try(PreparedStatement getPosts = 
                         MSFWindowsTestApplication.conn.prepareStatement(
-                        BuildAndFillDatabase.LIST_USER)) {
+                        BuildAndFillDatabase.LIST_ALL_POSTS)) {
                             getPosts.setInt(1, Context.getCurrentUser().getUserID());
                     ResultSet rs = getPosts.executeQuery();
                     if (!(rs.next())) {
                         errorMessage2.setVisible(true);
                     } else {
-                        UserPosts currentPosts = new UserPosts(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
-                                rs.close();
-                                Context.setCurrentPosts(currentPosts);
+                        List<Integer> accountIDTemp = new ArrayList<>();
+                        List<String> accountTypeTemp = new ArrayList<>();
+                        List<String> contentTemp = new ArrayList<>();
+                        accountIDTemp.add(0, rs.getInt(2));
+                        accountTypeTemp.add(0, rs.getString(3));
+                        contentTemp.add(0, rs.getString(3));
+                        
+                        int iterator = 1;
+                        while (rs.next()) {
+                            accountIDTemp.add(iterator, rs.getInt(2));
+                            accountTypeTemp.add(iterator, rs.getString(3));
+                            contentTemp.add(iterator, rs.getString(3));
+                            iterator++;
+                        }
+                        rs.close();
+                        UserPosts currentPosts = new UserPosts(rs.getInt(1), accountIDTemp, accountTypeTemp, contentTemp);
+                        Context.setCurrentPosts(currentPosts);  
                     }
                 } catch(SQLException e){
                     e.printStackTrace();
@@ -161,6 +178,9 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
                 MSFWindowsTestApplication.accessAndSetupSQLServer(false);
+            }
+            if (loadData() == true) {
+                myController.setScreen(FXMLGetResourcer.userMainScreenID);
             }
         } catch (SQLException e){
             e.printStackTrace();

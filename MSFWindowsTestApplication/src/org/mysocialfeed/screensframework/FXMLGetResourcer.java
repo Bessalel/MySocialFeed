@@ -52,7 +52,7 @@ public class FXMLGetResourcer {
     public final static String addTwitterAccountScreenID = "AddTwitterAccountScreen";
     private URL addTwitterAccountScreenFile;
     public final static String AccountCreationResultScreenID = "AddSuccessfullyAddedScreen";
-    private URL AccountCreationResultScreenFile;
+    private URL accountCreationResultScreenFile;
     
     
     public FXMLGetResourcer() {
@@ -62,7 +62,7 @@ public class FXMLGetResourcer {
         userSignUpScreenFile = FXMLGetResourcer.class.getResource(SIGNUPS_SCREENS_LOCATOR + "UserSignUpScreen.fxml");
         userAccountCreatedScreenFile = FXMLGetResourcer.class.getResource(SIGNUPS_SCREENS_LOCATOR + "UserAccountCreatedScreen.fxml");
         
-        userFacebookScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserFacebookScreen.fxml");
+       // userFacebookScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserFacebookScreen.fxml");
         userGooglePlusScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserGooglePlusScreen.fxml");
         userPinterestScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserPinterestScreen.fxml");
         userTwitterScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserTwitterScreen.fxml");
@@ -72,7 +72,7 @@ public class FXMLGetResourcer {
         addGooglePlusAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddGooglePlusAccountScreen.fxml");
         addPinterestAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddPinterestAccountScreen.fxml");
         addTwitterAccountScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AddTwitterAccountScreen.fxml");
-        AccountCreationResultScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AccountCreationResultScreen.fxml");
+        accountCreationResultScreenFile = FXMLGetResourcer.class.getResource(ADD_SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "AccountCreationResultScreen.fxml");
         
     }
 
@@ -125,7 +125,7 @@ public class FXMLGetResourcer {
     }
 
     public URL getAccountCreationResultScreenFile() {
-        return AccountCreationResultScreenFile;
+        return accountCreationResultScreenFile;
     }
 
     public URL getUserSignUpScreenFile() {

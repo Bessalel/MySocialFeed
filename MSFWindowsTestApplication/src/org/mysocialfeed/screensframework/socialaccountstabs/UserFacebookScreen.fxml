@@ -35,8 +35,8 @@
         </Tab>
       </tabs>
     </TabPane>
-    <Button layoutX="24.0" layoutY="358.0" mnemonicParsing="false" text="Leave" />
-    <Button fx:id="resetField" layoutX="272.0" layoutY="358.0" mnemonicParsing="false" text="Reset" />
-    <Button fx:id="sendPost" layoutX="521.0" layoutY="358.0" mnemonicParsing="false" text="Send" />
+    <Button layoutX="24.0" layoutY="358.0" mnemonicParsing="false" onAction="#userLeaveTab" text="Leave" />
+    <Button fx:id="resetField" layoutX="272.0" layoutY="358.0" mnemonicParsing="false" onAction="#userResetFieldPost" text="Reset" />
+    <Button fx:id="sendPost" layoutX="521.0" layoutY="358.0" mnemonicParsing="false" onAction="#userSendPost" text="Send" />
   </children>
 </AnchorPane>

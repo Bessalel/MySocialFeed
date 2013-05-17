@@ -31,26 +31,26 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     ScreensController myController;
 
     @FXML
-    private Button resetField;
+    private static Button resetField;
     
     @FXML
-    private Button sendPost;
+    private static Button sendPost;
     
     @FXML
-    private TextField post;
+    private static TextField post;
     
     
     @FXML
-    private Label successMessage;
+    private static Label successMessage;
     @FXML
-    private Label errorMessage;
+    private static Label errorMessage;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO 
     }    
     
     public void setScreenParent(ScreensController screenParent){
