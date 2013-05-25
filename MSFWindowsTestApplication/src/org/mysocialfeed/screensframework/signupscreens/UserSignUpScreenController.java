@@ -18,7 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.mysocialfeed.models.BuildAndFillDatabase;
+import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
@@ -142,7 +142,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                     try (PreparedStatement insertNewUser = 
                             MSFWindowsTestApplication.conn.prepareStatement(
-                            BuildAndFillDatabase.INSERT_USER)) {
+                            DatabaseManager.INSERT_USER)) {
                                 insertNewUser.setString(1, userNameTextField.getText());
                                 insertNewUser.setString(2, passwordField.getText());
                                 insertNewUser.setString(3, firstNameTextField.getText());

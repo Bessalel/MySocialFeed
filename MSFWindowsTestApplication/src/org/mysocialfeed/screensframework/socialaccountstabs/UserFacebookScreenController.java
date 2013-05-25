@@ -7,15 +7,19 @@ package org.mysocialfeed.screensframework.socialaccountstabs;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import org.mysocialfeed.models.BuildAndFillDatabase;
+import javafx.scene.control.TextArea;
+import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.models.Context;
+import org.mysocialfeed.models.UserPosts;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
@@ -31,48 +35,68 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     ScreensController myController;
 
     @FXML
-    private static Button resetField;
+    private Button resetField;
+    @FXML
+    private Button sendPost;
+    @FXML
+    private TextArea post;
+    @FXML
+    public static TextArea timeLine;
     
     @FXML
-    private static Button sendPost;
-    
+    private Label successMessage;
     @FXML
-    private static TextField post;
+    private Label errorMessage;
     
-    
-    @FXML
-    private static Label successMessage;
-    @FXML
-    private static Label errorMessage;
+    private static List<Integer> alreadyDisplayed = new ArrayList<Integer>();
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO 
+        timeLine.setText("");
     }    
     
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
     
-    @FXML
-    private void userTimeline(ActionEvent event) {
-        resetField.setVisible(false);
-        sendPost.setVisible(false);
+    private static boolean checkIfAlreadyDisplayed(int index){
+        for (int it : alreadyDisplayed){
+            if (it == index){
+                return false;
+            }
+        }
+        return true;
     }
     
     @FXML
-    private void userWriteSomething(ActionEvent event) {
-        resetField.setVisible(true);
-        sendPost.setVisible(true);
+    public static void loadUserFbTimeline(){
+        UserPosts temp = Context.getCurrentPosts();
+        if (Context.getCurrentPosts() != null) {
+            for (int it = 0; it < (Context.getCurrentPosts().getContent().size()); it++){
+                if (Context.getCurrentPosts().getAccountType().get(it).compareTo("Fb") == 0 
+                        && checkIfAlreadyDisplayed(it) == true){
+                    timeLine.setText(timeLine.getText() +  Context.getCurrentPosts().getContent().get(it)
+                            + "\n_________________________________________________________________________________\n\n");
+                    alreadyDisplayed.add(it);
+                }
+            }
+        }
+    }
+    
+    @FXML
+    private void userTimeline(Event event) {
+    }
+    
+    @FXML
+    private void userWriteSomething(Event event) {
+        
     }
     
     @FXML
     private void userLeaveTab(ActionEvent event) {
-        resetField.setVisible(false);
-        sendPost.setVisible(false);
         myController.setScreen(FXMLGetResourcer.userMainScreenID);
     }
     
@@ -81,8 +105,7 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
         post.setText("");
     }
     
-    @FXML
-    private boolean userSendPost(ActionEvent event) {
+    private boolean insertPostIntoDatabase(){
         try {
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
                 MSFWindowsTestApplication.accessAndSetupSQLServer(false);
@@ -91,9 +114,9 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
                 
                 try (PreparedStatement addPost = 
                         MSFWindowsTestApplication.conn.prepareStatement(
-                        BuildAndFillDatabase.INSERT_POST)) {
+                        DatabaseManager.INSERT_POST)) {
                             addPost.setInt(1, Context.getCurrentUser().getUserID());
-                            addPost.setInt(2, 1); // Later must add dynamically account id
+                            addPost.setInt(2, 5); // Later must add dynamically account id
                             addPost.setString(3, "Fb");
                             addPost.setString(4, post.getText());
                             System.out.println(addPost.toString());
@@ -110,5 +133,16 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
             return false;
         }
         return true;
+    }
+    
+    @FXML
+    private void userSendPost(ActionEvent event) {
+        if (insertPostIntoDatabase()){
+            List<String> temp = Context.getCurrentPosts().getContent();
+            temp.add(post.getText());
+            Context.getCurrentPosts().setAccountID(Context.getCurrentPosts().getAccountID());
+            Context.getCurrentPosts().setAccountType(Context.getCurrentPosts().getAccountType());
+            Context.getCurrentPosts().setContent(temp);
+        }
     }
 }

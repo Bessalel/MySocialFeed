@@ -62,7 +62,7 @@ public class FXMLGetResourcer {
         userSignUpScreenFile = FXMLGetResourcer.class.getResource(SIGNUPS_SCREENS_LOCATOR + "UserSignUpScreen.fxml");
         userAccountCreatedScreenFile = FXMLGetResourcer.class.getResource(SIGNUPS_SCREENS_LOCATOR + "UserAccountCreatedScreen.fxml");
         
-       // userFacebookScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserFacebookScreen.fxml");
+        userFacebookScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserFacebookScreen.fxml");
         userGooglePlusScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserGooglePlusScreen.fxml");
         userPinterestScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserPinterestScreen.fxml");
         userTwitterScreenFile = FXMLGetResourcer.class.getResource(SOCIAL_ACCOUNTS_SCREENS_LOCATOR + "UserTwitterScreen.fxml");

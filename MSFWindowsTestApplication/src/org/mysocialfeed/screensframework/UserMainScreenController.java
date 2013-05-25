@@ -27,7 +27,6 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     
     @FXML
     public static Label welcomeMessage;
-
     @FXML
     public static Label userHasAccount;
     
@@ -35,19 +34,14 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     
     @FXML
     public static Button accessFacebook;
-    
     @FXML
     public static Button accessTwitter;
-    
     @FXML
     public static Button accessGooglePlus;
-    
     @FXML
     public static Button accessPinterest;
-    
     @FXML
     public static Button addAccount;
-    
     @FXML
     public static Button addFirstAccount;
     
@@ -83,10 +77,11 @@ public class UserMainScreenController implements Initializable, ControlledScreen
         if (Context.getCurrentUser() != null) {
            if (!(Context.getCurrentUser().hasFacebook())) {
                noFacebookAccount.setVisible(true);
-           }
-        } else {
-            myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
-        }
+           }else {
+               UserFacebookScreenController.loadUserFbTimeline();
+               myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
+            }
+        } 
     }
     
     @FXML

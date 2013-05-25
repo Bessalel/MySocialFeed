@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author Vincent
  */
-public class BuildAndFillDatabase {
+public class DatabaseManager {
 
     public static HashMap<String, Object> ctx = null;
 	static {
@@ -83,12 +83,12 @@ public class BuildAndFillDatabase {
                 + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
 		+ ");";
         
-        public static final String CREAT_TABLE_POSTS_SQL = ""
+        public static final String CREATE_TABLE_POSTS_SQL = ""
                 + "CREATE TABLE IF NOT EXISTS posts ("
                 + "postid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
                 + "userid INT, "
                 + "accountid INT, " // cannot be a constraint foreign key because of undefined origin !!
-                + "type ENUM('Fb', 'Tw', 'G+', 'Pin', "
+                + "type ENUM('Fb', 'Tw', 'G+', 'Pin'), "
                 + "content LONGTEXT, "
                 + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
                 + ");";
@@ -128,7 +128,7 @@ public class BuildAndFillDatabase {
         
         public static final String INSERT_POST = ""
                 + "INSERT INTO posts("
-                + "userid, account id, "
+                + "userid, accountid, "
                 + "type, content"
                 + ")"
                 + " VALUES (?, ?, ?, ?);";
@@ -148,7 +148,7 @@ public class BuildAndFillDatabase {
         // Listing statements
         public static final String LIST_USER = 
                 "SELECT * FROM users WHERE username = ?";  
-        public static final String LIST_USER_FACEBOOK_ACCOUNT = 
+        public static final String LIST_USER_FACEBOOK_ACCOUNTS = 
                 "SELECT * FROM facebook WHERE userid = ?";
         public static final String LIST_USER_TWITTER_ACCOUNT = 
                 "SELECT * FROM twitter WHERE userid = ?";

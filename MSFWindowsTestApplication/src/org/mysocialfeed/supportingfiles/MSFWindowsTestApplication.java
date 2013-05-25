@@ -12,7 +12,7 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.mysocialfeed.models.BuildAndFillDatabase;
+import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 
 // for SQL :
@@ -53,11 +53,12 @@ public class MSFWindowsTestApplication extends Application {
             if (createTables == true) { // only needed once at application launch
                 stmt = conn.createStatement();
 
-                stmt.execute(BuildAndFillDatabase.CREATE_TABLE_USERS_SQL);
-                stmt.execute(BuildAndFillDatabase.CREATE_TABLE_FACEBOOK_SQL);
-                stmt.execute(BuildAndFillDatabase.CREATE_TABLE_TWITTER_SQL);
-                stmt.execute(BuildAndFillDatabase.CREATE_TABLE_GOOGLEPLUS_SQL);
-                stmt.execute(BuildAndFillDatabase.CREATE_TABLE_PINTEREST_SQL);
+                stmt.execute(DatabaseManager.CREATE_TABLE_USERS_SQL);
+                stmt.execute(DatabaseManager.CREATE_TABLE_FACEBOOK_SQL);
+                stmt.execute(DatabaseManager.CREATE_TABLE_TWITTER_SQL);
+                stmt.execute(DatabaseManager.CREATE_TABLE_GOOGLEPLUS_SQL);
+                stmt.execute(DatabaseManager.CREATE_TABLE_PINTEREST_SQL);
+                stmt.execute(DatabaseManager.CREATE_TABLE_POSTS_SQL);
 
                 stmt.close();
             }

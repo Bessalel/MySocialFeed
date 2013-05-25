@@ -22,7 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.mysocialfeed.models.BuildAndFillDatabase;
+import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.models.Context;
 import org.mysocialfeed.models.UserPosts;
 import org.mysocialfeed.models.UserData;
@@ -49,22 +49,23 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     public static Label errorMessage2;
     
     @FXML
-    TextField userName;
+    private TextField userName;
     
     @FXML
-    PasswordField userPassword;
+    private PasswordField userPassword;
 
     private boolean loadUserData() {
         try {
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 try(PreparedStatement getUserData = 
                         MSFWindowsTestApplication.conn.prepareStatement(
-                        BuildAndFillDatabase.LIST_USER, 
+                        DatabaseManager.LIST_USER, 
                         Statement.RETURN_GENERATED_KEYS)) {
                             getUserData.setString(1, userName.getText());
                     ResultSet rs = getUserData.executeQuery();
                     if (!(rs.next())) {
                         errorMessage.setVisible(true);
+                        return false;
                     } else {
                             if ((userName.getText().compareTo(rs.getString(2)) == 0) 
                              && (userPassword.getText().compareTo(rs.getString(3)) == 0)){
@@ -91,9 +92,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                                UserMainScreenController.accessPinterest.setVisible(false);
                                                UserMainScreenController.addAccount.setVisible(false);
                                            } else {
-                                               UserMainScreenController.addAccount.setVisible(true);
-                                           }
-                                        } else {
+                                               UserMainScreenController.addFirstAccount.setVisible(false);
                                                UserMainScreenController.userHasAccount.setVisible(true);
                                                UserMainScreenController.noAccountAvailable.setVisible(false);
                                                UserMainScreenController.accessFacebook.setVisible(true);
@@ -101,12 +100,14 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                                                UserMainScreenController.accessGooglePlus.setVisible(true);
                                                UserMainScreenController.accessPinterest.setVisible(true);
                                                UserMainScreenController.addAccount.setVisible(true);
-                                        }
+                                           }
+                                     }
                                    }
                                 myController.setScreen(FXMLGetResourcer.userMainScreenID);
                             } else if ((userName.getText().compareTo(rs.getString(2)) != 0) 
                                     || (userPassword.getText().compareTo(rs.getString(3)) != 0)){
                                 errorMessage.setVisible(true);
+                                return false;
                         }
                     }
                 } catch(SQLException e){
@@ -127,7 +128,7 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 try(PreparedStatement getPosts = 
                         MSFWindowsTestApplication.conn.prepareStatement(
-                        BuildAndFillDatabase.LIST_ALL_POSTS)) {
+                        DatabaseManager.LIST_ALL_POSTS)) {
                             getPosts.setInt(1, Context.getCurrentUser().getUserID());
                     ResultSet rs = getPosts.executeQuery();
                     if (!(rs.next())) {
@@ -136,20 +137,20 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                         List<Integer> accountIDTemp = new ArrayList<>();
                         List<String> accountTypeTemp = new ArrayList<>();
                         List<String> contentTemp = new ArrayList<>();
-                        accountIDTemp.add(0, rs.getInt(2));
-                        accountTypeTemp.add(0, rs.getString(3));
-                        contentTemp.add(0, rs.getString(3));
+                        accountIDTemp.add(0, rs.getInt(3));
+                        accountTypeTemp.add(0, rs.getString(4));
+                        contentTemp.add(0, rs.getString(5));
                         
                         int iterator = 1;
                         while (rs.next()) {
-                            accountIDTemp.add(iterator, rs.getInt(2));
-                            accountTypeTemp.add(iterator, rs.getString(3));
-                            contentTemp.add(iterator, rs.getString(3));
+                            accountIDTemp.add(iterator, rs.getInt(3));
+                            accountTypeTemp.add(iterator, rs.getString(4));
+                            contentTemp.add(iterator, rs.getString(5));
                             iterator++;
                         }
                         rs.close();
-                        UserPosts currentPosts = new UserPosts(rs.getInt(1), accountIDTemp, accountTypeTemp, contentTemp);
-                        Context.setCurrentPosts(currentPosts);  
+                        UserPosts currentPosts = new UserPosts(Context.getCurrentUser().getUserID(), accountIDTemp, accountTypeTemp, contentTemp);
+                        Context.setCurrentPosts(currentPosts); 
                     }
                 } catch(SQLException e){
                     e.printStackTrace();
@@ -165,22 +166,35 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     }
     
     private boolean loadData() {
-        boolean result = true;
-        result = loadUserData();
-        if (result == true) {
-            result = loadContent();
+        if (loadUserData() == true){
+            try {
+                while (MSFWindowsTestApplication.conn.isClosed() == true) {
+                    MSFWindowsTestApplication.accessAndSetupSQLServer(false);
+                }
+                return loadContent();
+            }catch(SQLException e){
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            return false;
         }
-        return result;
     }
     
     @FXML
     private void SignUserIn(ActionEvent event) {
         try {
+            if (userName.getText().isEmpty() && userPassword.getText().isEmpty()) {
+                errorMessage.setVisible(true);
+                return;
+            }
             while (MSFWindowsTestApplication.conn.isClosed() == true) {
                 MSFWindowsTestApplication.accessAndSetupSQLServer(false);
             }
             if (loadData() == true) {
                 myController.setScreen(FXMLGetResourcer.userMainScreenID);
+            }else {
+                //
             }
         } catch (SQLException e){
             e.printStackTrace();

@@ -15,7 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.mysocialfeed.models.BuildAndFillDatabase;
+import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.models.Context;
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
@@ -104,7 +104,7 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
                 Context.getCurrentUser().setNbFacebook(Context.getCurrentUser().getNbFacebook() + 1);
                 try (PreparedStatement updateUserData = 
                         MSFWindowsTestApplication.conn.prepareStatement(
-                        BuildAndFillDatabase.UPDATE_USER_ACCOUNT)) {
+                        DatabaseManager.UPDATE_USER_ACCOUNT)) {
                             updateUserData.setString(1, Context.getCurrentUser().getUserName());
                             updateUserData.setString(2, Context.getCurrentUser().getUserFirstName());
                             updateUserData.setString(3, Context.getCurrentUser().getUserLastName());
@@ -143,13 +143,14 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                     try (PreparedStatement insertNewFacebookAccount = 
                             MSFWindowsTestApplication.conn.prepareStatement(
-                            BuildAndFillDatabase.INSERT_FACEBOOK_ACCOUNT)) {
+                            DatabaseManager.INSERT_FACEBOOK_ACCOUNT)) {
                                 insertNewFacebookAccount.setInt(1, Context.getCurrentUser().getUserID());
                                 insertNewFacebookAccount.setString(2, userFirstName.getText());
                                 insertNewFacebookAccount.setString(3, userLastName.getText());
                                 insertNewFacebookAccount.setString(4, userEmailAddr.getText());
                                 System.out.println(insertNewFacebookAccount.toString());
                                 insertNewFacebookAccount.execute();
+                                UserAddAccountScreenController.result = true;
                     } catch (SQLException e) {
                         UserAddAccountScreenController.result = false;
                         e.printStackTrace();
