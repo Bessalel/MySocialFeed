@@ -4,14 +4,15 @@
  */
 package org.mysocialfeed.screensframework;
 
-import java.lang.reflect.Array;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -45,8 +46,6 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     
     @FXML
     public static Label errorMessage;
-    @FXML
-    public static Label errorMessage2;
     
     @FXML
     private TextField userName;
@@ -132,24 +131,31 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                             getPosts.setInt(1, Context.getCurrentUser().getUserID());
                     ResultSet rs = getPosts.executeQuery();
                     if (!(rs.next())) {
-                        errorMessage2.setVisible(true);
+                        return true;
                     } else {
                         List<Integer> accountIDTemp = new ArrayList<>();
                         List<String> accountTypeTemp = new ArrayList<>();
                         List<String> contentTemp = new ArrayList<>();
+                        List<Timestamp> timeStampTemp = new ArrayList<>();
+                        
                         accountIDTemp.add(0, rs.getInt(3));
                         accountTypeTemp.add(0, rs.getString(4));
                         contentTemp.add(0, rs.getString(5));
+                        timeStampTemp.add(0, rs.getTimestamp(6));
                         
                         int iterator = 1;
                         while (rs.next()) {
                             accountIDTemp.add(iterator, rs.getInt(3));
                             accountTypeTemp.add(iterator, rs.getString(4));
                             contentTemp.add(iterator, rs.getString(5));
+                            timeStampTemp.add(iterator, rs.getTimestamp(6));
                             iterator++;
                         }
                         rs.close();
-                        UserPosts currentPosts = new UserPosts(Context.getCurrentUser().getUserID(), accountIDTemp, accountTypeTemp, contentTemp);
+                        UserPosts currentPosts = new UserPosts(
+                                Context.getCurrentUser().getUserID(), 
+                                accountIDTemp, accountTypeTemp, 
+                                contentTemp, timeStampTemp);
                         Context.setCurrentPosts(currentPosts); 
                     }
                 } catch(SQLException e){

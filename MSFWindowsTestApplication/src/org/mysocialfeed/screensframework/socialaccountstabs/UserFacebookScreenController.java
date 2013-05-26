@@ -7,7 +7,9 @@ package org.mysocialfeed.screensframework.socialaccountstabs;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javax.swing.JLabel;
 import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.models.Context;
 import org.mysocialfeed.models.UserPosts;
@@ -49,6 +52,8 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     private Label errorMessage;
     
     private static List<Integer> alreadyDisplayed = new ArrayList<Integer>();
+    private static Date date;
+    private static Timestamp timeStamp;
     
     /**
      * Initializes the controller class.
@@ -78,8 +83,13 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
             for (int it = 0; it < (Context.getCurrentPosts().getContent().size()); it++){
                 if (Context.getCurrentPosts().getAccountType().get(it).compareTo("Fb") == 0 
                         && checkIfAlreadyDisplayed(it) == true){
-                    timeLine.setText(timeLine.getText() +  Context.getCurrentPosts().getContent().get(it)
-                            + "\n_________________________________________________________________________________\n\n");
+                    
+                    JLabel myTimeStamp = new JLabel(
+                            "<u>" + new Date(Context.getCurrentPosts().getTimeStamp().get(it).getTime()) + "</u>");
+                    
+                    timeLine.setText(timeLine.getText() + "Message wrote at " + new Date(Context.getCurrentPosts().getTimeStamp().get(it).getTime())
+                            + "\n\n" + Context.getCurrentPosts().getContent().get(it)
+                            + "\n_________________________________________________________________________________________\n\n");
                     alreadyDisplayed.add(it);
                 }
             }
@@ -112,6 +122,9 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
                 }
             if (!(MSFWindowsTestApplication.conn.isClosed())){
                 
+                date = new Date();
+                timeStamp = new Timestamp(date.getTime());
+                
                 try (PreparedStatement addPost = 
                         MSFWindowsTestApplication.conn.prepareStatement(
                         DatabaseManager.INSERT_POST)) {
@@ -119,6 +132,7 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
                             addPost.setInt(2, 5); // Later must add dynamically account id
                             addPost.setString(3, "Fb");
                             addPost.setString(4, post.getText());
+                            addPost.setTimestamp(5, timeStamp);
                             System.out.println(addPost.toString());
                             addPost.execute();
                 } catch (SQLException e) {
@@ -138,11 +152,11 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     @FXML
     private void userSendPost(ActionEvent event) {
         if (insertPostIntoDatabase()){
-            List<String> temp = Context.getCurrentPosts().getContent();
-            temp.add(post.getText());
-            Context.getCurrentPosts().setAccountID(Context.getCurrentPosts().getAccountID());
-            Context.getCurrentPosts().setAccountType(Context.getCurrentPosts().getAccountType());
-            Context.getCurrentPosts().setContent(temp);
+            // Need to update Context as well !
+            Context.getCurrentPosts().addAccountID(5); // Warning : later must add dynamically account id !!
+            Context.getCurrentPosts().addAccountType("Fb");
+            Context.getCurrentPosts().addPost(post.getText());
+            Context.getCurrentPosts().addTimeStamp(timeStamp);
         }
     }
 }

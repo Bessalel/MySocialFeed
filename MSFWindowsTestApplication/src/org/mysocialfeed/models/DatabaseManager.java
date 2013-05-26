@@ -90,6 +90,7 @@ public class DatabaseManager {
                 + "accountid INT, " // cannot be a constraint foreign key because of undefined origin !!
                 + "type ENUM('Fb', 'Tw', 'G+', 'Pin'), "
                 + "content LONGTEXT, "
+                + "timestamp DATETIME, "
                 + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
                 + ");";
         
@@ -129,9 +130,9 @@ public class DatabaseManager {
         public static final String INSERT_POST = ""
                 + "INSERT INTO posts("
                 + "userid, accountid, "
-                + "type, content"
+                + "type, content, timestamp"
                 + ")"
-                + " VALUES (?, ?, ?, ?);";
+                + " VALUES (?, ?, ?, ?, ?);";
         
         
         // Update statements

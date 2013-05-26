@@ -4,7 +4,8 @@
  */
 package org.mysocialfeed.models;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,17 +14,36 @@ import java.util.List;
  */
 public class UserPosts {
     private int userID;
-    private List<Integer> accountID; // = new ArrayList<Integer>();
-    private List<String> accountType; // = new ArrayList<String>();
-    private List<String> content;// = new ArrayList<String>();
-
-    public UserPosts(int userID, List<Integer> accountID, List<String> accountType, List<String> content) {
+    private List<Integer> accountID;
+    private List<String> accountType;
+    private List<String> content;
+    //private List<Date> timeStamp;
+    private List<Timestamp> timeStamp;
+    
+    public UserPosts(int userID, List<Integer> accountID, List<String> accountType, List<String> content, List<Timestamp> timeStamp) {
         this.userID = userID;
         this.accountID = accountID;
         this.accountType = accountType;
         this.content = content;
+        this.timeStamp = timeStamp;
     }
-
+    
+    public void addAccountID(int accntID){
+        this.accountID.add(accntID);
+    }
+    
+    public void addAccountType(String type){
+        this.accountType.add(type);
+    }
+    
+    public void addPost(String post){
+        this.content.add(post);
+    }
+    
+    public void addTimeStamp(Timestamp timeStamp){
+        this.timeStamp.add(timeStamp);
+    }
+    
     public int getUserID() {
         return userID;
     }
@@ -54,5 +74,13 @@ public class UserPosts {
 
     public void setContent(List<String> content) {
         this.content = content;
+    }
+    
+    public List<Timestamp> getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(List<Timestamp> timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }
