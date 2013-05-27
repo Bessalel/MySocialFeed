@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.UserAddAccountScreenController">
+  <children>
+    <Text layoutX="230.0" layoutY="57.0" scaleX="2.639251559251559" scaleY="2.1904062652961334" strokeType="OUTSIDE" strokeWidth="0.0" text="Add an account ! No limit !">
+      <font>
+        <Font name="System Italic" size="12.0" />
+      </font>
+    </Text>
+    <Label layoutX="165.0" layoutY="114.0" text="What Social Network Account do you wish to add?" />
+    <Button layoutX="423.0" layoutY="364.0" mnemonicParsing="false" onAction="#backToUserMainScreen" text="Cancel" />
+    <Button layoutX="515.0" layoutY="364.0" mnemonicParsing="false" onAction="#signUserOff" text="Sign off" />
+    <Label layoutX="14.0" layoutY="368.0" text="N.B.: We will be adding future support for other social networks ;-)">
+      <font>
+        <Font name="System Italic" size="10.0" />
+      </font>
+    </Label>
+    <ImageView id="Facebook-Logo.jpg" fitHeight="42.0" fitWidth="105.5" layoutX="14.0" layoutY="190.0" onMouseClicked="#addFacebookAccount">
+      <image>
+        <Image url="@Facebook-Logo.jpg" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="Twitter-Logo.jpg" fitHeight="42.0" fitWidth="128.0" layoutX="146.0" layoutY="190.0" onMouseClicked="#addTwitterAccount">
+      <image>
+        <Image url="@Twitter-Logo.jpg" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="Google-plus-logo.png" fitHeight="42.0" fitWidth="128.0" layoutX="295.0" layoutY="190.0" onMouseClicked="#addGooglePlusAccount">
+      <image>
+        <Image url="@Google-plus-logo.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <ImageView id="Pinterest-logo.png" fitHeight="42.0" fitWidth="128.0" layoutX="448.0" layoutY="190.0" onMouseClicked="#addPinterestAccount">
+      <image>
+        <Image url="@Pinterest-logo.png" preserveRatio="true" smooth="true" />
+      </image>
+    </ImageView>
+    <Label layoutX="229.0" layoutY="151.0" text="Just click on the banner !" />
+    <Pane layoutX="14.0" layoutY="102.0" prefHeight="76.0" prefWidth="120.0" />
+  </children>
+</AnchorPane>

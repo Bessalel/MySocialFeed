@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.UserFacebookScreenController">
+  <children>
+    <Text layoutX="211.0" layoutY="35.0" scaleX="1.70403891236275" scaleY="2.065100331600155" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to your Facebook Tab!">
+      <font>
+        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
+      </font>
+    </Text>
+    <TabPane layoutX="14.0" layoutY="59.0" opacity="0.95" prefHeight="327.0" prefWidth="572.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab text="Your Timeline">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="283.0000999999975" prefWidth="572.0">
+              <children>
+                <Button id="Leave" layoutX="14.0" layoutY="258.0" mnemonicParsing="false" onAction="#userLeaveTab" text="Leave" />
+                <TextArea fx:id="timeLine" editable="false" layoutX="48.0" layoutY="57.0" prefHeight="192.0" prefWidth="476.0" promptText="you don't have any post yet" wrapText="true" />
+                <Label layoutX="48.0" layoutY="35.0" text="These are all of your posts" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+        <Tab onSelectionChanged="#userWriteSomething" text="Write something">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="574.0">
+              <children>
+                <TextArea fx:id="post" layoutX="48.0" layoutY="57.0" prefHeight="192.0" prefWidth="476.0" wrapText="true" />
+                <Label layoutX="48.0" layoutY="30.0" text="Tell the world what you want :" />
+                <Label fx:id="successMessage" font="$x1" layoutX="287.0" layoutY="30.0" text="Message posted" textFill="#00cc21" visible="false" />
+                <Label fx:id="errorMessage" font="$x1" layoutX="287.0" layoutY="30.0" text="Could not post message!" textFill="RED" visible="false" />
+                <Button fx:id="sendPost" layoutX="501.0" layoutY="258.0" mnemonicParsing="false" onAction="#userSendPost" text="Send" />
+                <Button fx:id="resetField" layoutX="250.0" layoutY="258.0" mnemonicParsing="false" onAction="#userResetFieldPost" text="Reset" />
+                <Button layoutX="14.0" layoutY="258.0" mnemonicParsing="false" onAction="#userLeaveTab" text="Leave" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+</AnchorPane>
