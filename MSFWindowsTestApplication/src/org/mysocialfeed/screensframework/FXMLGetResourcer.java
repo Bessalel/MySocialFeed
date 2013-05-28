@@ -23,7 +23,7 @@ public class FXMLGetResourcer {
     // Main screens :
     public final static String welcomeScreenID = "WelcomeScreen";
     private URL welcomeScreenFile;
-    public final static String userMainScreenID = "UserMainScree";
+    public final static String userMainScreenID = "UserMainScreen";
     private URL userMainScreenFile;
     public final static String userSignUpScreenID = "UserSignUpScreen";
     private URL userSignUpScreenFile;

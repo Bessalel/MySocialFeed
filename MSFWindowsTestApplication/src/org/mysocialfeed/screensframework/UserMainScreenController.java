@@ -64,11 +64,12 @@ public class UserMainScreenController implements Initializable, ControlledScreen
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //
+        
     }
-    
+    @Override
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
+        
     }
     
         

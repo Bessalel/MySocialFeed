@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework;
 
+import com.google.inject.Inject;
 import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -27,6 +28,7 @@ import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.models.Context;
 import org.mysocialfeed.models.UserPosts;
 import org.mysocialfeed.models.UserData;
+import org.mysocialfeed.supportingfiles.UserService;
 
 /**
  *
@@ -36,7 +38,16 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     
     ScreensController myController;
     
-        @Override
+    //Our constructor to implement Injection Dependancies
+    
+    private final UserService userService;
+    
+    @Inject
+    public WelcomeScreenController(UserService userService){
+        this.userService = userService;
+    }
+    
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
     } 
     

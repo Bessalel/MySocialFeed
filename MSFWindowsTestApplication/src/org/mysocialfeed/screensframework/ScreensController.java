@@ -4,13 +4,16 @@
  */
 package org.mysocialfeed.screensframework;
 
+import com.google.inject.Injector;
 import java.net.URL;
 import java.util.HashMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-
+import javafx.util.Callback;
+import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
+import org.mysocialfeed.supportingfiles.UserService;
 /**
  *
  * @author Vincent
@@ -18,36 +21,47 @@ import javafx.scene.layout.StackPane;
 public class ScreensController extends StackPane {
     //Contains the screens to be displayed in a HasMap collection
 
-    private HashMap<String, Node> screens = new HashMap<>();
+    private final HashMap<String, Object> screens = new HashMap<>();
+    private final Injector injector;
     
-    public ScreensController() {
+    public ScreensController(Injector injector) {
         super();
+        this.injector = injector;
     }
     
-     //This method adds a given screen in the HasMap
-    public void addScreen(String name, Node screen) {  
-        screens.put(name, screen); 
-    }
-    
-    //This method returns the screen filename from the screen given name
-    public Node getScreen(String name) {
-        return screens.get(name); 
+    public void registerScreen(String name, URL url){
+        screens.put(name, url);
     }
     
     //Loads the fxml file, add the screen to the screens collection and
     //finally injects the screenPane to the controller.
-    public boolean loadScreen(String name, URL resource) {
+    private Node loadOrFindScreen(String name) {
+        Object urlOrNode = screens.get(name);
+        if (urlOrNode == null){
+            return null;
+        }
+        if (urlOrNode instanceof Node){
+            return (Node) urlOrNode;
+        }
         try {
-            System.out.println(name + "\n" + resource);
-            FXMLLoader myLoader = new FXMLLoader(resource);
-            Parent loadScreen = (Parent) myLoader.load();
-            ControlledScreen myScreenController = ((ControlledScreen) myLoader.getController());
+            FXMLLoader loader = new FXMLLoader((URL)urlOrNode);
+            
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+ 
+                @Override
+                public Object call(Class<?> paramClass) {
+                    return injector.getInstance(paramClass);
+                }
+            });
+
+            Parent loadScreen = (Parent)loader.load();
+            ControlledScreen myScreenController = ((ControlledScreen) loader.getController());
             myScreenController.setScreenParent(this);
-            addScreen(name, loadScreen);
-            return true;
+            screens.put(name, loadScreen);
+            return loadScreen;
         } catch (Exception e) {
             System.err.println("Error while loading screen \"" + name + "\" : " + e.getMessage());
-            return false;
+            return null;
         }
     }
     
@@ -56,28 +70,19 @@ public class ScreensController extends StackPane {
     //one screen the new screen is being added second, and then the current screen is removed.
     // If there isn't any screen being displayed, the new screen is just added to the root.
     public boolean setScreen(final String name) {       
-        if (screens.get(name) != null) {   //if screen(s) are loaded
+        Node screen = loadOrFindScreen(name);
+        if (screen != null) {   //if screen(s) are loaded
             if (!getChildren().isEmpty()) {    //if there is more than one screen already displayed
                 getChildren().remove(0);                    //remove the displayed screen
-                getChildren().add(0, screens.get(name));     //add the screen
+                getChildren().add(0, screen);     //add the screen
             }
             else { // if no screen dusplayed yet
-                getChildren().add(screens.get(name));       
+                getChildren().add(screen);       
             }
             return true;
         } else {
-            System.err.println("screen hasn't been loaded. Screen name : " + screens.get(name) + "\n");
+            System.err.println("screen hasn't been registered. Screen name : " + screens.get(name) + "\n");
             return false;
-        }
-    }
-
-    //This method will remove the screen with the given name from the collection of screens
-    public boolean unloadScreen(String name) {
-        if (screens.remove(name) == null) {
-            System.err.println("Screen didn't exist");
-            return false;
-        } else {
-            return true;
         }
     }
 }

@@ -4,6 +4,8 @@
  */
 package org.mysocialfeed.supportingfiles;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,10 +16,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
-
-// for SQL :
-
 import org.mysocialfeed.screensframework.ScreensController;
+import org.mysocialfeed.screensframework.WelcomeScreenController;
+import org.mysocialfeed.supportingfiles.*;
 
 /**
  *
@@ -28,13 +29,22 @@ public class MSFWindowsTestApplication extends Application {
     public static Connection conn;
     public static Statement stmt;
     
+    private Injector mainServiceInjector;
+    
     @Override
     public void start(Stage primaryStage) {
         
+        // Guice implementation:
+        this.mainServiceInjector = Guice.createInjector(new MainServiceModule());
+        
+        Object i1 = mainServiceInjector.getInstance(WelcomeScreenController.class);
+        Object i2 = mainServiceInjector.getInstance(WelcomeScreenController.class);
+        System.out.println(i1 == i2);
+        
         accessAndSetupSQLServer(true);
         
-        ScreensController mainController = new ScreensController();
-        addAllScreens(mainController);
+        ScreensController mainController = new ScreensController(this.mainServiceInjector);
+        registerAllScreens(mainController);
         
         Group root = new Group();
         root.getChildren().addAll(mainController);
@@ -43,7 +53,7 @@ public class MSFWindowsTestApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
+    
     public static void accessAndSetupSQLServer(boolean createTables){
         try {  
             
@@ -68,26 +78,26 @@ public class MSFWindowsTestApplication extends Application {
         }
     }
     
-     private void addAllScreens(ScreensController mainController) {
+     private void registerAllScreens(ScreensController mainController) {
        
         FXMLGetResourcer myFXMLGetResourcer = new FXMLGetResourcer();
               
-        mainController.loadScreen(FXMLGetResourcer.welcomeScreenID, myFXMLGetResourcer.getWelcomeScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userMainScreenID, myFXMLGetResourcer.getUserMainScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userSignUpScreenID, myFXMLGetResourcer.getUserSignUpScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userAccountCreatedScreenID, myFXMLGetResourcer.getUserAccountCreatedScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.welcomeScreenID, myFXMLGetResourcer.getWelcomeScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userMainScreenID, myFXMLGetResourcer.getUserMainScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userSignUpScreenID, myFXMLGetResourcer.getUserSignUpScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userAccountCreatedScreenID, myFXMLGetResourcer.getUserAccountCreatedScreenFile());
         
-        mainController.loadScreen(FXMLGetResourcer.userAddAccountScreenID, myFXMLGetResourcer.getUserAddAccountScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userFacebookScreenID, myFXMLGetResourcer.getUserFacebookScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userGooglePlusScreenID, myFXMLGetResourcer.getUserGooglePlusScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userPinterestScreenID, myFXMLGetResourcer.getUserPinterestScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.userTwitterScreenID, myFXMLGetResourcer.getUserTwitterScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userAddAccountScreenID, myFXMLGetResourcer.getUserAddAccountScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userFacebookScreenID, myFXMLGetResourcer.getUserFacebookScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userGooglePlusScreenID, myFXMLGetResourcer.getUserGooglePlusScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userPinterestScreenID, myFXMLGetResourcer.getUserPinterestScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.userTwitterScreenID, myFXMLGetResourcer.getUserTwitterScreenFile());
         
-        mainController.loadScreen(FXMLGetResourcer.addFacebookAccountScreenID, myFXMLGetResourcer.getAddFacebookScreenAccountScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.addGooglePlusAccountScreenID, myFXMLGetResourcer.getAddGooglePlusAccountScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.addPinterestAccountScreenID, myFXMLGetResourcer.getAddPinterestAccountScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.addTwitterAccountScreenID, myFXMLGetResourcer.getAddTwitterAccountScreenFile());
-        mainController.loadScreen(FXMLGetResourcer.AccountCreationResultScreenID, myFXMLGetResourcer.getAccountCreationResultScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.addFacebookAccountScreenID, myFXMLGetResourcer.getAddFacebookScreenAccountScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.addGooglePlusAccountScreenID, myFXMLGetResourcer.getAddGooglePlusAccountScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.addPinterestAccountScreenID, myFXMLGetResourcer.getAddPinterestAccountScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.addTwitterAccountScreenID, myFXMLGetResourcer.getAddTwitterAccountScreenFile());
+        mainController.registerScreen(FXMLGetResourcer.AccountCreationResultScreenID, myFXMLGetResourcer.getAccountCreationResultScreenFile());
         
         mainController.setScreen(FXMLGetResourcer.welcomeScreenID); 
     }
