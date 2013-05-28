@@ -18,6 +18,7 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
+import com.googlecode.objectify.annotation.*;
 
 @SuppressWarnings("serial")
 public class ServerServlet extends HttpServlet {

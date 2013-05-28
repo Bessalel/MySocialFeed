@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+
 	<servlet>
 		<servlet-name>Server</servlet-name>
 		<servlet-class>com.mysocialfeed.ServerServlet</servlet-class>
@@ -16,5 +17,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<welcome-file>ServerServlet.java</welcome-file>
 	</welcome-file-list>
 
+
 </web-app>
-<!-- JSP/Home.jsp -->
+<filter>
+	        
+	<filter-name>ObjectifyFilter</filter-name>
+	        
+	<filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+</filter>
+<filter-mapping>
+	        
+	<filter-name>ObjectifyFilter</filter-name>
+	        
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
