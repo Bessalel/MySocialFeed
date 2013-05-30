@@ -12,8 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
-import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
-import org.mysocialfeed.supportingfiles.UserService;
 /**
  *
  * @author Vincent
@@ -32,6 +30,7 @@ public class ScreensController extends StackPane {
     public void registerScreen(String name, URL url){
         screens.put(name, url);
     }
+    
     
     //Loads the fxml file, add the screen to the screens collection and
     //finally injects the screenPane to the controller.

@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.mysocialfeed.supportingfiles;
+package org.mysocialfeed.services.interfaces;
 
 /**
  *
  * @author Vincent
  */
 public interface UserService {
-    public boolean getIsAuthenticated();
+    public boolean isAuthenticated();
+    
+    // User Operations
     public boolean authenticate(String userName, String passWord);
     public void userSignOff();
     //UserData authenticatedData {get ;}

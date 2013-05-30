@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.supportingfiles;
 
+import org.mysocialfeed.services.MainServiceModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.sql.Connection;
@@ -17,8 +18,6 @@ import javafx.stage.Stage;
 import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
-import org.mysocialfeed.screensframework.WelcomeScreenController;
-import org.mysocialfeed.supportingfiles.*;
 
 /**
  *
@@ -37,9 +36,6 @@ public class MSFWindowsTestApplication extends Application {
         // Guice implementation:
         this.mainServiceInjector = Guice.createInjector(new MainServiceModule());
         
-        Object i1 = mainServiceInjector.getInstance(WelcomeScreenController.class);
-        Object i2 = mainServiceInjector.getInstance(WelcomeScreenController.class);
-        System.out.println(i1 == i2);
         
         accessAndSetupSQLServer(true);
         

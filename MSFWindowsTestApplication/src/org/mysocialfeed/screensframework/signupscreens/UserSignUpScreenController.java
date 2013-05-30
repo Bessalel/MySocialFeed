@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.signupscreens;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -71,9 +72,11 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML
     AnchorPane mainAnchorPane;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public UserSignUpScreenController(){
+        System.out.println("USUSC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }    
@@ -130,7 +133,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(515);
         stage.setHeight(440);
-        WelcomeScreenController.errorMessage.setVisible(false);
+      //  WelcomeScreenController.errorMessage.setVisible(false);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
     

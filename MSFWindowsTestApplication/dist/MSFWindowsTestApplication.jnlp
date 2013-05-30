@@ -11,11 +11,11 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MSFWindowsTestApplication.jar" size="437811" download="eager" />
-    <jar href="lib/aopalliance.jar" size="6543" download="eager" />
-    <jar href="lib/guice-3.0.jar" size="771204" download="eager" />
-    <jar href="lib/javax.inject.jar" size="4473" download="eager" />
-    <jar href="lib/mysql-connector-java-5.1.23-bin.jar" size="873922" download="eager" />
+    <jar href="MSFWindowsTestApplication.jar" size="444049" download="eager" />
+    <jar href="lib/aopalliance.jar" size="6539" download="eager" />
+    <jar href="lib/guice-3.0.jar" size="771206" download="eager" />
+    <jar href="lib/javax.inject.jar" size="4472" download="eager" />
+    <jar href="lib/mysql-connector-java-5.1.23-bin.jar" size="873921" download="eager" />
   </resources>
 <security>
   <all-permissions/>

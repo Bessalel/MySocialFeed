@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,9 +29,11 @@ public class AccountCreationResultScreenController implements Initializable, Con
 
     ScreensController myController;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public AccountCreationResultScreenController(){
+        System.out.println("ACRSC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -121,23 +124,7 @@ public class AccountCreationResultScreenController implements Initializable, Con
         AccountCreationResultScreenController.addAnotherFbAccount.setVisible(false);
         AccountCreationResultScreenController.mainPage.setVisible(false);
         
-        if (UserAddAccountScreenController.result == true) {
-            UserMainScreenController.userHasAccount.setVisible(true);
-            UserMainScreenController.noAccountAvailable.setVisible(false);
-            UserMainScreenController.accessFacebook.setVisible(true);
-            UserMainScreenController.accessTwitter.setVisible(true);
-            UserMainScreenController.accessGooglePlus.setVisible(true);
-            UserMainScreenController.accessPinterest.setVisible(true);
-            UserMainScreenController.addAccount.setVisible(true);
-        } else {
-            UserMainScreenController.userHasAccount.setVisible(false);
-            UserMainScreenController.noAccountAvailable.setVisible(true);
-            UserMainScreenController.accessFacebook.setVisible(false);
-            UserMainScreenController.accessTwitter.setVisible(false);
-            UserMainScreenController.accessGooglePlus.setVisible(false);
-            UserMainScreenController.accessPinterest.setVisible(false);
-            UserMainScreenController.addAccount.setVisible(false);    
-        }
+       
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(515);
         stage.setHeight(440);

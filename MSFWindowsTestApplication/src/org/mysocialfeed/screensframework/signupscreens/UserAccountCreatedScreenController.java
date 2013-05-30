@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.signupscreens;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -25,9 +26,11 @@ public class UserAccountCreatedScreenController implements Initializable, Contro
 
     ScreensController myController;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public UserAccountCreatedScreenController(){
+        System.out.println("USACSC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -42,7 +45,7 @@ public class UserAccountCreatedScreenController implements Initializable, Contro
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(515);
         stage.setHeight(440);
-        WelcomeScreenController.errorMessage.setVisible(false);
+      //  WelcomeScreenController.errorMessage.setVisible(false);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 }

@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.socialaccountstabs;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -55,9 +56,11 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     private static Date date;
     private static Timestamp timeStamp;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public UserFacebookScreenController(){
+        System.out.println("UFSC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         timeLine.setText("");

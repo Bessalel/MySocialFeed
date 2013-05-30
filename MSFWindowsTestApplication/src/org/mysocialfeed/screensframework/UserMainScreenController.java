@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,8 +14,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.mysocialfeed.models.Context;
-import org.mysocialfeed.screensframework.socialaccountstabs.UserFacebookScreenController;
+import org.mysocialfeed.services.interfaces.UserService;
+import org.mysocialfeed.services.repository.UserDataService;
 
 /**
  * FXML Controller class
@@ -26,30 +27,27 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     ScreensController myController;
     
     @FXML
-    public static Label welcomeMessage;
+    private Label welcomeMessage;
     @FXML
-    public static Label userHasAccount;
+    private Label userHasAccount;
     
-    // List of action buttons :
-    
+    // List of action buttons :    
     @FXML
-    public static Button accessFacebook;
+    private Button accessFacebook;
     @FXML
-    public static Button accessTwitter;
+    private Button accessTwitter;
     @FXML
-    public static Button accessGooglePlus;
+    private Button accessGooglePlus;
     @FXML
-    public static Button accessPinterest;
+    private Button accessPinterest;
     @FXML
-    public static Button addAccount;
+    private Button addAccount;
     @FXML
-    public static Button addFirstAccount;
+    private Button addFirstAccount;
     
     // No Social Account error messages :
-    
     @FXML
-    public static Label noAccountAvailable;
-    
+    private Label noAccountAvailable;
     @FXML
     private Label noFacebookAccount;
     @FXML
@@ -59,9 +57,45 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     @FXML
     private Label noPinterestAccount;
      
-    /**
-     * Initializes the controller class.
-     */
+    
+    private final UserService userService;
+    private final UserDataService userDataService;
+    
+    @Inject
+    public UserMainScreenController(UserService userService, UserDataService userDataService){
+        this.userService = userService;
+        this.userDataService = userDataService;
+        setDefaultProperties();
+    }
+    
+    private void setDefaultProperties(){
+        if (userService.isAuthenticated() == true) {
+                if (userDataService.hasAccount() == false) {
+                    this.noAccountAvailable.setVisible(true);
+                    this.accessFacebook.setVisible(false);
+                    this.accessGooglePlus.setVisible(false);
+                    this.accessPinterest.setVisible(false);
+                    this.accessTwitter.setVisible(false);
+                } 
+                else if (userDataService.hasAccount() == true) {
+                    if (userDataService.hasFacebook() == true) {
+                        this.accessFacebook.setVisible(true);
+                    }
+                    if (userDataService.hasGooglePlus() == true) {
+                        this.accessGooglePlus.setVisible(true);
+                    }
+                    if (userDataService.hasPinterest() == true) {
+                        this.accessPinterest.setVisible(true);
+                    }
+                    if (userDataService.hasTwitter() == true) {
+                        this.accessTwitter.setVisible(true);
+                }
+            }
+        } else if (userService.isAuthenticated() == false) {
+            this.welcomeMessage.setText("Something went wrong because you were not properly authenticated.\nPlease, sign off and sign in again.");
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -75,41 +109,35 @@ public class UserMainScreenController implements Initializable, ControlledScreen
         
     @FXML
     private void userChooseFacebook(ActionEvent event) {
-        if (Context.getCurrentUser() != null) {
-           if (!(Context.getCurrentUser().hasFacebook())) {
-               noFacebookAccount.setVisible(true);
-           }else {
-               UserFacebookScreenController.loadUserFbTimeline();
-               myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
-            }
-        } 
+        if (userDataService.hasFacebook() == false) {
+            this.noFacebookAccount.setVisible(true);
+        } else {
+            myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
+        }
     }
     
     @FXML
     private void userChooseTwitter(ActionEvent event) {
-        if (Context.getCurrentUser() != null) {
-          if (!(Context.getCurrentUser().hasTwitter())) {
-               noTwitterAccount.setVisible(true);
-           } else
-              myController.setScreen(FXMLGetResourcer.userTwitterScreenID);
+        if (userDataService.hasTwitter() == false) {
+            this.noTwitterAccount.setVisible(true);
+        } else {
+            myController.setScreen(FXMLGetResourcer.userTwitterScreenID);
         }
     }
     
     @FXML
     private void userChooseGooglePlus(ActionEvent event) {
-        if (Context.getCurrentUser() != null) {
-            if (!(Context.getCurrentUser().hasGooglePlus())) {
-               noGooglePlusAccount.setVisible(true);
-           }
+        if (userDataService.hasGooglePlus() == false) {
+            this.noGooglePlusAccount.setVisible(true);
+        } else {
+            //
         }
     }
     
     @FXML
     private void userChoosePinterest(ActionEvent event) {
-        if (Context.getCurrentUser() != null) {
-            if (!(Context.getCurrentUser().hasPinterest())) {
-               noPinterestAccount.setVisible(true);
-           }
+        if (userDataService.hasPinterest() == false) {
+            this.noPinterestAccount.setVisible(true);
         }
     }
     
@@ -127,13 +155,14 @@ public class UserMainScreenController implements Initializable, ControlledScreen
         stage.setWidth(515);
         stage.setHeight(440);
         
-        noFacebookAccount.setVisible(false);
-        noTwitterAccount.setVisible(false);
-        noGooglePlusAccount.setVisible(false);
-        noPinterestAccount.setVisible(false);
+        userService.userSignOff();
         
-        UserMainScreenController.welcomeMessage.setText(UserMainScreenController.welcomeMessage.getText().substring(0, 7));
-        WelcomeScreenController.errorMessage.setVisible(false);
+        this.noFacebookAccount.setVisible(false);
+        this.noTwitterAccount.setVisible(false);
+        this.noGooglePlusAccount.setVisible(false);
+        this.noPinterestAccount.setVisible(false);
+        
+        this.welcomeMessage.setText(this.welcomeMessage.getText().substring(0, 7));
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 }
