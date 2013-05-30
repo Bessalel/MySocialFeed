@@ -33,7 +33,7 @@
     <Label fx:id="noTwitterAccount" font="$x1" layoutX="161.0" layoutY="202.0" text="No Twitter account added !" textFill="RED" visible="false" />
     <Label fx:id="noGooglePlusAccount" font="$x1" layoutX="161.0" layoutY="244.0" text="No Google + account added !" textFill="RED" visible="false" />
     <Label id="noPinterestAcount" fx:id="noPinterestAccount" font="$x1" layoutX="161.0" layoutY="289.0" text="No Pinterest account added !" textFill="RED" visible="false" />
-    <Button fx:id="addFirstAccount" layoutX="206.0" layoutY="200.0" mnemonicParsing="false" text="Add account" visible="false" />
+    <Button fx:id="addFirstAccount" layoutX="206.0" layoutY="200.0" mnemonicParsing="false" onAction="#addUserAccount" text="Add account" visible="false" />
     <Label fx:id="userHasAccount" layoutX="38.0" layoutY="94.0" text="Use on of the following button to access your desired social account :" />
   </children>
 </AnchorPane>

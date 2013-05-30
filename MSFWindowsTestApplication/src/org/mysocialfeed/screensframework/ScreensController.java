@@ -46,7 +46,6 @@ public class ScreensController extends StackPane {
             FXMLLoader loader = new FXMLLoader((URL)urlOrNode);
             
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
- 
                 @Override
                 public Object call(Class<?> paramClass) {
                     return injector.getInstance(paramClass);

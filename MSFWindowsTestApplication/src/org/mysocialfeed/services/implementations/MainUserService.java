@@ -24,7 +24,7 @@ public class MainUserService implements UserService {
     private final MySQLService mySQLService;
     private Connection conn;
     
-    // user data
+    // User Data
     private final UserDataService userDataService;
     
     
@@ -58,7 +58,7 @@ public class MainUserService implements UserService {
     public boolean authenticate(String userName, String passWord) {
       try {
            if (accessSQLService().isClosed() == true) {
-               accessSQLService(); // putting a while here would freeze the program if always false... so only one try for the moment
+               accessSQLService(); // putting a while here would freeze the program if always false... so only one try for the momment
            } else { 
                try(PreparedStatement getUserData = 
                        this.conn.prepareStatement(

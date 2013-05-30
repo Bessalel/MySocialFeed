@@ -27,35 +27,35 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     ScreensController myController;
     
     @FXML
-    private Label welcomeMessage;
+    private Label welcomeMessage = new Label();
     @FXML
-    private Label userHasAccount;
+    private Label userHasAccount = new Label();
     
     // List of action buttons :    
     @FXML
-    private Button accessFacebook;
+    private Button accessFacebook = new Button();
     @FXML
-    private Button accessTwitter;
+    private Button accessTwitter = new Button();
     @FXML
-    private Button accessGooglePlus;
+    private Button accessGooglePlus = new Button();
     @FXML
-    private Button accessPinterest;
+    private Button accessPinterest = new Button();
     @FXML
-    private Button addAccount;
+    private Button addAccount = new Button();
     @FXML
-    private Button addFirstAccount;
+    private Button addFirstAccount = new Button();
     
     // No Social Account error messages :
     @FXML
-    private Label noAccountAvailable;
+    private Label noAccountAvailable = new Label();
     @FXML
-    private Label noFacebookAccount;
+    private Label noFacebookAccount = new Label();
     @FXML
-    private Label noTwitterAccount;
+    private Label noTwitterAccount = new Label();
     @FXML
-    private Label noGooglePlusAccount;
+    private Label noGooglePlusAccount = new Label();
     @FXML
-    private Label noPinterestAccount;
+    private Label noPinterestAccount = new Label();
      
     
     private final UserService userService;
@@ -70,14 +70,18 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     
     private void setDefaultProperties(){
         if (userService.isAuthenticated() == true) {
+            this.welcomeMessage.setText("Welcome " + userDataService.getUserName() + "!");
                 if (userDataService.hasAccount() == false) {
                     this.noAccountAvailable.setVisible(true);
+                    this.addFirstAccount.setVisible(true);
                     this.accessFacebook.setVisible(false);
                     this.accessGooglePlus.setVisible(false);
                     this.accessPinterest.setVisible(false);
                     this.accessTwitter.setVisible(false);
                 } 
                 else if (userDataService.hasAccount() == true) {
+                    this.noAccountAvailable.setVisible(false);
+                    this.addFirstAccount.setVisible(false);
                     if (userDataService.hasFacebook() == true) {
                         this.accessFacebook.setVisible(true);
                     }
@@ -92,7 +96,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
                 }
             }
         } else if (userService.isAuthenticated() == false) {
-            this.welcomeMessage.setText("Something went wrong because you were not properly authenticated.\nPlease, sign off and sign in again.");
+           // this.welcomeMessage.setText("Something went wrong because you were not properly authenticated.\nPlease, sign off and sign in again.");
         }
     }
     
