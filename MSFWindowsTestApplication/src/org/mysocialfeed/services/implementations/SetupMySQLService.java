@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import org.mysocialfeed.services.interfaces.MySQLService;
-import static org.mysocialfeed.supportingfiles.MSFWindowsTestApplication.conn;
 
 /**
  *

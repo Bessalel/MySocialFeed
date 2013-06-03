@@ -114,6 +114,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     @FXML
     private void userChooseFacebook(ActionEvent event) {
         if (userDataService.hasFacebook() == false) {
+            System.out.println(userDataService.hasFacebook());
             this.noFacebookAccount.setVisible(true);
         } else {
             myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
