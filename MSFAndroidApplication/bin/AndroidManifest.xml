@@ -15,6 +15,12 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="fr.mysocialfeed.supportingfiles.MainActivity"
+            android:label="@string/app_acronym"
+            android:icon="@drawable/ic_launcher"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>        
+        <activity
+            android:name="fr.mysocialfeed.supportingfiles.LoginDisplayActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +29,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="fr.mysocialfeed.supportingfiles.SettingsActivity"
-            android:label="@string/title_activity_settings" >
+            android:name="fr.mysocialfeed.supportingfiles.ErrorActivity"
+            android:label="@string/title_activity_error" >
         </activity>
     </application>
 
