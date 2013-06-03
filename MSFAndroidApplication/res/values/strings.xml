@@ -2,9 +2,20 @@
 <resources>
 
     <string name="app_name">MySocialFeed</string>
+    <string name="app_acronym">MSF</string>
+    <string name="activity_name_filter">Filters</string>
+    <string name="activity_name_home">Home</string>
+    <string name="activity_name_setting">Settings</string>
+    <string name="activity_name_singin">Sign In</string>
+    <string name="menu_filter">Filters</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_setting">Settings</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_send">Send!</string>
+    <string name="menu_about">About</string>
+    <string name="title_activity_error">Oups!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">Filters</string>
-    <string name="title_section2">Home</string>
-    <string name="title_section3">Settings</string>
+    <string name="error_page">Sorry, an error has been detected! Please retry later or contact the developpers.</string>
 
 </resources>
