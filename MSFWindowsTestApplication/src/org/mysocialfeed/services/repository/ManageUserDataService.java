@@ -15,13 +15,9 @@ public class ManageUserDataService implements UserDataService {
     private String userFirstName;
     private String userLastName;
     private String userEmailAddress;
-    private boolean hasFacebook;
     private int nbFacebook;
-    private boolean hasTwitter;
     private int nbTwitter;
-    private boolean hasGooglePlus;
     private int nbGooglePlus;
-    private boolean hasPinterest;
     private int nbPinterest;
 
     @Override
@@ -35,34 +31,10 @@ public class ManageUserDataService implements UserDataService {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmailAddress = userEmailAddress;
-        if (nbFacebook == 0) {
-            this.hasFacebook = false;
-            this.nbFacebook = 0;
-        } else {
-            this.hasFacebook = true;
-            this.nbFacebook = nbFacebook;
-        }
-        if (nbTwitter == 0) {
-            this.hasTwitter = false;
-            this.nbTwitter = 0;
-        } else {
-            this.hasTwitter = true;
-            this.nbTwitter = nbTwitter;
-        }
-        if (nbGooglePlus == 0) {
-            this.hasGooglePlus = false;
-            this.nbFacebook = 0;
-        } else {
-            this.hasGooglePlus = true;
-            this.nbGooglePlus = nbGooglePlus;
-        }
-        if (nbPinterest == 0) {
-            this.hasPinterest = false;
-            this.hasPinterest = true;
-        } else {
-            this.hasPinterest = true;
-            this.nbPinterest = nbPinterest;
-        }
+        this.nbFacebook = nbFacebook;
+        this.nbTwitter = nbTwitter;
+        this.nbGooglePlus = nbGooglePlus;
+        this.nbPinterest = nbPinterest;
     }
     
     @Override
@@ -72,10 +44,6 @@ public class ManageUserDataService implements UserDataService {
         this.userFirstName = null;
         this.userLastName = null;
         this.userEmailAddress = null;
-        this.hasFacebook = false;
-        this.hasGooglePlus = false;
-        this.hasPinterest = false;
-        this.hasTwitter = false;
         this.nbFacebook = 0;
         this.nbGooglePlus = 0;
         this.nbPinterest = 0;
@@ -85,30 +53,27 @@ public class ManageUserDataService implements UserDataService {
     // Get user social account(s) status
     @Override
     public boolean hasAccount() {
-        if (this.hasFacebook == false && this.hasGooglePlus == false && this.hasPinterest == false && this.hasTwitter == false) {
-            return false;
-        }
-        return true;
+        return (this.nbFacebook + this.nbGooglePlus + this.nbPinterest + this.nbTwitter) > 0;
     }
 
     @Override
     public boolean hasFacebook() {
-        return this.hasTwitter;
+        return this.nbFacebook > 0;
     }
 
     @Override
     public boolean hasGooglePlus() {
-        return this.hasGooglePlus;
+        return this.nbGooglePlus > 0;
     }
 
     @Override
     public boolean hasPinterest() {
-        return this.hasPinterest;
+        return this.nbPinterest > 0;
     }
 
     @Override
     public boolean hasTwitter() {
-        return this.hasTwitter;
+        return this.nbTwitter > 0;
     }
 
     
@@ -183,18 +148,8 @@ public class ManageUserDataService implements UserDataService {
     }
 
     @Override
-    public void setHasFacebook(boolean hasFacebook) {
-        this.hasFacebook = hasFacebook;
-    }
-
-    @Override
     public void setNbFacebook(int nbFacebook) {
         this.nbFacebook = nbFacebook;
-    }
-
-    @Override
-    public void setHasTwitter(boolean hasTwitter) {
-        this.hasTwitter = hasTwitter;
     }
 
     @Override
@@ -203,18 +158,8 @@ public class ManageUserDataService implements UserDataService {
     }
 
     @Override
-    public void setHasGooglePlus(boolean hasGooglePlus) {
-        this.hasGooglePlus = hasGooglePlus;
-    }
-
-    @Override
     public void setNbGooglePlus(int nbGooglePlus) {
         this.nbGooglePlus = nbGooglePlus;
-    }
-
-    @Override
-    public void setHasPinterest(boolean hasPinterest) {
-        this.hasPinterest = hasPinterest;
     }
 
     @Override

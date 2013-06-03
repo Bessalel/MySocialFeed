@@ -96,7 +96,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
                 }
             }
         } else if (userService.isAuthenticated() == false) {
-           // this.welcomeMessage.setText("Something went wrong because you were not properly authenticated.\nPlease, sign off and sign in again.");
+           this.welcomeMessage.setText("Something went wrong because you were not properly authenticated.\nPlease, sign off and sign in again.");
         }
     }
     
@@ -115,6 +115,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     private void userChooseFacebook(ActionEvent event) {
         if (userDataService.hasFacebook() == false) {
             System.out.println(userDataService.hasFacebook());
+            System.out.println(userDataService.getNbFbAccount());
             this.noFacebookAccount.setVisible(true);
         } else {
             myController.setScreen(FXMLGetResourcer.userFacebookScreenID);

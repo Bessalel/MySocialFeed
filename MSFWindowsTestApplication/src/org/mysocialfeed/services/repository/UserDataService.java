@@ -44,12 +44,8 @@ public interface UserDataService {
     public void setUserFirstName(String userFirstName);
     public void setUserLastName(String userLastName);
     public void setUserEmailAddress(String userEmailAddress);
-    public void setHasFacebook(boolean hasFacebook);
     public void setNbFacebook(int nbFacebook);
-    public void setHasTwitter(boolean hasTwitter);
     public void setNbTwitter(int nbTwitter);
-    public void setHasGooglePlus(boolean hasGooglePlus);
-    public void setNbGooglePlus(int nbGooglePlus);
-    public void setHasPinterest(boolean hasPinterest);
+    public void setNbGooglePlus(int nbGooglePlus);;
     public void setNbPinterest(int nbPinterest);
 }
