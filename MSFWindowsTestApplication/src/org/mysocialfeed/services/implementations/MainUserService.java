@@ -9,9 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import org.mysocialfeed.services.interfaces.MySQLService;
 import org.mysocialfeed.services.interfaces.UserService;
 import org.mysocialfeed.services.repository.UserDataService;
+import org.mysocialfeed.services.repository.UserPostsService;
 
 /**
  *
@@ -27,11 +31,14 @@ public class MainUserService implements UserService {
     // User Data
     private final UserDataService userDataService;
     
+    // User Posts
+    private final UserPostsService userPostsService;
     
     @Inject
-    public MainUserService(MySQLService mySQLService, UserDataService userDataService){
+    public MainUserService(MySQLService mySQLService, UserDataService userDataService, UserPostsService userPostsService){
         this.mySQLService = mySQLService;
         this.userDataService = userDataService;
+        this.userPostsService = userPostsService;
     }
     
     private Connection accessSQLService(){
@@ -41,12 +48,51 @@ public class MainUserService implements UserService {
     private boolean loadUserData(ResultSet rs){
         try {
             userDataService.loadUserData(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
         return true;
     }
     
+    private boolean loadUserPosts(){
+        ResultSet rs;
+        int tempUserID = this.userDataService.getUserID();
+        List<Integer> postsID = new ArrayList<Integer>();
+        List<Integer> accountID = new ArrayList<Integer>();
+        List<String> accountType = new ArrayList<String>();
+        List<String> content = new ArrayList<String>();
+        List<Timestamp> timeStamp = new ArrayList<Timestamp>();
+        
+        try(PreparedStatement getUserPosts = 
+               this.conn.prepareStatement(this.mySQLService.getLIST_ALL_POSTS())) {
+                    getUserPosts.setInt(1, this.userDataService.getUserID());
+
+                    rs = getUserPosts.executeQuery();
+                    postsID.add(rs.getInt(1));
+                    accountID.add(rs.getInt(2));
+                    accountType.add(rs.getString(3));
+                    content.add(rs.getString(4));
+                    timeStamp.add(rs.getTimestamp(5));
+
+                    int it = 0;
+                    while (rs.next()) {
+                        postsID.add(rs.getInt(it));
+                        accountID.add(rs.getInt(it));
+                        accountType.add(rs.getString(it));
+                        content.add(rs.getString(it));
+                        timeStamp.add(rs.getTimestamp(it));
+                        it++;
+                    }
+                    rs.close();
+                this.userPostsService.loadPosts(tempUserID, postsID, accountID, accountType, content, timeStamp);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        return true;
+    }
     
     @Override
     public boolean isAuthenticated() {
@@ -59,7 +105,7 @@ public class MainUserService implements UserService {
       try {
            if (accessSQLService().isClosed() == true) {
                accessSQLService(); // putting a while here would freeze the program if always false... so only one try for the momment
-           } else { 
+           } else {
                try(PreparedStatement getUserData = 
                        this.conn.prepareStatement(
                        this.mySQLService.getLIST_USER())) {
@@ -73,6 +119,7 @@ public class MainUserService implements UserService {
                            if (passWord.compareTo(rs.getString(3)) == 0) {
                                // Success -> passwords match !
                                this.connectionStatus = loadUserData(rs);
+                               this.connectionStatus = loadUserPosts();
                                this.conn.close();
                                return this.connectionStatus;
                            } else {
