@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.socialaccountstabs;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -19,9 +20,11 @@ public class UserPinterestScreenController implements Initializable, ControlledS
 
     ScreensController myController;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public UserPinterestScreenController(){
+        System.out.println("UPSC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

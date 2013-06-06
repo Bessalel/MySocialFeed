@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -32,9 +33,11 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
 
     ScreensController myController;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public AddFacebookAccountScreenController(){
+        System.out.println("AFSC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

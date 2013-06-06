@@ -4,6 +4,7 @@
  */
 package org.mysocialfeed.screensframework.socialaccountstabs;
 
+import com.google.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,9 +28,11 @@ public class UserAddAccountScreenController implements Initializable, Controlled
 
     ScreensController myController;
     
-    /**
-     * Initializes the controller class.
-     */
+    @Inject
+    public UserAddAccountScreenController(){
+        System.out.println("UAASC is OK");
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     }
@@ -78,9 +81,9 @@ public class UserAddAccountScreenController implements Initializable, Controlled
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(515);
         stage.setHeight(440);
-        UserMainScreenController.welcomeMessage.setText(
-                UserMainScreenController.welcomeMessage.getText().substring(0, 7)); // remove previous added username
-        WelcomeScreenController.errorMessage.setVisible(false);
+     //   UserMainScreenController.welcomeMessage.setText(
+       //         UserMainScreenController.welcomeMessage.getText().substring(0, 7)); // remove previous added username
+       // WelcomeScreenController.errorMessage.setVisible(false);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 }

@@ -27,7 +27,7 @@
     <PasswordField fx:id="userPassword" layoutX="31.0" layoutY="317.0" onAction="#SignUserIn" prefWidth="147.0" promptText="password" />
     <Label layoutX="34.0" layoutY="240.0" text="Your username" />
     <Label layoutX="34.0" layoutY="294.0" text="Your password" />
-    <Label fx:id="errorMessage" layoutX="207.0" layoutY="291.0" text="Wrong password and/or username !" textFill="#ff3333" visible="false">
+    <Label fx:id="errorMessage" layoutX="192.0" layoutY="291.0" prefWidth="294.0" text="" textFill="#ff3333" visible="false">
       <font>
         <Font name="System Bold" size="12.0" />
       </font>

@@ -14,7 +14,7 @@
         <Font name="System Bold Italic" size="18.0" />
       </font>
     </Label>
-    <Button layoutX="428.0" layoutY="365.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
+    <Button cancelButton="true" layoutX="428.0" layoutY="365.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
     <Button fx:id="accessTwitter" layoutX="36.0" layoutY="200.0" mnemonicParsing="false" onAction="#userChooseTwitter" prefWidth="91.0" text="My Twitter" />
     <Label fx:id="noAccountAvailable" layoutX="38.0" layoutY="101.0" text="You have not added any account yet. Why not add one ?" textFill="#ff7a00" visible="false">
       <font>
