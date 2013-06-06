@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>MySocialFeed</title>
+<title>TwitterConnect</title>
 <!-- Bootstrap -->
 <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
@@ -70,6 +70,13 @@
 							type="password" name="password" placeholder="Password">
 						<button type="submit" class="btn">Se connecter</button>
 					</form>
+					<br>
+					<p>
+						${requestScope.authUrl}<br> ${requestScope.text2}<br>
+						${requestScope.text3}<br>
+						${requestScope.yop}<br>
+						yop<br>
+					</p>
 				</c:otherwise>
 			</c:choose>
 		</div>
