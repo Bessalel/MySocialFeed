@@ -22,8 +22,8 @@
 				<a class="brand" href="#">Project name</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="/TwitterOAuthServlet">Twitter</a></li>
+						<li><a href="/">Home</a></li>
+						<li class="active"><a href="/TwitterOAuthServlet">Twitter</a></li>
 						<li><a href="#contact">Contact</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -51,34 +51,14 @@
 		<!-- Main hero unit for a primary marketing message or call to action -->
 		<div class="hero-unit">
 			<h1>Bienvenu chez MSF !</h1>
-			<c:choose>
-				<c:when test="${requestScope.test!=null}">
-					<p>
-						You like this website ? Rate ${requestScope.test} it on the <a
-							href="http://apple.com">Apple Store</a> !<br> Thank's you !<br>
-						${requestScope.authUrl}<br> ${requestScope.text2}<br>
-						${requestScope.text3}<br>
-					<p>
-						<a href="#" class="btn btn-primary btn-large">Learn more
-							&raquo;</a>
-					</p>
-				</c:when>
-				<c:otherwise>
-					<form class="navbar-form pull-right" action="server" method="post">
-						<input class="span2" type="text" name="username"
-							placeholder="Username"> <input class="span2"
-							type="password" name="password" placeholder="Password">
-						<button type="submit" class="btn">Se connecter</button>
-					</form>
-					<br>
-					<p>
-						${requestScope.authUrl}<br> ${requestScope.text2}<br>
-						${requestScope.text3}<br>
-						${requestScope.yop}<br>
-						yop<br>
-					</p>
-				</c:otherwise>
-			</c:choose>
+
+			<br>
+			<p>
+			Cliquez sur le lien suivant, puis acceptez l'invitation afin de connecter Twitter à MSF :<br> 
+			
+				<a href="${requestScope.authUrl}">Connectez vous à Twitter !</a><br>
+			</p>
+
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery.js"></script>

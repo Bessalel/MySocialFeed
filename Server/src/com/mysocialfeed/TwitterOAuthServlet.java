@@ -15,55 +15,59 @@ import javax.servlet.http.HttpServletResponse;
 import twitter4j.*;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.TwitterException;
 import com.googlecode.objectify.annotation.*;
-
-import facebook4j.Facebook;
-import facebook4j.FacebookFactory;
 
 @SuppressWarnings("serial")
 public class TwitterOAuthServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		Twitter twitter = new TwitterFactory().getInstance();
-		twitter.setOAuthConsumer("[cARhnMxZ6HHZsdNRzI1SWQ]", "[UZloxdl2NtxLLAzDXZ2kRpPsFYkRNWQruyllVEFIXi0]");
-		RequestToken requestToken;
-		try {
-			requestToken = twitter.getOAuthRequestToken();
-			String authUrl = requestToken.getAuthorizationURL();
-
-			AccessToken accessToken = null;
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));
-			while (null == accessToken) {
+		if (request.getParameter("oauth_token") == null
+				&& request.getParameter("oauth_verifier") == null) {
+			Twitter twitter = TwitterFactory.getSingleton();
+			try {
+				RequestToken requestToken = twitter.getOAuthRequestToken("http://127.0.0.1:8081/TwitterOAuthServlet");
+				AccessToken accessToken = null;
+				String authUrl = requestToken.getAuthorizationURL();
 				request.setAttribute("authUrl", authUrl);
-				System.out
-						.print("Enter the PIN(if aviailable) or just hit enter.[PIN]:");
-				String pin = br.readLine();
-				try {
-					if (pin.length() > 0) {
-						accessToken = twitter.getOAuthAccessToken(requestToken,
-								pin);
-					} else {
-						accessToken = twitter.getOAuthAccessToken();
-					}
-				} catch (TwitterException te) {
-					if (401 == te.getStatusCode()) {
-						System.out.println("Unable to get the access token.");
-					} else {
-						te.printStackTrace();
-					}
-				}
+
+			} catch (TwitterException te) {
+				te.printStackTrace();
 			}
-		} catch (TwitterException te) {
-			te.printStackTrace();
+
+		} 
+		else {
+			Twitter twitter = TwitterFactory.getSingleton();
+			Status status;
+			try {
+				AccessToken accessToken = twitter.getOAuthAccessToken();
+				twitter.setOAuthAccessToken(accessToken);
+				status = twitter.updateStatus("Hello from T4J");
+				System.out.println("Successfully updated the status to ["
+						+ status.getText() + "].");
+				// twitter.getOAuthAccessToken(
+				// request.getParameter("oauth_token"),
+				// request.getParameter("oauth_verifier"));
+			} catch (TwitterException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		this.getServletContext().getRequestDispatcher("/JSP/TwitterOAuth.jsp")
 				.forward(request, response);
 
 	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
 }
+
+// twitter.setOAuthConsumer("[consumer key]", "[consumer secret]");
+// twitter.setOAuthConsumer("[cARhnMxZ6HHZsdNRzI1SWQ]",
+// "[UZloxdl2NtxLLAzDXZ2kRpPsFYkRNWQruyllVEFIXi0]");
+// "http://projetmsf.appspot.com/TwitterOAuthServlet"
