@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Bessalel/Desktop/T4J/lib/twitter4j-core-3.0.3.jar" sourcepath="war/WEB-INF/lib/twitter4j-core-3.0.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bessalel/Desktop/guava-14.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bessalel/Desktop/objectify-4.0rc1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Bessalel/Desktop/facebook4j-core-1.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Bessalel/Downloads/Docs/Prog/workspace/T4J/lib/twitter4j-core-3.0.3.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

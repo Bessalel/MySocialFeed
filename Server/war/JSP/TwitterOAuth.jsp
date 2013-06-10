@@ -50,13 +50,22 @@
 	<div class="container">
 		<!-- Main hero unit for a primary marketing message or call to action -->
 		<div class="hero-unit">
-			<h1>Bienvenu chez MSF !</h1>
+			<h2>Connexion à Twitter !</h2>
 
-			<br>
 			<p>
-			Cliquez sur le lien suivant, puis acceptez l'invitation afin de connecter Twitter à MSF :<br> 
-			
-				<a href="${requestScope.authUrl}">Connectez vous à Twitter !</a><br>
+
+				<c:choose>
+					<c:when test="${requestScope.connectedToTwitter==null}">
+						Cliquez sur le lien suivant, puis acceptez l'invitation afin de
+						connecter Twitter à MSF :<br>
+						<a href="${requestScope.authUrl}">Connectez vous à Twitter !</a><br>
+					</c:when>
+					<c:otherwise>
+						Voici votre Access Token : ${requestScope.yop}<br>
+						Voici votre Access Secret : ${requestScope.yop2}<br>
+					</c:otherwise>
+				</c:choose>
+
 			</p>
 
 		</div>
