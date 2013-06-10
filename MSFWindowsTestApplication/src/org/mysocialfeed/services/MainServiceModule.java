@@ -11,7 +11,9 @@ import org.mysocialfeed.services.interfaces.UserService;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import org.mysocialfeed.services.repository.ManageUserDataService;
+import org.mysocialfeed.services.repository.ManageUserPostsService;
 import org.mysocialfeed.services.repository.UserDataService;
+import org.mysocialfeed.services.repository.UserPostsService;
 /**
  *
  * @author Vincent
@@ -23,6 +25,7 @@ public class MainServiceModule extends AbstractModule{
         bind(UserService.class).to(MainUserService.class).in(Singleton.class);
         bind(MySQLService.class).to(SetupMySQLService.class).in(Singleton.class);
         bind(UserDataService.class).to(ManageUserDataService.class).in(Singleton.class);
+        bind(UserPostsService.class).to(ManageUserPostsService.class).in(Singleton.class);
     }
     
 }

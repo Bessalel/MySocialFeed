@@ -29,6 +29,7 @@ public class ScreensController extends StackPane {
     
     public void registerScreen(String name, URL url){
         screens.put(name, url);
+        System.out.println("Registering : " + name + " at \n" + url.toString());
     }
     
     

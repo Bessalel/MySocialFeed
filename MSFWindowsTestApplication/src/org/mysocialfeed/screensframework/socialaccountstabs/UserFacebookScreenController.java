@@ -5,29 +5,34 @@
 package org.mysocialfeed.screensframework.socialaccountstabs;
 
 import com.google.inject.Inject;
+import java.awt.Rectangle;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-import javax.swing.JLabel;
-import org.mysocialfeed.models.DatabaseManager;
-import org.mysocialfeed.models.Context;
-import org.mysocialfeed.models.UserPosts;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
+import org.joda.time.DateTime;
 import org.mysocialfeed.screensframework.ControlledScreen;
-import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
-import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
+import org.mysocialfeed.services.repository.UserDataService;
+import org.mysocialfeed.services.repository.UserPostsService;
 
 /**
  * FXML Controller class
@@ -37,129 +42,68 @@ import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 public class UserFacebookScreenController implements Initializable, ControlledScreen {
 
     ScreensController myController;
-
-    @FXML
-    private Button resetField;
-    @FXML
-    private Button sendPost;
-    @FXML
-    private TextArea post;
-    @FXML
-    public static TextArea timeLine;
     
-    @FXML
-    private Label successMessage;
-    @FXML
-    private Label errorMessage;
+    private UserDataService userDataService;
+    private UserPostsService userPostsService;
+    private int FbAccountID = 1;
     
-    private static List<Integer> alreadyDisplayed = new ArrayList<Integer>();
-    private static Date date;
-    private static Timestamp timeStamp;
+    @FXML private TextArea userPost = new TextArea();
+    
+    @FXML private Button resetField = new Button();
+    @FXML private Button sendPost = new Button();
+    
+    @FXML private ScrollPane timeLine = new ScrollPane();
+    @FXML private AnchorPane pane = new AnchorPane(); 
+    @FXML private VBox chatBox = new VBox();
     
     @Inject
-    public UserFacebookScreenController(){
-        System.out.println("UFSC is OK");
+        public UserFacebookScreenController(UserDataService userDataService, UserPostsService userPostsService){
+        this.userDataService = userDataService;
+        this.userPostsService = userPostsService;
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        timeLine.setText("");
+        setDefaultProperties();
     }    
     
+    
+    private void setDefaultProperties() {
+        if (this.userPostsService.hasPost() == true) {
+            for (int it = 0; this.userPostsService.getContent(it) != null; it++ ) {
+                this.chatBox.getChildren().add(new Label(this.userPostsService.getContent(it)));
+            }
+        }
+    }
+    
+    @Override
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
     
-    private static boolean checkIfAlreadyDisplayed(int index){
-        for (int it : alreadyDisplayed){
-            if (it == index){
-                return false;
-            }
-        }
-        return true;
+    @FXML
+    private void resetField(ActionEvent e) {
+        this.userPost.setText(null);
     }
     
     @FXML
-    public static void loadUserFbTimeline(){
-        UserPosts temp = Context.getCurrentPosts();
-        if (Context.getCurrentPosts() != null) {
-            for (int it = 0; it < (Context.getCurrentPosts().getContent().size()); it++){
-                if (Context.getCurrentPosts().getAccountType().get(it).compareTo("Fb") == 0 
-                        && checkIfAlreadyDisplayed(it) == true){
-                    
-                    JLabel myTimeStamp = new JLabel(
-                            "<u>" + new Date(Context.getCurrentPosts().getTimeStamp().get(it).getTime()) + "</u>");
-                    
-                    timeLine.setText(timeLine.getText() + "Message wrote at " + new Date(Context.getCurrentPosts().getTimeStamp().get(it).getTime())
-                            + "\n\n" + Context.getCurrentPosts().getContent().get(it)
-                            + "\n_________________________________________________________________________________________\n\n");
-                    alreadyDisplayed.add(it);
-                }
-            }
-        }
-    }
-    
-    @FXML
-    private void userTimeline(Event event) {
-    }
-    
-    @FXML
-    private void userWriteSomething(Event event) {
+    private void sendPost(ActionEvent e) {
+        String cssBordering = "-fx-border-color:darkblue ; \n" //#090a0c
+                + "-fx-border-insets:3;\n"
+                + "-fx-border-radius:1;\n"
+                + "-fx-border-width:2.0";
         
+        DateTime dt = new DateTime();
+        this.userPostsService.addPost(FbAccountID, "Fb", this.userPost.getText(), dt);
+        
+        Label currentPost = new Label(this.userPost.getText() + "\n" + dt.toDate() + "\n");
+
+        currentPost.setMaxWidth(Double.MAX_VALUE);
+        currentPost.setWrapText(true);
+        currentPost.setStyle(cssBordering);
+        
+        currentPost.setStyle("-fx-background-color: #DCDCDC;");
+        this.chatBox.getChildren().add(currentPost);
     }
     
-    @FXML
-    private void userLeaveTab(ActionEvent event) {
-        myController.setScreen(FXMLGetResourcer.userMainScreenID);
-    }
-    
-    @FXML
-    private void userResetFieldPost(ActionEvent event) {
-        post.setText("");
-    }
-    
-    private boolean insertPostIntoDatabase(){
-        try {
-            while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                MSFWindowsTestApplication.accessAndSetupSQLServer(false);
-                }
-            if (!(MSFWindowsTestApplication.conn.isClosed())){
-                
-                date = new Date();
-                timeStamp = new Timestamp(date.getTime());
-                
-                try (PreparedStatement addPost = 
-                        MSFWindowsTestApplication.conn.prepareStatement(
-                        DatabaseManager.INSERT_POST)) {
-                            addPost.setInt(1, Context.getCurrentUser().getUserID());
-                            addPost.setInt(2, 5); // Later must add dynamically account id
-                            addPost.setString(3, "Fb");
-                            addPost.setString(4, post.getText());
-                            addPost.setTimestamp(5, timeStamp);
-                            System.out.println(addPost.toString());
-                            addPost.execute();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-                MSFWindowsTestApplication.conn.commit();
-                MSFWindowsTestApplication.conn.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-    
-    @FXML
-    private void userSendPost(ActionEvent event) {
-        if (insertPostIntoDatabase()){
-            // Need to update Context as well !
-            Context.getCurrentPosts().addAccountID(5); // Warning : later must add dynamically account id !!
-            Context.getCurrentPosts().addAccountType("Fb");
-            Context.getCurrentPosts().addPost(post.getText());
-            Context.getCurrentPosts().addTimeStamp(timeStamp);
-        }
-    }
 }

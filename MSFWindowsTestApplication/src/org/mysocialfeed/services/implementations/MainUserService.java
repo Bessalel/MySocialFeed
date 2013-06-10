@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import org.joda.time.DateTime;
 import org.mysocialfeed.services.interfaces.MySQLService;
 import org.mysocialfeed.services.interfaces.UserService;
 import org.mysocialfeed.services.repository.UserDataService;
@@ -63,30 +64,33 @@ public class MainUserService implements UserService {
         List<Integer> accountID = new ArrayList<Integer>();
         List<String> accountType = new ArrayList<String>();
         List<String> content = new ArrayList<String>();
-        List<Timestamp> timeStamp = new ArrayList<Timestamp>();
+        List<DateTime> timeStamp = new ArrayList<DateTime>();
         
         try(PreparedStatement getUserPosts = 
                this.conn.prepareStatement(this.mySQLService.getLIST_ALL_POSTS())) {
                     getUserPosts.setInt(1, this.userDataService.getUserID());
 
                     rs = getUserPosts.executeQuery();
-                    postsID.add(rs.getInt(1));
-                    accountID.add(rs.getInt(2));
-                    accountType.add(rs.getString(3));
-                    content.add(rs.getString(4));
-                    timeStamp.add(rs.getTimestamp(5));
+                    
+                    if (rs.next()) {
+                        postsID.add(rs.getInt(1));
+                        accountID.add(rs.getInt(2));
+                        accountType.add(rs.getString(3));
+                        content.add(rs.getString(4));
+                        timeStamp.add(new DateTime(rs.getTimestamp(5)));
 
-                    int it = 0;
-                    while (rs.next()) {
-                        postsID.add(rs.getInt(it));
-                        accountID.add(rs.getInt(it));
-                        accountType.add(rs.getString(it));
-                        content.add(rs.getString(it));
-                        timeStamp.add(rs.getTimestamp(it));
-                        it++;
+                        int it = 0;
+                        while (rs.next()) {
+                            postsID.add(rs.getInt(++it));
+                            accountID.add(rs.getInt(++it));
+                            accountType.add(rs.getString(++it));
+                            content.add(rs.getString(++it));
+                            timeStamp.add(new DateTime(rs.getTimestamp(++it)));
+                            it = 0;
+                        }
+                        this.userPostsService.loadPosts(tempUserID, postsID, accountID, accountType, content, timeStamp);
                     }
                     rs.close();
-                this.userPostsService.loadPosts(tempUserID, postsID, accountID, accountType, content, timeStamp);
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
