@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.mysocialfeed.services.interfaces.MySQLService;
@@ -31,9 +30,11 @@ public class ManageUserPostsService implements UserPostsService{
     private List<DateTime> timeStamp = new ArrayList<DateTime>();
 
     private final MySQLService mySQLService;
+    private UserDataService userDataService;
     
     @Inject
-    public ManageUserPostsService(MySQLService mySQLService) {
+    public ManageUserPostsService(UserDataService userDataService, MySQLService mySQLService) {
+        this.userDataService = userDataService;
         this.mySQLService = mySQLService;
     }
     
@@ -51,6 +52,11 @@ public class ManageUserPostsService implements UserPostsService{
         this.content = content;
         this.timeStamp = DateTime;
     }
+    
+    public void refreshUserPosts() {
+        
+    }
+    
 
     @Override
     public int getUserID() {
@@ -75,6 +81,11 @@ public class ManageUserPostsService implements UserPostsService{
     @Override
     public String getContent(int index) {
         return this.content.get(index);
+    }
+    
+    @Override
+    public int getMaxIndex() {
+        return this.content.size();
     }
 
     @Override
@@ -101,12 +112,13 @@ public class ManageUserPostsService implements UserPostsService{
                 try(PreparedStatement insertUserPost =
                         this.conn.prepareStatement(
                         this.mySQLService.getINSERT_POST())) {
-                            insertUserPost.setInt(1, userID);
+                            insertUserPost.setInt(1, this.userDataService.getUserID());
                             insertUserPost.setInt(2, accountID);
                             insertUserPost.setString(3, accountType);
                             insertUserPost.setString(4, post);
                             insertUserPost.setTimestamp(5, new Timestamp(dt.toDate().getTime()));
                             insertUserPost.execute();
+                            System.out.println(insertUserPost);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

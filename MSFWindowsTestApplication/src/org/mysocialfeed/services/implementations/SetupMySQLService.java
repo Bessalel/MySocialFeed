@@ -211,7 +211,7 @@ public class SetupMySQLService implements MySQLService {
                 + "twitter TINYINT UNSIGNED, "
                 + "googleplus TINYINT UNSIGNED, "
                 + "pinterest TINYINT UNSIGNED, "
-                + "PRIMARY KEY (id)"
+                + "PRIMARY KEY (id) ON DELETE CASCADE"
 		+ ");";
     
         private final String CREATE_TABLE_FACEBOOK_SQL = ""
@@ -221,7 +221,7 @@ public class SetupMySQLService implements MySQLService {
                 + "firstname VARCHAR(255), "
                 + "lastname VARCHAR(255), "
                 + "email VARCHAR(255), "
-                + "CONSTRAINT users_fk FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
+                + "CONSTRAINT users_fk FOREIGN KEY (userid) REFERENCES users (id)"
 		+ ");";
         
         private final String CREATE_TABLE_TWITTER_SQL = ""
@@ -232,7 +232,7 @@ public class SetupMySQLService implements MySQLService {
                 + "firstname VARCHAR(255), "
                 + "lastname VARCHAR(255), "
                 + "email VARCHAR(255), "
-                + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
+                + "FOREIGN KEY (userid) REFERENCES users (id)"
 		+ ");";
         
         private final String CREATE_TABLE_GOOGLEPLUS_SQL = ""
@@ -242,7 +242,7 @@ public class SetupMySQLService implements MySQLService {
                 + "firstname VARCHAR(255), "
                 + "lastname VARCHAR(255), "
                 + "email VARCHAR(255), "
-                + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
+                + "FOREIGN KEY (userid) REFERENCES users (id)"
 		+ ");";
         
         private final String CREATE_TABLE_PINTEREST_SQL = ""
@@ -252,7 +252,7 @@ public class SetupMySQLService implements MySQLService {
                 + "firstname VARCHAR(255), "
                 + "lastname VARCHAR(255), "
                 + "email VARCHAR(255), "
-                + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
+                + "FOREIGN KEY (userid) REFERENCES users (id)"
 		+ ");";
         
         private final String CREATE_TABLE_POSTS_SQL = ""
@@ -263,7 +263,7 @@ public class SetupMySQLService implements MySQLService {
                 + "type ENUM('Fb', 'Tw', 'G+', 'Pin'), "
                 + "content LONGTEXT, "
                 + "timestamp DATETIME, "
-                + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE"
+                + "FOREIGN KEY (userid) REFERENCES users (id)"
                 + ");";
         
         

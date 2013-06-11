@@ -74,14 +74,15 @@ public class MainUserService implements UserService {
                     
                     if (rs.next()) {
                         postsID.add(rs.getInt(1));
-                        accountID.add(rs.getInt(2));
-                        accountType.add(rs.getString(3));
-                        content.add(rs.getString(4));
-                        timeStamp.add(new DateTime(rs.getTimestamp(5)));
+                        accountID.add(rs.getInt(3));
+                        accountType.add(rs.getString(4));
+                        content.add(rs.getString(5));
+                        timeStamp.add(new DateTime(rs.getTimestamp(6)));
 
                         int it = 0;
                         while (rs.next()) {
                             postsID.add(rs.getInt(++it));
+                            it++;
                             accountID.add(rs.getInt(++it));
                             accountType.add(rs.getString(++it));
                             content.add(rs.getString(++it));

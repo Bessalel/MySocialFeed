@@ -24,6 +24,7 @@ public interface UserPostsService {
    public int getAccountID(int index);
    public String getAccountType(int index);
    public String getContent(int index);
+   public int getMaxIndex();
    public DateTime getTimeStamp(int index);
    public boolean hasPost();
    

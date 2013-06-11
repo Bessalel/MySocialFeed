@@ -30,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.joda.time.DateTime;
 import org.mysocialfeed.screensframework.ControlledScreen;
+import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.services.repository.UserDataService;
 import org.mysocialfeed.services.repository.UserPostsService;
@@ -46,15 +47,16 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     private UserDataService userDataService;
     private UserPostsService userPostsService;
     private int FbAccountID = 1;
+    private String backGroundStyle = new String();
     
     @FXML private TextArea userPost = new TextArea();
     
     @FXML private Button resetField = new Button();
     @FXML private Button sendPost = new Button();
+
     
-    @FXML private ScrollPane timeLine = new ScrollPane();
-    @FXML private AnchorPane pane = new AnchorPane(); 
-    @FXML private VBox chatBox = new VBox();
+    @FXML private ScrollPane sp = new ScrollPane();
+    @FXML private VBox vb = new VBox();
     
     @Inject
         public UserFacebookScreenController(UserDataService userDataService, UserPostsService userPostsService){
@@ -68,11 +70,30 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     }    
     
     
+    private Label formatMessage(String message, DateTime dt) {
+        Label temp = new Label("\n" + message + "\n\n" + "wrote on "
+                + dt.toDate() + " by " + this.userDataService.getUserName()
+                + "\n__________________________________________________________________"
+                + "______________________________________________________________________\n");
+        
+        if (this.backGroundStyle.isEmpty() || this.backGroundStyle == "-fx-background-color: #F8F8FF;") {
+            backGroundStyle = "-fx-background-color: #DCDCDC;";
+        } else if (this.backGroundStyle == "-fx-background-color: #DCDCDC;") {
+            this.backGroundStyle = "-fx-background-color: #F8F8FF;";
+        }
+        temp.setStyle(this.backGroundStyle);
+        return temp;
+    }
+    
     private void setDefaultProperties() {
+        this.sp.setVmax(440);
+        this.sp.setPrefSize(690, 685);
         if (this.userPostsService.hasPost() == true) {
-            for (int it = 0; this.userPostsService.getContent(it) != null; it++ ) {
-                this.chatBox.getChildren().add(new Label(this.userPostsService.getContent(it)));
+            for (int it = 0; it < this.userPostsService.getMaxIndex(); it++ ) {
+                this.vb.getChildren().add(formatMessage(
+                        this.userPostsService.getContent(it), this.userPostsService.getTimeStamp(it)));
             }
+            this.sp.setContent(this.vb);
         }
     }
     
@@ -87,23 +108,21 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     }
     
     @FXML
-    private void sendPost(ActionEvent e) {
-        String cssBordering = "-fx-border-color:darkblue ; \n" //#090a0c
-                + "-fx-border-insets:3;\n"
-                + "-fx-border-radius:1;\n"
-                + "-fx-border-width:2.0";
-        
+    private void sendPost(ActionEvent e) { 
         DateTime dt = new DateTime();
         this.userPostsService.addPost(FbAccountID, "Fb", this.userPost.getText(), dt);
-        
-        Label currentPost = new Label(this.userPost.getText() + "\n" + dt.toDate() + "\n");
-
-        currentPost.setMaxWidth(Double.MAX_VALUE);
-        currentPost.setWrapText(true);
-        currentPost.setStyle(cssBordering);
-        
-        currentPost.setStyle("-fx-background-color: #DCDCDC;");
-        this.chatBox.getChildren().add(currentPost);
+        this.vb.getChildren().add(formatMessage(this.userPost.getText(), dt));
+        this.sp.setContent(this.vb);
+        this.userPost.setText("");
     }
     
+    @FXML
+    private void refreshPosts(ActionEvent e) {
+        
+    }
+    
+    @FXML
+    private void leaveFacebookTab(ActionEvent e) {
+        this.myController.setScreen(FXMLGetResourcer.userMainScreenID);
+    }
 }

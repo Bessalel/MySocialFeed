@@ -20,6 +20,7 @@ public class ManageUserDataService implements UserDataService {
     private int nbGooglePlus;
     private int nbPinterest;
 
+
     @Override
     public void loadUserData(
             int userID, String userName, String userFirstName,
