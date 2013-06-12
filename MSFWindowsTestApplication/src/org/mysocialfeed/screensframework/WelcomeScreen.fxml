@@ -2,35 +2,71 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1180.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
   <children>
-    <Label layoutX="178.0" layoutY="-8.0" prefHeight="80.0" prefWidth="147.0" text="My Social Feed" textAlignment="CENTER">
-      <font>
-        <Font name="System Bold" size="20.0" />
-      </font>
-    </Label>
-    <Button layoutX="34.0" layoutY="357.0" mnemonicParsing="false" onAction="#SignUserIn" text="Sign in" />
-    <Button layoutX="411.0" layoutY="359.0" mnemonicParsing="false" onAction="#SignUserUp" text="Sign up" />
-    <Label layoutX="251.0" layoutY="358.0" text="or" />
-    <ImageView fitHeight="175.8750153277962" fitWidth="469.0000305175781" layoutY="72.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0">
-      <image>
-        <Image url="@%5BMSF%5D%20Logo.png" preserveRatio="false" smooth="false" />
-      </image>
-    </ImageView>
-    <TextField fx:id="userName" layoutX="31.0" layoutY="264.0" prefWidth="147.0" promptText="username" />
-    <PasswordField fx:id="userPassword" layoutX="31.0" layoutY="317.0" onAction="#SignUserIn" prefWidth="147.0" promptText="password" />
-    <Label layoutX="34.0" layoutY="240.0" text="Your username" />
-    <Label layoutX="34.0" layoutY="294.0" text="Your password" />
-    <Label fx:id="errorMessage" layoutX="192.0" layoutY="291.0" prefWidth="294.0" text="" textFill="#ff3333" visible="false">
-      <font>
-        <Font name="System Bold" size="12.0" />
-      </font>
-    </Label>
+    <BorderPane prefHeight="809.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <center>
+        <StackPane prefHeight="809.0" prefWidth="1180.0">
+          <children>
+            <ImageView fitHeight="342.75" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
+              <image>
+                <Image url="@%5BMSF%5D%20Logo.png" preserveRatio="false" smooth="false" />
+              </image>
+            </ImageView>
+            <Text scaleX="2.988867767838954" scaleY="4.260951139591067" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to YOUR social feed where you take control of YOUR social LIFE !" textAlignment="CENTER" wrappingWidth="300.0" />
+            <Label text="Your username">
+              <StackPane.margin>
+                <Insets right="600.0" top="300.0" />
+              </StackPane.margin>
+            </Label>
+            <TextField id="userName" maxWidth="-Infinity" prefWidth="200.0" promptText="username" StackPane.alignment="CENTER">
+              <StackPane.margin>
+                <Insets right="600.0" top="350.0" />
+              </StackPane.margin>
+            </TextField>
+            <Label text="Your password" StackPane.alignment="CENTER">
+              <StackPane.margin>
+                <Insets left="600.0" top="300.0" />
+              </StackPane.margin>
+            </Label>
+            <PasswordField id="userPassword" maxWidth="-Infinity" onAction="#SignUserIn" prefWidth="186.0" promptText="password">
+              <StackPane.margin>
+                <Insets left="600.0" top="350.0" />
+              </StackPane.margin>
+            </PasswordField>
+            <Button mnemonicParsing="false" onAction="#SignUserIn" text="Sign in" visible="true" StackPane.alignment="CENTER">
+              <StackPane.margin>
+                <Insets top="450.0" />
+              </StackPane.margin>
+            </Button>
+            <Label id="errorMessage" prefWidth="186.0" text="" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
+              <font>
+                <Font name="System Bold" size="12.0" />
+              </font>
+              <StackPane.margin>
+                <Insets top="350.0" />
+              </StackPane.margin>
+            </Label>
+            <Label prefHeight="16.0" prefWidth="205.0" text="No account ? Create one, it's free !" wrapText="true">
+              <StackPane.margin>
+                <Insets left="20.0" top="530.0" />
+              </StackPane.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#SignUserUp" text="Sign up">
+              <StackPane.margin>
+                <Insets top="580.0" />
+              </StackPane.margin>
+            </Button>
+          </children>
+        </StackPane>
+      </center>
+    </BorderPane>
   </children>
 </AnchorPane>

@@ -7,7 +7,9 @@ package org.mysocialfeed.services.repository;
 import com.google.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +55,41 @@ public class ManageUserPostsService implements UserPostsService{
         this.timeStamp = DateTime;
     }
     
-    public void refreshUserPosts() {
-        
+    @Override
+    public int refreshUserPosts() {
+        int newIndex = -1;
+        try {
+            if (accessSQLService().isClosed() == true) {
+               accessSQLService(); // putting a while here would freeze the program if always false... so only one attempt for the momment
+            } else {
+                try(PreparedStatement getUserNewPosts =
+                        this.conn.prepareStatement(
+                        this.mySQLService.getLIST_ALL_POSTS())) {
+                            getUserNewPosts.setInt(1, this.userDataService.getUserID());
+                            ResultSet rs = getUserNewPosts.executeQuery();
+                            
+                            while (rs.next()) {
+                                for (int id : this.postsID) {
+                                    if (id == rs.getInt(1)) {
+                                        rs.next(); // will skip any found postID in ArrayList
+                                    } else {
+                                        if (!(newIndex == -1)) {
+                                            newIndex = rs.getInt(1);
+                                        }
+                                        this.postsID.add(rs.getInt(1));
+                                        this.accountID.add(rs.getInt(3));
+                                        this.accountType.add(rs.getString(4));
+                                        this.content.add(rs.getString(5));
+                                        this.timeStamp.add(new DateTime(rs.getTimestamp(6)));
+                                    }
+                                }
+                            }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newIndex;
     }
     
 
@@ -111,14 +146,15 @@ public class ManageUserPostsService implements UserPostsService{
             } else {
                 try(PreparedStatement insertUserPost =
                         this.conn.prepareStatement(
-                        this.mySQLService.getINSERT_POST())) {
+                        this.mySQLService.getINSERT_POST(), Statement.RETURN_GENERATED_KEYS)) {
                             insertUserPost.setInt(1, this.userDataService.getUserID());
                             insertUserPost.setInt(2, accountID);
                             insertUserPost.setString(3, accountType);
                             insertUserPost.setString(4, post);
                             insertUserPost.setTimestamp(5, new Timestamp(dt.toDate().getTime()));
                             insertUserPost.execute();
-                            System.out.println(insertUserPost);
+                            this.postsID.add(insertUserPost.getGeneratedKeys().getInt(1));
+                            System.out.println(insertUserPost.getGeneratedKeys().getInt(1));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

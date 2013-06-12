@@ -12,8 +12,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
@@ -43,9 +45,11 @@ public class MSFWindowsTestApplication extends Application {
         registerAllScreens(mainController);
         
         Group root = new Group();
+        
+        root.setAutoSizeChildren(true);
         root.getChildren().addAll(mainController);
         Scene scene = new Scene(root);
-
+        
         primaryStage.setScene(scene);
         primaryStage.show();
     }

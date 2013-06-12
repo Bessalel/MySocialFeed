@@ -13,10 +13,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.joda.time.DateTime;
+import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.services.interfaces.MySQLService;
 import org.mysocialfeed.services.interfaces.UserService;
 import org.mysocialfeed.services.repository.UserDataService;
 import org.mysocialfeed.services.repository.UserPostsService;
+import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 
 /**
  *
@@ -48,7 +50,9 @@ public class MainUserService implements UserService {
     
     private boolean loadUserData(ResultSet rs){
         try {
-            userDataService.loadUserData(rs.getInt(1), rs.getString(2), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getInt(10));
+            userDataService.loadUserData(rs.getInt(1), rs.getString(2), rs.getString(4), 
+                    rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), 
+                    rs.getInt(9), rs.getInt(10));
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,6 +109,42 @@ public class MainUserService implements UserService {
     }
     
     // User operations
+    
+    @Override
+    public boolean insertNewUserIntoDatabase(String userName, String password,
+            String firstName, String lastName, String emailAddr) {
+        try {
+             if (accessSQLService().isClosed() == true) {
+               accessSQLService(); // putting a while here would freeze the program if always false... so only one try for the momment
+           } else {
+                 try(PreparedStatement insertNewUser = 
+                            this.conn.prepareStatement(
+                            mySQLService.getINSERT_USER())) {
+                                insertNewUser.setString(1, userName);
+                                insertNewUser.setString(2, password);
+                                insertNewUser.setString(3, firstName);
+                                insertNewUser.setString(4, lastName);
+                                insertNewUser.setString(5, emailAddr);
+                                insertNewUser.setInt(6, 0);
+                                insertNewUser.setInt(7, 0);
+                                insertNewUser.setInt(8, 0);
+                                insertNewUser.setInt(9, 0);
+                                insertNewUser.execute();
+                                insertNewUser.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                this.conn.commit();
+                this.conn.close();
+             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean authenticate(String userName, String passWord) {
       try {

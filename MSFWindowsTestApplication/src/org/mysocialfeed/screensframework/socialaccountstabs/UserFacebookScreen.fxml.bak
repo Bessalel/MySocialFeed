@@ -9,7 +9,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="958.0" prefWidth="1281.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.UserFacebookScreenController">
   <children>
-    <ListView layoutX="751.0" layoutY="241.0" prefHeight="685.0" prefWidth="492.0" />
     <Label layoutX="36.0" layoutY="214.0" text="Your Facebook Timeline" />
     <Label layoutX="751.0" layoutY="217.0" text="Your Facebook conversations (private messages)" />
     <Button layoutX="36.0" layoutY="30.0" mnemonicParsing="false" text="Settings" />

@@ -3,15 +3,15 @@
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1180.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.9609375" prefWidth="1157.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
   <children>
-    <StackPane prefHeight="809.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <StackPane layoutX="-11.0" layoutY="-4.0" prefHeight="809.0" prefWidth="1180.0">
       <children>
         <ImageView fitHeight="342.75" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="TOP_CENTER">
           <image>
@@ -24,7 +24,7 @@
             <Insets right="600.0" top="300.0" />
           </StackPane.margin>
         </Label>
-        <TextField id="userName" maxWidth="-Infinity" prefWidth="200.0" promptText="username" StackPane.alignment="CENTER">
+        <TextField fx:id="userName" maxWidth="-Infinity" prefWidth="200.0" promptText="username" StackPane.alignment="CENTER">
           <StackPane.margin>
             <Insets right="600.0" top="350.0" />
           </StackPane.margin>
@@ -34,7 +34,7 @@
             <Insets left="600.0" top="300.0" />
           </StackPane.margin>
         </Label>
-        <PasswordField id="userPassword" maxWidth="-Infinity" onAction="#SignUserIn" prefWidth="186.0" promptText="password">
+        <PasswordField fx:id="userPassword" maxWidth="-Infinity" onAction="#SignUserIn" prefWidth="186.0" promptText="password">
           <StackPane.margin>
             <Insets left="600.0" top="350.0" />
           </StackPane.margin>
@@ -44,7 +44,7 @@
             <Insets top="450.0" />
           </StackPane.margin>
         </Button>
-        <Label id="errorMessage" prefWidth="186.0" text="" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
+        <Label fx:id="errorMessage" prefWidth="186.0" text="" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
           <font>
             <Font name="System Bold" size="12.0" />
           </font>

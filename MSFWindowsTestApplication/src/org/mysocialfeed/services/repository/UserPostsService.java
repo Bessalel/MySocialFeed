@@ -29,6 +29,7 @@ public interface UserPostsService {
    public boolean hasPost();
    
    //set message info and content
+   public int refreshUserPosts();
    public void addPost(int accountID, String accountType, String post, DateTime dt);
    
 }

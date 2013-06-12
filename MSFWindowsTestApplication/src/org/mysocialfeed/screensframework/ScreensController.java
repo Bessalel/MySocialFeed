@@ -29,7 +29,6 @@ public class ScreensController extends StackPane {
     
     public void registerScreen(String name, URL url){
         screens.put(name, url);
-        System.out.println("Registering : " + name + " at \n" + url.toString());
     }
     
     
@@ -57,6 +56,7 @@ public class ScreensController extends StackPane {
             ControlledScreen myScreenController = ((ControlledScreen) loader.getController());
             myScreenController.setScreenParent(this);
             screens.put(name, loadScreen);
+            
             return loadScreen;
         } catch (Exception e) {
             System.err.println("Error while loading screen \"" + name + "\" : " + e.getMessage());
