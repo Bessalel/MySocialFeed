@@ -46,10 +46,9 @@ public class MSFWindowsTestApplication extends Application {
         
         Group root = new Group();
         
-        root.setAutoSizeChildren(true);
         root.getChildren().addAll(mainController);
+        root.setAutoSizeChildren(false);
         Scene scene = new Scene(root);
-        
         primaryStage.setScene(scene);
         primaryStage.show();
     }
