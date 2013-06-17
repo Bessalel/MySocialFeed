@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 /**
  *
@@ -31,6 +32,7 @@ public class ScreensController extends StackPane {
         screens.put(name, url);
     }
     
+  
     
     //Loads the fxml file, add the screen to the screens collection and
     //finally injects the screenPane to the controller.
@@ -75,7 +77,7 @@ public class ScreensController extends StackPane {
                 getChildren().remove(0);                    //remove the displayed screen
                 getChildren().add(0, screen);     //add the screen
             }
-            else { // if no screen dusplayed yet
+            else { // if no screen displayed yet
                 getChildren().add(screen);       
             }
             return true;

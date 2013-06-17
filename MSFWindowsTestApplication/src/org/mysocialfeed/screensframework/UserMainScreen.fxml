@@ -2,38 +2,89 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="864.9609375" prefWidth="1335.0" visible="true" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserMainScreenController">
+<AnchorPane id="AnchorPane" prefHeight="785.5" prefWidth="1321.0" visible="true" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.UserMainScreenController">
   <children>
-    <Label fx:id="welcomeMessage" labelFor="$welcomeMessage" layoutX="38.0" layoutY="34.0" prefHeight="31.0" prefWidth="403.0" text="Welcome">
-      <font>
-        <Font name="System Bold Italic" size="18.0" />
-      </font>
-    </Label>
-    <Button cancelButton="true" layoutX="847.0" layoutY="530.0" mnemonicParsing="false" onAction="#logUserOff" text="Log off" />
-    <Button fx:id="accessTwitter" layoutX="455.0" layoutY="365.0" mnemonicParsing="false" onAction="#userChooseTwitter" prefWidth="91.0" text="My Twitter" />
-    <Label fx:id="noAccountAvailable" layoutX="38.0" layoutY="101.0" text="You have not added any account yet. Why not add one ?" textFill="#ff7a00" visible="false">
-      <font>
-        <Font name="System Bold" size="12.0" />
-      </font>
-    </Label>
-    <Button fx:id="accessGooglePlus" layoutX="455.0" layoutY="406.0" mnemonicParsing="false" onAction="#userChooseGooglePlus" prefWidth="91.0" text="My Google +" />
-    <Button fx:id="accessFacebook" layoutX="456.0" layoutY="320.0" mnemonicParsing="false" onAction="#userChooseFacebook" text="My Facebook" />
-    <Button fx:id="accessPinterest" layoutX="456.0" layoutY="451.0" mnemonicParsing="false" onAction="#userChoosePinterest" prefWidth="91.0" text="My Pinterest" />
-    <Button id="addFirstAccount" fx:id="addAccount" layoutX="457.0" layoutY="530.0" mnemonicParsing="false" onAction="#addUserAccount" text="Add account" />
-    <Label fx:id="noFacebookAccount" layoutX="161.0" layoutY="158.0" text="No Facebook account added !" textFill="RED" visible="false">
-      <font>
-        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label fx:id="noTwitterAccount" font="$x1" layoutX="161.0" layoutY="202.0" text="No Twitter account added !" textFill="RED" visible="false" />
-    <Label fx:id="noGooglePlusAccount" font="$x1" layoutX="161.0" layoutY="244.0" text="No Google + account added !" textFill="RED" visible="false" />
-    <Label id="noPinterestAcount" fx:id="noPinterestAccount" font="$x1" layoutX="161.0" layoutY="289.0" text="No Pinterest account added !" textFill="RED" visible="false" />
-    <Button fx:id="addFirstAccount" layoutX="206.0" layoutY="200.0" mnemonicParsing="false" onAction="#addUserAccount" text="Add account" visible="false" />
-    <Label fx:id="userHasAccount" layoutX="457.0" layoutY="259.0" text="Use on of the following button to access your desired social account :" />
+    <BorderPane prefHeight="864.9609375" prefWidth="1335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <Button mnemonicParsing="false" onAction="#logUserOff" text="Log off">
+          <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" />
+          </BorderPane.margin>
+        </Button>
+      </bottom>
+      <center>
+        <ImageView id="[MSF] socialmedia_banner2.png" fitHeight="393.0" fitWidth="915.0">
+          <image>
+            <Image url="@%5BMSF%5D%20socialmedia_banner2.png" preserveRatio="true" smooth="true" />
+          </image>
+          <BorderPane.margin>
+            <Insets right="300.0" />
+          </BorderPane.margin>
+        </ImageView>
+      </center>
+      <left>
+        <VBox prefHeight="799.0" prefWidth="690.0">
+          <children>
+            <Label id="noAccountAvailable" fx:id="x1" labelFor="$x1" prefWidth="600.0" text="Please use one of the following buttons to access your desired social account :" textFill="BLACK" underline="false" visible="true">
+              <font>
+                <Font name="System Bold" size="16.0" fx:id="x2" />
+              </font>
+              <VBox.margin>
+                <Insets left="20.0" top="60.0" fx:id="x7" />
+              </VBox.margin>
+            </Label>
+            <Label id="noAccountAvailable" fx:id="x3" font="$x2" labelFor="$x3" prefWidth="503.0" text="You have not added any account yet. Why not add one right now?" textFill="#ff9533" underline="false" visible="true">
+              <VBox.margin>
+                <Insets left="20.0" />
+              </VBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#addUserAccount" text="Add first account!" visible="false">
+              <VBox.margin>
+                <Insets left="20.0" top="10.0" />
+              </VBox.margin>
+            </Button>
+            <Button fx:id="accessFacebook" mnemonicParsing="false" onAction="#userChooseFacebook" text="My Facebook">
+              <VBox.margin>
+                <Insets left="20.0" top="50.0" />
+              </VBox.margin>
+            </Button>
+            <Label text="Access your Facebook timeline, your private messages and many more!">
+              <font>
+                <Font name="System Italic" size="12.0" fx:id="x4" />
+              </font>
+              <VBox.margin>
+                <Insets left="20.0" top="5.0" fx:id="x5" />
+              </VBox.margin>
+            </Label>
+            <Button fx:id="accessTwitter" mnemonicParsing="false" onAction="#userChooseTwitter" prefWidth="91.00009999999747" text="My Twitter">
+              <VBox.margin>
+                <Insets left="20.0" top="40.0" fx:id="x6" />
+              </VBox.margin>
+            </Button>
+            <Label font="$x4" text="Access your Twiter timeline and tweet your friends back!" VBox.margin="$x5" />
+            <Button fx:id="accessGooglePlus" mnemonicParsing="false" onAction="#userChooseGooglePlus" prefWidth="92.0" text="My Google +" VBox.margin="$x6" />
+            <Label font="$x4" text="Access your Google+ homepage and use hangouts to talk to your friends!" VBox.margin="$x5" />
+            <Button fx:id="accessPinterest" mnemonicParsing="false" onAction="#userChoosePinterest" prefWidth="92.0" text="My Pinterest" VBox.margin="$x6" />
+            <Label font="$x4" text="Access your Pinterest timeline, your private messages and many more!" VBox.margin="$x5" />
+            <Button id="addFirstAccount" fx:id="addAccount" mnemonicParsing="false" onAction="#addUserAccount" prefWidth="92.0" text="Add account" VBox.margin="$x7" />
+            <Label font="$x4" text="No limit, and it's free !" VBox.margin="$x5" />
+          </children>
+        </VBox>
+      </left>
+      <top>
+        <Text id="welcomeMessage" scaleX="3.816983343220685" scaleY="4.445912873225649" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME HERE !">
+          <BorderPane.margin>
+            <Insets left="150.0" top="50.0" />
+          </BorderPane.margin>
+        </Text>
+      </top>
+    </BorderPane>
   </children>
 </AnchorPane>

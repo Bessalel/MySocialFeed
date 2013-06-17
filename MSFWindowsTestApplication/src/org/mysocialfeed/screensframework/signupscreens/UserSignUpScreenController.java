@@ -127,34 +127,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     }
     
     private void insertUserIntoDatabase() {
-        try {
-            while (MSFWindowsTestApplication.conn.isClosed() == true) {
-                MSFWindowsTestApplication.accessAndSetupSQLServer(false);
-                }
-            if (!(MSFWindowsTestApplication.conn.isClosed())){
-                    try (PreparedStatement insertNewUser = 
-                            MSFWindowsTestApplication.conn.prepareStatement(
-                            DatabaseManager.INSERT_USER)) {
-                                insertNewUser.setString(1, userNameTextField.getText());
-                                insertNewUser.setString(2, passwordField.getText());
-                                insertNewUser.setString(3, firstNameTextField.getText());
-                                insertNewUser.setString(4, lastNameTextField.getText());
-                                insertNewUser.setString(5, emailAddrTextField.getText());
-                                insertNewUser.setInt(6, 0);
-                                insertNewUser.setInt(7, 0);
-                                insertNewUser.setInt(8, 0);
-                                insertNewUser.setInt(9, 0);
-                                System.out.println(insertNewUser.toString());
-                                insertNewUser.execute();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                MSFWindowsTestApplication.conn.commit();
-                MSFWindowsTestApplication.conn.close();
-                myController.setScreen(FXMLGetResourcer.userAccountCreatedScreenID);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        
     }
 }

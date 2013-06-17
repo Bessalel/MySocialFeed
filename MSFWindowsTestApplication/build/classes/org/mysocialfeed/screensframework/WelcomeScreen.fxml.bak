@@ -26,7 +26,11 @@
                 <Insets right="600.0" top="300.0" />
               </StackPane.margin>
             </Label>
+<<<<<<< HEAD
+            <TextField fx:id="userName" maxWidth="-Infinity" prefWidth="200.0" promptText="username" StackPane.alignment="CENTER">
+=======
             <TextField id="userName" maxWidth="-Infinity" prefWidth="200.0" promptText="username" StackPane.alignment="CENTER">
+>>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
               <StackPane.margin>
                 <Insets right="600.0" top="350.0" />
               </StackPane.margin>
@@ -36,7 +40,11 @@
                 <Insets left="600.0" top="300.0" />
               </StackPane.margin>
             </Label>
+<<<<<<< HEAD
+            <PasswordField fx:id="userPassword" maxWidth="-Infinity" onAction="#SignUserIn" prefWidth="186.0" promptText="password">
+=======
             <PasswordField id="userPassword" maxWidth="-Infinity" onAction="#SignUserIn" prefWidth="186.0" promptText="password">
+>>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
               <StackPane.margin>
                 <Insets left="600.0" top="350.0" />
               </StackPane.margin>
@@ -46,7 +54,11 @@
                 <Insets top="450.0" />
               </StackPane.margin>
             </Button>
+<<<<<<< HEAD
+            <Label fx:id="errorMessage" prefWidth="255.0" text="" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
+=======
             <Label id="errorMessage" prefWidth="186.0" text="" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
+>>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
               <font>
                 <Font name="System Bold" size="12.0" />
               </font>

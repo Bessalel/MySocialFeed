@@ -8,6 +8,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import org.mysocialfeed.services.interfaces.MySQLService;
 
@@ -18,6 +19,31 @@ import org.mysocialfeed.services.interfaces.MySQLService;
 public class SetupMySQLService implements MySQLService {
     
     private Connection conn;
+    private boolean isInstalled = false;
+    
+    public SetupMySQLService() {
+        installDatabase();
+    }
+    
+    private void installDatabase() {
+        connectToDatabase();
+        if (this.isInstalled == false) {
+            try {
+                Statement stmt = this.conn.createStatement();
+                stmt.execute(this.CREATE_TABLE_USERS_SQL);
+                stmt.execute(this.CREATE_TABLE_FACEBOOK_SQL);
+                stmt.execute(this.CREATE_TABLE_TWITTER_SQL);
+                stmt.execute(this.CREATE_TABLE_GOOGLEPLUS_SQL);
+                stmt.execute(this.CREATE_TABLE_PINTEREST_SQL);
+                stmt.execute(this.CREATE_TABLE_POSTS_SQL);
+                stmt.close();
+                this.isInstalled = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                this.isInstalled = false;
+            }
+        }
+    }
     
     @Override
     public Connection connectToDatabase() {
@@ -29,6 +55,10 @@ public class SetupMySQLService implements MySQLService {
         }
         return(this.conn);
     }   
+    
+    private boolean ensureIsInstalled() {
+        return this.isInstalled;
+    }
     
     @Override
     public boolean builDatabase() {
@@ -198,160 +228,160 @@ public class SetupMySQLService implements MySQLService {
             	ctx.put("jdbc/MySociaFeed", dsMySQL);
 	}
 	
-	// Create statements (skipped, if already done)
-	private final String CREATE_TABLE_USERS_SQL = ""
-                + "CREATE TABLE IF NOT EXISTS users ("
-		+ "id INT UNSIGNED NOT NULL AUTO_INCREMENT,"
-		+ "username VARCHAR(255), "
-                + "password VARCHAR(255), "
-                + "firstname VARCHAR(255), "
-                + "lastname VARCHAR(255), "
-                + "email VARCHAR(255), "
-                + "facebook TINYINT UNSIGNED, "
-                + "twitter TINYINT UNSIGNED, "
-                + "googleplus TINYINT UNSIGNED, "
-                + "pinterest TINYINT UNSIGNED, "
-                + "PRIMARY KEY (id) ON DELETE CASCADE"
-		+ ");";
-    
-        private final String CREATE_TABLE_FACEBOOK_SQL = ""
-                + "CREATE TABLE IF NOT EXISTS facebook ("
-		+ "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
-                + "userid INT UNSIGNED, "
-                + "firstname VARCHAR(255), "
-                + "lastname VARCHAR(255), "
-                + "email VARCHAR(255), "
-                + "CONSTRAINT users_fk FOREIGN KEY (userid) REFERENCES users (id)"
-		+ ");";
-        
-        private final String CREATE_TABLE_TWITTER_SQL = ""
-                + "CREATE TABLE IF NOT EXISTS twitter ("
-                + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
-		+ "userid INT, "
-                + "username VARCHAR(255), "
-                + "firstname VARCHAR(255), "
-                + "lastname VARCHAR(255), "
-                + "email VARCHAR(255), "
-                + "FOREIGN KEY (userid) REFERENCES users (id)"
-		+ ");";
-        
-        private final String CREATE_TABLE_GOOGLEPLUS_SQL = ""
-                + "CREATE TABLE IF NOT EXISTS googleplus ("
-                + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
-		+ "userid INT,"
-                + "firstname VARCHAR(255), "
-                + "lastname VARCHAR(255), "
-                + "email VARCHAR(255), "
-                + "FOREIGN KEY (userid) REFERENCES users (id)"
-		+ ");";
-        
-        private final String CREATE_TABLE_PINTEREST_SQL = ""
-                + "CREATE TABLE IF NOT EXISTS pinterest ("
-                + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
-		+ "userid INT, "
-                + "firstname VARCHAR(255), "
-                + "lastname VARCHAR(255), "
-                + "email VARCHAR(255), "
-                + "FOREIGN KEY (userid) REFERENCES users (id)"
-		+ ");";
-        
-        private final String CREATE_TABLE_POSTS_SQL = ""
-                + "CREATE TABLE IF NOT EXISTS posts ("
-                + "postid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
-                + "userid INT, "
-                + "accountid INT, " // cannot be a constraint foreign key because of undefined origin !!
-                + "type ENUM('Fb', 'Tw', 'G+', 'Pin'), "
-                + "content LONGTEXT, "
-                + "timestamp DATETIME, "
-                + "FOREIGN KEY (userid) REFERENCES users (id)"
-                + ");";
-        
-        
-        // Insert statements
-        private final String INSERT_USER = ""
-                + "INSERT INTO users("
-                + "username, password, firstname, lastname, email,"
-                + "facebook, twitter, googleplus, pinterest"
-                + ")"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        
-        private final String INSERT_FACEBOOK_ACCOUNT = "" 
-                + "INSERT INTO facebook("
-                + "userid, firstname, lastname, email"
-                + ")"
-                + " VALUES (?, ?, ?, ?);";
-        
-        private final String INSERT_TWITTER_ACCOUNT = ""
-                + "INSERT INTO twitter("
-                + "userid, username, firstname, lastname, email, "
-                + ")"
-                + " VALUES (?, ?, ?, ?, ?);";
-        
-        private final String INSERT_GOOGLEPLUS_ACCOUNT = ""
-                + "INSERT INTO googleplus("
-                + "userid, firstname, lastname, email"
-                + ")"
-                + " VALUES (?, ?, ?, ?);";
-        
-        private final String INSERT_PINTEREST_ACCOUNT = ""
-                + "INSERT INTO pinterest("
-                + "userid, firstname, lastname, email"
-                + ")"
-                + " VALUES (?, ?, ?, ?);";
-        
-        private final String INSERT_POST = ""
-                + "INSERT INTO posts("
-                + "userid, accountid, "
-                + "type, content, timestamp"
-                + ")"
-                + " VALUES (?, ?, ?, ?, ?);";
-        
-        
-        // Update statements
-        private final String UPDATE_USER_ACCOUNT = "" // no password change !
-                + "UPDATE users "
-                + "SET "
-                + "username = ?, firstname = ?, "
-                + "lastname = ?, email = ?, "
-                + "facebook = ?, twitter = ?, "
-                + "googleplus = ?, pinterest = ? "
-                + "WHERE id = ?";
-        
-        
-        // Listing statements
-        private final String LIST_USER = 
-                "SELECT * FROM users WHERE username = ?";  
-        private final String LIST_USER_FACEBOOK_ACCOUNTS = 
-                "SELECT * FROM facebook WHERE userid = ?";
-        private final String LIST_USER_TWITTER_ACCOUNT = 
-                "SELECT * FROM twitter WHERE userid = ?";
-        private final String LIST_USER_GOOGLEPLUS_ACCOUNT = 
-                "SELECT * FROM googleplus WHERE userid = ?";
-        private final String LIST_USER_PINTEREST_ACCOUNT = 
-                "SELECT * FROM pinterest WHERE userid = ?";
-        private final String LIST_ALL_POSTS =
-                "SELECT * FROM posts WHERE userid = ?";
-        
-        
-        // Delete statements
-        private final String DELETE_USER = 
-                "DELETE FROM users WHERE id = ?";
-        private final String DELETE_USERS_TABLE = 
-                "DROP TABLE IF EXISTS users";
-        private final String DELETE_FACEBOOK_TABLE = 
-                "DROP TABLE IF EXISTS facebook";
-        private final String DELETE_TWITTER_TABLE = 
-                "DROP TABLE IF EXISTS twitter";
-        private final String DELETE_GOOGLEPLUS_TABLE = 
-                "DROP TABLE IF EXISTS googleplus";
-        private final String DELETE_PINTEREST_TABLE = 
-                "DROP TABLE IF EXISTS pinterest";
-        private final String DELETE_USER_FACEBOOK_ACCOUNT = 
-                "DELETE FROM facebook WHERE userid = ? AND id = ?";
-        private final String DELETE_USER_TWITTER_ACCOUNT = 
-                "DELETE FROM twitter WHERE userid = ? AND id = ?";
-        private final String DELETE_USER_GOOGLEPLUS_ACCOUNT = 
-                "DELETE FROM googleplus WHERE userid = ? AND id = ?";
-        private final String DELETE_USER_PINTEREST_ACCOUNT = 
+    // Create statements (skipped, if already done)
+    private final String CREATE_TABLE_USERS_SQL = ""
+            + "CREATE TABLE IF NOT EXISTS users ("
+            + "id INT UNSIGNED NOT NULL AUTO_INCREMENT, "
+            + "username VARCHAR(255), "
+            + "password VARCHAR(255), "
+            + "firstname VARCHAR(255), "
+            + "lastname VARCHAR(255), "
+            + "email VARCHAR(255), "
+            + "facebook TINYINT UNSIGNED, "
+            + "twitter TINYINT UNSIGNED, "
+            + "googleplus TINYINT UNSIGNED, "
+            + "pinterest TINYINT UNSIGNED, "
+            + "PRIMARY KEY (id)"
+            + ");";
+
+    private final String CREATE_TABLE_FACEBOOK_SQL = ""
+            + "CREATE TABLE IF NOT EXISTS facebook ("
+            + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
+            + "userid INT UNSIGNED, "
+            + "firstname VARCHAR(255), "
+            + "lastname VARCHAR(255), "
+            + "email VARCHAR(255), "
+            + "CONSTRAINT users_fk FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
+            + ");";
+
+    private final String CREATE_TABLE_TWITTER_SQL = ""
+            + "CREATE TABLE IF NOT EXISTS twitter ("
+            + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
+            + "userid INT, "
+            + "username VARCHAR(255), "
+            + "firstname VARCHAR(255), "
+            + "lastname VARCHAR(255), "
+            + "email VARCHAR(255), "
+            + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
+            + ");";
+
+    private final String CREATE_TABLE_GOOGLEPLUS_SQL = ""
+            + "CREATE TABLE IF NOT EXISTS googleplus ("
+            + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
+            + "userid INT,"
+            + "firstname VARCHAR(255), "
+            + "lastname VARCHAR(255), "
+            + "email VARCHAR(255), "
+            + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
+            + ");";
+
+    private final String CREATE_TABLE_PINTEREST_SQL = ""
+            + "CREATE TABLE IF NOT EXISTS pinterest ("
+            + "accountid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
+            + "userid INT, "
+            + "firstname VARCHAR(255), "
+            + "lastname VARCHAR(255), "
+            + "email VARCHAR(255), "
+            + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
+            + ");";
+
+    private final String CREATE_TABLE_POSTS_SQL = ""
+            + "CREATE TABLE IF NOT EXISTS posts ("
+            + "postid INT PRIMARY KEY NOT NULL AUTO_INCREMENT, "
+            + "userid INT, "
+            + "accountid INT, " // cannot be a constraint foreign key because of undefined origin !!
+            + "type ENUM('Fb', 'Tw', 'G+', 'Pin'), "
+            + "content LONGTEXT, "
+            + "timestamp DATETIME, "
+            + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
+            + ");";
+
+
+    // Insert statements
+    private final String INSERT_USER = ""
+            + "INSERT INTO users("
+            + "username, password, firstname, lastname, email,"
+            + "facebook, twitter, googleplus, pinterest"
+            + ")"
+            + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+    private final String INSERT_FACEBOOK_ACCOUNT = "" 
+            + "INSERT INTO facebook("
+            + "userid, firstname, lastname, email"
+            + ")"
+            + " VALUES (?, ?, ?, ?);";
+
+    private final String INSERT_TWITTER_ACCOUNT = ""
+            + "INSERT INTO twitter("
+            + "userid, username, firstname, lastname, email, "
+            + ")"
+            + " VALUES (?, ?, ?, ?, ?);";
+
+    private final String INSERT_GOOGLEPLUS_ACCOUNT = ""
+            + "INSERT INTO googleplus("
+            + "userid, firstname, lastname, email"
+            + ")"
+            + " VALUES (?, ?, ?, ?);";
+
+    private final String INSERT_PINTEREST_ACCOUNT = ""
+            + "INSERT INTO pinterest("
+            + "userid, firstname, lastname, email"
+            + ")"
+            + " VALUES (?, ?, ?, ?);";
+
+    private final String INSERT_POST = ""
+            + "INSERT INTO posts("
+            + "userid, accountid, "
+            + "type, content, timestamp"
+            + ")"
+            + " VALUES (?, ?, ?, ?, ?);";
+
+
+    // Update statements
+    private final String UPDATE_USER_ACCOUNT = "" // no password change !
+            + "UPDATE users "
+            + "SET "
+            + "username = ?, firstname = ?, "
+            + "lastname = ?, email = ?, "
+            + "facebook = ?, twitter = ?, "
+            + "googleplus = ?, pinterest = ? "
+            + "WHERE id = ?";
+
+
+    // Listing statements
+    private final String LIST_USER = 
+            "SELECT * FROM users WHERE username = ?";  
+    private final String LIST_USER_FACEBOOK_ACCOUNTS = 
+            "SELECT * FROM facebook WHERE userid = ?";
+    private final String LIST_USER_TWITTER_ACCOUNT = 
+            "SELECT * FROM twitter WHERE userid = ?";
+    private final String LIST_USER_GOOGLEPLUS_ACCOUNT = 
+            "SELECT * FROM googleplus WHERE userid = ?";
+    private final String LIST_USER_PINTEREST_ACCOUNT = 
+            "SELECT * FROM pinterest WHERE userid = ?";
+    private final String LIST_ALL_POSTS =
+            "SELECT * FROM posts WHERE userid = ?";
+
+
+    // Delete statements
+    private final String DELETE_USER = 
+            "DELETE FROM users WHERE id = ?";
+    private final String DELETE_USERS_TABLE = 
+            "DROP TABLE IF EXISTS users";
+    private final String DELETE_FACEBOOK_TABLE = 
+            "DROP TABLE IF EXISTS facebook";
+    private final String DELETE_TWITTER_TABLE = 
+            "DROP TABLE IF EXISTS twitter";
+    private final String DELETE_GOOGLEPLUS_TABLE = 
+            "DROP TABLE IF EXISTS googleplus";
+    private final String DELETE_PINTEREST_TABLE = 
+            "DROP TABLE IF EXISTS pinterest";
+    private final String DELETE_USER_FACEBOOK_ACCOUNT = 
+            "DELETE FROM facebook WHERE userid = ? AND id = ?";
+    private final String DELETE_USER_TWITTER_ACCOUNT = 
+            "DELETE FROM twitter WHERE userid = ? AND id = ?";
+    private final String DELETE_USER_GOOGLEPLUS_ACCOUNT = 
+            "DELETE FROM googleplus WHERE userid = ? AND id = ?";
+    private final String DELETE_USER_PINTEREST_ACCOUNT = 
                 "DELETE FROM pinterest WHERE userid = ? AND id = ?";
 }

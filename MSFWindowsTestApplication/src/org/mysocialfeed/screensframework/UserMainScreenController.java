@@ -26,36 +26,23 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     
     ScreensController myController;
     
-    @FXML
-    private Label welcomeMessage = new Label();
-    @FXML
-    private Label userHasAccount = new Label();
+    @FXML private Label welcomeMessage = new Label();
+    @FXML private Label userHasAccount = new Label();
     
     // List of action buttons :    
-    @FXML
-    private Button accessFacebook = new Button();
-    @FXML
-    private Button accessTwitter = new Button();
-    @FXML
-    private Button accessGooglePlus = new Button();
-    @FXML
-    private Button accessPinterest = new Button();
-    @FXML
-    private Button addAccount = new Button();
-    @FXML
-    private Button addFirstAccount = new Button();
+    @FXML private Button accessFacebook = new Button();
+    @FXML private Button accessTwitter = new Button();
+    @FXML private Button accessGooglePlus = new Button();
+    @FXML private Button accessPinterest = new Button();
+    @FXML private Button addAccount = new Button();
+    @FXML private Button addFirstAccount = new Button();
     
     // No Social Account error messages :
-    @FXML
-    private Label noAccountAvailable = new Label();
-    @FXML
-    private Label noFacebookAccount = new Label();
-    @FXML
-    private Label noTwitterAccount = new Label();
-    @FXML
-    private Label noGooglePlusAccount = new Label();
-    @FXML
-    private Label noPinterestAccount = new Label();
+    @FXML private Label noAccountAvailable = new Label();
+    @FXML private Label noFacebookAccount = new Label();
+    @FXML private Label noTwitterAccount = new Label();
+    @FXML private Label noGooglePlusAccount = new Label();
+    @FXML private Label noPinterestAccount = new Label();
      
     
     private final UserService userService;
@@ -71,6 +58,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     private void setDefaultProperties(){
         if (userService.isAuthenticated() == true) {
             this.welcomeMessage.setText("Welcome " + userDataService.getUserName() + "!");
+            System.out.println(this.welcomeMessage.getText());
                 if (userDataService.hasAccount() == false) {
                     this.noAccountAvailable.setVisible(true);
                     this.addFirstAccount.setVisible(true);
@@ -80,6 +68,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
                     this.accessTwitter.setVisible(false);
                 } 
                 else if (userDataService.hasAccount() == true) {
+                    this.userHasAccount.setVisible(true);
                     this.noAccountAvailable.setVisible(false);
                     this.addFirstAccount.setVisible(false);
                     if (userDataService.hasFacebook() == true) {
@@ -157,9 +146,6 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     
     @FXML
     private void logUserOff(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(515);
-        stage.setHeight(440);
         
         userService.userSignOff();
         

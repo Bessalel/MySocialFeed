@@ -48,12 +48,9 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
         myController = screenParent;
     }
     
-    @FXML
-    private Label errorMessage;
-    @FXML
-    private TextField userName;
-    @FXML
-    private PasswordField userPassword;
+    @FXML private Label errorMessage = new Label();
+    @FXML private TextField userName = new TextField();
+    @FXML private PasswordField userPassword = new PasswordField();
 
     
     @FXML
@@ -73,9 +70,6 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
     
     @FXML
     private void SignUserUp(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(600);
-        stage.setHeight(430);
         myController.setScreen(FXMLGetResourcer.userSignUpScreenID);
     }
 }

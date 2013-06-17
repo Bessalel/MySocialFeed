@@ -53,6 +53,7 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     
     
     private Label formatMessage(String message, DateTime dt) {
+        
         Label temp = new Label("\n" + message + "\n\n" + "wrote on "
                 + dt.toDate() + " by " + this.userDataService.getUserName()
                 + "\n__________________________________________________________________"

@@ -7,17 +7,11 @@ package org.mysocialfeed.supportingfiles;
 import org.mysocialfeed.services.MainServiceModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.mysocialfeed.models.DatabaseManager;
+
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
 
@@ -26,9 +20,6 @@ import org.mysocialfeed.screensframework.ScreensController;
  * @author Vincent
  */
 public class MSFWindowsTestApplication extends Application {
- 
-    public static Connection conn;
-    public static Statement stmt;
     
     private Injector mainServiceInjector;
     
@@ -38,44 +29,24 @@ public class MSFWindowsTestApplication extends Application {
         // Guice implementation:
         this.mainServiceInjector = Guice.createInjector(new MainServiceModule());
         
-        
-        accessAndSetupSQLServer(true);
-        
         ScreensController mainController = new ScreensController(this.mainServiceInjector);
         registerAllScreens(mainController);
+<<<<<<< HEAD
+
+        Scene scene = new Scene(mainController);
+=======
         
         Group root = new Group();
         
         root.getChildren().addAll(mainController);
         root.setAutoSizeChildren(false);
         Scene scene = new Scene(root);
+>>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
         primaryStage.setScene(scene);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
     
-    public static void accessAndSetupSQLServer(boolean createTables){
-        try {  
-            
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/mysocialfeed","root","");
-            conn.setAutoCommit(false);
- 
-            if (createTables == true) { // only needed once at application launch
-                stmt = conn.createStatement();
-
-                stmt.execute(DatabaseManager.CREATE_TABLE_USERS_SQL);
-                stmt.execute(DatabaseManager.CREATE_TABLE_FACEBOOK_SQL);
-                stmt.execute(DatabaseManager.CREATE_TABLE_TWITTER_SQL);
-                stmt.execute(DatabaseManager.CREATE_TABLE_GOOGLEPLUS_SQL);
-                stmt.execute(DatabaseManager.CREATE_TABLE_PINTEREST_SQL);
-                stmt.execute(DatabaseManager.CREATE_TABLE_POSTS_SQL);
-
-                stmt.close();
-            }
-            
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
     
      private void registerAllScreens(ScreensController mainController) {
        
