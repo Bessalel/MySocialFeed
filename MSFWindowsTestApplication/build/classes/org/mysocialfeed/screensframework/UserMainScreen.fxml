@@ -20,7 +20,7 @@
         </Button>
       </bottom>
       <center>
-        <ImageView id="[MSF] socialmedia_banner2.png" fitHeight="393.0" fitWidth="890.0">
+        <ImageView id="[MSF] socialmedia_banner2.png" fx:id="mainBanner" fitHeight="393.0" fitWidth="890.0">
           <image>
             <Image url="@%5BMSF%5D%20socialmedia_banner2.png" preserveRatio="true" smooth="true" />
           </image>
