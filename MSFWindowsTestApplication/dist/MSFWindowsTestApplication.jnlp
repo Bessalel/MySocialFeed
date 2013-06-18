@@ -11,11 +11,7 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="MSFWindowsTestApplication.jar" size="733315" download="eager" />
-=======
-    <jar href="MSFWindowsTestApplication.jar" size="444796" download="eager" />
->>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
+    <jar href="MSFWindowsTestApplication.jar" size="734009" download="eager" />
     <jar href="lib/aopalliance.jar" size="4467" download="eager" />
     <jar href="lib/guice-3.0.jar" size="710683" download="eager" />
     <jar href="lib/javax.inject.jar" size="2497" download="eager" />

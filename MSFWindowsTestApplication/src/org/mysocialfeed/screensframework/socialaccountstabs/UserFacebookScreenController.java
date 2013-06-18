@@ -7,9 +7,11 @@ package org.mysocialfeed.screensframework.socialaccountstabs;
 import com.google.inject.Inject;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -98,7 +100,7 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     private void sendPost(ActionEvent e) { 
         DateTime dt = new DateTime();
         this.userPostsService.addPost(FbAccountID, "Fb", this.userPost.getText(), dt);
-        this.vb.getChildren().add(formatMessage(this.userPost.getText(), dt));
+        this.vb.getChildren().add(0, formatMessage(this.userPost.getText(), dt));
         this.sp.setContent(this.vb);
         this.userPost.setText("");
     }

@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="809.0" prefWidth="1180.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.WelcomeScreenController">
   <children>
     <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="809.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
@@ -46,11 +46,7 @@
                 <Insets top="450.0" />
               </StackPane.margin>
             </Button>
-<<<<<<< HEAD
             <Label fx:id="errorMessage" prefWidth="320.0" text="" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
-=======
-            <Label id="errorMessage" prefWidth="186.0" textFill="#ff3333" visible="false" StackPane.alignment="CENTER">
->>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
               <font>
                 <Font name="System Bold" size="12.0" />
               </font>

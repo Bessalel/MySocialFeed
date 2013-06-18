@@ -153,8 +153,10 @@ public class ManageUserPostsService implements UserPostsService{
                             insertUserPost.setString(4, post);
                             insertUserPost.setTimestamp(5, new Timestamp(dt.toDate().getTime()));
                             insertUserPost.execute();
-                            this.postsID.add(insertUserPost.getGeneratedKeys().getInt(1));
-                            System.out.println(insertUserPost.getGeneratedKeys().getInt(1));
+                            ResultSet rs = insertUserPost.getGeneratedKeys();
+                            if (rs.next()) {
+                                this.postsID.add(rs.getInt(1));
+                            }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

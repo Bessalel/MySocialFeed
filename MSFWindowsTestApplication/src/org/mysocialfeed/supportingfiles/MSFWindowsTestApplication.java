@@ -8,7 +8,6 @@ import org.mysocialfeed.services.MainServiceModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -31,19 +30,16 @@ public class MSFWindowsTestApplication extends Application {
         
         ScreensController mainController = new ScreensController(this.mainServiceInjector);
         registerAllScreens(mainController);
-<<<<<<< HEAD
 
         Scene scene = new Scene(mainController);
-=======
-        
-        Group root = new Group();
-        
-        root.getChildren().addAll(mainController);
-        root.setAutoSizeChildren(false);
-        Scene scene = new Scene(root);
->>>>>>> 99610cac6bced84ce80fdcc92286ae79b72eed8e
         primaryStage.setScene(scene);
+        
         primaryStage.setResizable(true);
+        primaryStage.setMinHeight(785.5);
+        primaryStage.setMinWidth(1321);
+       // primaryStage.setMaxHeight(958);
+       // primaryStage.setMaxWidth(1281);
+        
         primaryStage.show();
     }
     
