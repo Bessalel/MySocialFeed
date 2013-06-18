@@ -6,12 +6,11 @@ package org.mysocialfeed.screensframework.socialaccountstabs;
 
 import com.google.inject.Inject;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -56,17 +55,20 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     
     private Label formatMessage(String message, DateTime dt) {
         
-        Label temp = new Label("\n" + message + "\n\n" + "wrote on "
-                + dt.toDate() + " by " + this.userDataService.getUserName()
-                + "\n__________________________________________________________________"
-                + "______________________________________________________________________\n");
+        DateTime.Property pDoW = dt.dayOfWeek();
+        DateTime.Property pMoY = dt.monthOfYear();
+        Label temp = new Label(message + "\n\nwrote on " + pDoW.getAsText(Locale.ENGLISH)
+                + " " + pMoY.getAsText(Locale.ENGLISH) + " " + dt.getYear()
+                + " by " + this.userDataService.getUserName() + "\n\n");
         
         if (this.backGroundStyle.isEmpty() || this.backGroundStyle == "-fx-background-color: #F8F8FF;") {
             backGroundStyle = "-fx-background-color: #DCDCDC;";
         } else if (this.backGroundStyle == "-fx-background-color: #DCDCDC;") {
             this.backGroundStyle = "-fx-background-color: #F8F8FF;";
         }
+        
         temp.setStyle(this.backGroundStyle);
+        temp.setMinWidth(this.vb.getMinWidth());
         return temp;
     }
     
@@ -80,6 +82,7 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     private void setDefaultProperties() {
         this.sp.setVmax(440);
         this.sp.setPrefSize(690, 685);
+        this.vb.setMinWidth(this.sp.getPrefWidth());
         if (this.userPostsService.hasPost() == true) {
             addMessagesToTimeline(this.userPostsService.getMaxIndex() - 1);
             this.sp.setContent(this.vb);
