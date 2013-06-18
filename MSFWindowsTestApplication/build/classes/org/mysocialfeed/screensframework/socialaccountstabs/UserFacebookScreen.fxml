@@ -37,12 +37,12 @@
               <children>
                 <Text scaleX="4.170056592144338" scaleY="3.524500994084441" strokeType="OUTSIDE" strokeWidth="0.0" text="What's new?" StackPane.alignment="CENTER">
                   <StackPane.margin>
-                    <Insets bottom="200.0" right="200.0" />
+                    <Insets bottom="230.0" right="200.0" />
                   </StackPane.margin>
                 </Text>
                 <TextArea fx:id="userPost" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="481.0" wrapText="true">
                   <StackPane.margin>
-                    <Insets bottom="100.0" right="200.0" top="100.0" />
+                    <Insets bottom="100.0" right="200.0" top="80.0" />
                   </StackPane.margin>
                 </TextArea>
                 <Button mnemonicParsing="false" onAction="#sendPost" prefWidth="48.9998779296875" text="Send">

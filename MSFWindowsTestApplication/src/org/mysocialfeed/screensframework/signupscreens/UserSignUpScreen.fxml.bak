@@ -2,39 +2,135 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="389.9998558593725" prefWidth="597.9998779296875" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.signupscreens.UserSignUpScreenController">
+<AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.signupscreens.UserSignUpScreenController">
   <children>
-    <Text layoutX="164.0" layoutY="46.0" scaleX="2.1846949635604838" scaleY="2.5663487657138186" strokeType="INSIDE" strokeWidth="0.0" text="Welcome to MySocialFeed where taking control" />
-    <Text layoutX="193.0" layoutY="94.0" scaleX="2.5261416107379246" scaleY="2.2530592266275087" strokeType="INSIDE" strokeWidth="0.0" text="of your social life hasn't been easier !" />
-    <TextField id="usernameField" fx:id="userNameTextField" layoutX="24.0" layoutY="163.0" prefWidth="200.0" promptText="username" />
-    <TextField fx:id="firstNameTextField" layoutX="24.0" layoutY="222.0" prefWidth="200.0" promptText="FirstName" />
-    <TextField fx:id="lastNameTextField" layoutX="24.0" layoutY="281.0" prefWidth="200.0" promptText="LastName" />
-    <TextField fx:id="emailAddrTextField" layoutX="24.0" layoutY="337.0" prefWidth="200.0" promptText="E-mail Address" />
-    <PasswordField fx:id="passwordField" layoutX="337.0" layoutY="197.0" prefWidth="200.0" promptText="password" />
-    <PasswordField fx:id="confirmPasswordField" layoutX="337.0" layoutY="281.0" onAction="#createUserAccount" prefWidth="200.0" promptText="confirm password" />
-    <Button layoutX="493.0" layoutY="349.0" mnemonicParsing="false" onAction="#createUserAccount" text="Confirm" />
-    <Button layoutX="341.0" layoutY="349.0" mnemonicParsing="false" onAction="#returnUserBackToWelcomeScreen" text="Go back" />
-    <Label layoutX="24.0" layoutY="140.0" text="Choose a username" />
-    <Label layoutX="24.0" layoutY="200.0" text="Your First Name" />
-    <Label layoutX="24.0" layoutY="259.0" text="Your Family Name" />
-    <Label layoutX="23.0" layoutY="314.0" text="Your e-mail Address" />
-    <Label layoutX="337.0" layoutY="166.0" text="Choose a password" />
-    <Label layoutX="337.0" layoutY="256.0" text="Confirm password" />
-    <Label fx:id="usernameEmpty" layoutX="138.0" layoutY="140.0" text="You must provide an username !" textFill="RED">
-      <font>
-        <Font name="System Bold" size="12.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label fx:id="firstNameEmpty" font="$x1" layoutX="138.0" layoutY="197.0" text="You must provide a first name !" textFill="RED" />
-    <Label fx:id="lastNameEmpty" font="$x1" layoutX="138.0" layoutY="262.0" text="You must provide a last name !" textFill="RED" />
-    <Label fx:id="emailAddrEmpty" font="$x1" layoutX="138.0" layoutY="314.0" text="You must provide a valid e-mail address !" textFill="RED" />
-    <Label fx:id="passwordEmpty" font="$x1" layoutX="337.0" layoutY="140.0" text="You must provide a password !" textFill="RED" />
-    <Label fx:id="confirmPwdEmpty" font="$x1" layoutX="337.0" layoutY="233.0" text="You must confirm the password !" textFill="RED" />
-    <Label fx:id="pwdDifferent" font="$x1" layoutX="440.0" layoutY="314.0" text="Passwords don't match !" textFill="RED" visible="false" />
+    <BorderPane prefHeight="785.5" prefWidth="1321.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+          <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+              <children>
+                <Button mnemonicParsing="false" onAction="#returnUserBackToWelcomeScreen" text="Go back" StackPane.alignment="CENTER_LEFT">
+                  <StackPane.margin>
+                    <Insets left="20.0" top="150.0" />
+                  </StackPane.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#createUserAccount" text="Confirm" StackPane.alignment="CENTER_RIGHT">
+                  <StackPane.margin>
+                    <Insets right="20.0" top="150.0" />
+                  </StackPane.margin>
+                </Button>
+              </children>
+            </StackPane>
+          </center>
+        </BorderPane>
+      </bottom>
+      <center>
+        <ImageView id="[MSF] share-people.png" fitHeight="299.0" fitWidth="396.219970703125">
+          <image>
+            <Image url="@%5BMSF%5D%20share-people.png" preserveRatio="true" smooth="true" />
+          </image>
+        </ImageView>
+      </center>
+      <left>
+        <VBox prefHeight="586.0" prefWidth="308.0">
+          <children>
+            <Label text="Choose a username">
+              <font>
+                <Font name="System Bold" size="16.0" fx:id="x1" />
+              </font>
+              <VBox.margin>
+                <Insets left="20.0" top="50.0" />
+              </VBox.margin>
+            </Label>
+            <Label fx:id="usernameEmpty" text="You must provide an username !" textFill="RED" visible="false">
+              <font>
+                <Font name="System Bold" size="12.0" fx:id="x2" />
+              </font>
+              <VBox.margin>
+                <Insets left="20.0" fx:id="x3" />
+              </VBox.margin>
+            </Label>
+            <TextField id="usernameField" fx:id="userNameTextField" prefWidth="200.0" promptText="username">
+              <VBox.margin>
+                <Insets left="20.0" top="10.0" fx:id="x4" />
+              </VBox.margin>
+            </TextField>
+            <Label font="$x1" text="Your First Name">
+              <VBox.margin>
+                <Insets left="20.0" top="20.0" fx:id="x5" />
+              </VBox.margin>
+            </Label>
+            <Label fx:id="firstNameEmpty" font="$x2" text="You must provide a first name !" textFill="RED" visible="false" VBox.margin="$x3" />
+            <TextField fx:id="firstNameTextField" prefWidth="200.0" promptText="FirstName" VBox.margin="$x4" />
+            <Label font="$x1" text="Your Family Name" VBox.margin="$x5" />
+            <Label fx:id="lastNameEmpty" font="$x2" text="You must provide a last name !" textFill="RED" visible="false" VBox.margin="$x3" />
+            <TextField fx:id="lastNameTextField" prefWidth="200.0" promptText="LastName" VBox.margin="$x4" />
+            <Label id="emailAddrTextField" font="$x1" text="Your e-mail Address" VBox.margin="$x5" />
+            <Label id="emailAddrEmpty" font="$x2" text="You must provide a valid e-mail address !" textFill="RED" visible="false" VBox.margin="$x3" />
+            <TextField id="emailAddrTextField" fx:id="emailAddrEmpty" prefWidth="200.0" promptText="E-mail Address" VBox.margin="$x4" />
+          </children>
+        </VBox>
+      </left>
+      <right>
+        <VBox prefHeight="586.0" prefWidth="268.0">
+          <children>
+            <Label font="$x1" text="Choose a password">
+              <VBox.margin>
+                <Insets right="10.0" top="120.0" />
+              </VBox.margin>
+            </Label>
+            <Label fx:id="passwordEmpty" font="$x2" text="You must provide a password !" textFill="RED" visible="false" />
+            <PasswordField fx:id="passwordField" prefWidth="200.0" promptText="password">
+              <VBox.margin>
+                <Insets right="20.0" top="10.0" fx:id="x6" />
+              </VBox.margin>
+            </PasswordField>
+            <Label fx:id="confirmPwdEmpty" font="$x1" text="Confirm password">
+              <VBox.margin>
+                <Insets right="10.0" top="20.0" />
+              </VBox.margin>
+            </Label>
+            <Label id="confirmPwdEmpty" font="$x2" text="You must confirm the password !" textFill="RED" visible="false" />
+            <PasswordField fx:id="confirmPasswordField" onAction="#createUserAccount" prefWidth="200.0" promptText="confirm password" VBox.margin="$x6" />
+            <Label fx:id="pwdDifferent" font="$x2" text="Passwords don't match !" textFill="RED" visible="false">
+              <VBox.margin>
+                <Insets top="10.0" />
+              </VBox.margin>
+            </Label>
+          </children>
+        </VBox>
+      </right>
+      <top>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+          <center>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+              <children>
+                <Text scaleX="2.5329862832868537" scaleY="2.5663487657138186" strokeType="INSIDE" strokeWidth="0.0" text="Welcome to MySocialFeed where taking control">
+                  <font>
+                    <Font size="18.0" fx:id="x7" />
+                  </font>
+                  <StackPane.margin>
+                    <Insets bottom="100.0" right="250.0" top="10.0" />
+                  </StackPane.margin>
+                </Text>
+                <Text font="$x7" scaleX="2.5261416107379246" scaleY="2.2530592266275087" strokeType="INSIDE" strokeWidth="0.0" text="of your social life hasn't been easier!">
+                  <StackPane.margin>
+                    <Insets left="300.0" top="30.0" />
+                  </StackPane.margin>
+                </Text>
+              </children>
+            </StackPane>
+          </center>
+        </BorderPane>
+      </top>
+    </BorderPane>
   </children>
 </AnchorPane>

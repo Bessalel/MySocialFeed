@@ -6,26 +6,20 @@ package org.mysocialfeed.screensframework.signupscreens;
 
 import com.google.inject.Inject;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import org.mysocialfeed.models.DatabaseManager;
+
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
-import org.mysocialfeed.screensframework.WelcomeScreenController;
 import org.mysocialfeed.services.interfaces.UserService;
-import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
+
+
 
 /**
  * FXML Controller class
@@ -37,13 +31,13 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     ScreensController myController;
     
     // Error Messages labels
-    @FXML private Label usernameEmpty = new Label();
-    @FXML private Label firstNameEmpty = new Label();
-    @FXML private Label lastNameEmpty = new Label();
-    @FXML private Label emailAddrEmpty = new Label();
-    @FXML private Label passwordEmpty = new Label();
-    @FXML private Label confirmPwdEmpty = new Label();
-    @FXML private Label pwdDifferent = new Label();
+    @FXML private final Label usernameEmpty = new Label();
+    @FXML private final Label firstNameEmpty = new Label();
+    @FXML private final Label lastNameEmpty = new Label();
+    @FXML private final Label emailAddrEmpty = new Label();
+    @FXML private final Label passwordEmpty = new Label();
+    @FXML private final Label confirmPwdEmpty = new Label();
+    @FXML private final Label pwdDifferent = new Label();
       
     
     // Field variables
@@ -53,9 +47,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML private TextField emailAddrTextField = new TextField();
     @FXML private PasswordField passwordField = new PasswordField();
     @FXML private PasswordField confirmPasswordField = new PasswordField();
-    
-    
-    @FXML AnchorPane mainAnchorPane;
     
     private final UserService userService;
     
@@ -120,9 +111,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
 
     @FXML
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(515);
-        stage.setHeight(440);
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
     
