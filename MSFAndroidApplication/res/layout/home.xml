@@ -26,4 +26,12 @@
         android:text="Hi!"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <TextView
+        android:id="@+id/textZoneHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/loginText"
+        android:layout_below="@+id/loginText"
+        android:text="TextView" />
+
 </RelativeLayout>
