@@ -125,10 +125,10 @@ public class MainUserService implements UserService {
                                 insertNewUser.setString(3, firstName);
                                 insertNewUser.setString(4, lastName);
                                 insertNewUser.setString(5, emailAddr);
-                                insertNewUser.setInt(6, 0);
-                                insertNewUser.setInt(7, 0);
-                                insertNewUser.setInt(8, 0);
-                                insertNewUser.setInt(9, 0);
+                                insertNewUser.setByte(6, (byte)(0));
+                                insertNewUser.setByte(7, (byte)(0));
+                                insertNewUser.setByte(8, (byte)(0));
+                                insertNewUser.setByte(9, (byte)(0));;
                                 insertNewUser.execute();
                                 insertNewUser.close();
                     } catch (SQLException e) {

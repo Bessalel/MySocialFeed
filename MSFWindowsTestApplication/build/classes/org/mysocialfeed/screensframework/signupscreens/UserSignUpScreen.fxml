@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="mainAnchorPane" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.signupscreens.UserSignUpScreenController">
@@ -25,6 +26,44 @@
                 <Button mnemonicParsing="false" onAction="#createUserAccount" text="Confirm" StackPane.alignment="CENTER_RIGHT">
                   <StackPane.margin>
                     <Insets right="20.0" top="150.0" />
+                  </StackPane.margin>
+                </Button>
+                <Label id="sucessMessage1" fx:id="successMessage1" text="Congratulations! You have successfully created your account!" visible="false">
+                  <font>
+                    <Font name="System Bold" size="20.0" fx:id="x8" />
+                  </font>
+                  <textFill>
+                    <Color blue="0.128" green="0.800" red="0.000" fx:id="x9" />
+                  </textFill>
+                </Label>
+                <Label fx:id="successMessage2" font="$x8" text="Shall we log you in?" textFill="$x9" visible="false">
+                  <StackPane.margin>
+                    <Insets top="50.0" />
+                  </StackPane.margin>
+                </Label>
+                <Button fx:id="logNewUserIn" mnemonicParsing="false" onAction="#logNewUserIn" text="Yes log me in at once!" visible="false">
+                  <StackPane.margin>
+                    <Insets top="110.0" />
+                  </StackPane.margin>
+                </Button>
+                <Label id="accountCreationFailed" fx:id="accountCreationFailed1" font="$x8" text="Oops, something went unfortunately wrong," textFill="RED" visible="false">
+                  <StackPane.margin>
+                    <Insets left="50.0" />
+                  </StackPane.margin>
+                </Label>
+                <Label fx:id="accountCreationFailed2" font="$x8" text="Please try again or restart the application!" textFill="RED" visible="false">
+                  <StackPane.margin>
+                    <Insets left="50.0" top="50.0" />
+                  </StackPane.margin>
+                </Label>
+                <Button fx:id="endProgram" mnemonicParsing="false" onAction="#endProgram" text="End program" visible="false">
+                  <StackPane.margin>
+                    <Insets left="380.0" top="110.0" />
+                  </StackPane.margin>
+                </Button>
+                <Button fx:id="startAllOver" mnemonicParsing="false" onAction="#startAccountCreationOver" text="Start all over" visible="false">
+                  <StackPane.margin>
+                    <Insets right="280.0" top="110.0" />
                   </StackPane.margin>
                 </Button>
               </children>
@@ -73,9 +112,9 @@
             <Label font="$x1" text="Your Family Name" VBox.margin="$x5" />
             <Label fx:id="lastNameEmpty" font="$x2" text="You must provide a last name !" textFill="RED" visible="false" VBox.margin="$x3" />
             <TextField fx:id="lastNameTextField" prefWidth="200.0" promptText="LastName" VBox.margin="$x4" />
-            <Label fx:id="emailAddrTextField" font="$x1" text="Your e-mail Address" VBox.margin="$x5" />
-            <Label id="emailAddrEmpty" font="$x2" text="You must provide a valid e-mail address !" textFill="RED" visible="false" VBox.margin="$x3" />
-            <TextField id="emailAddrTextField" fx:id="emailAddrEmpty" prefWidth="200.0" promptText="E-mail Address" VBox.margin="$x4" />
+            <Label id="emailAddrTextField" font="$x1" text="Your e-mail Address" VBox.margin="$x5" />
+            <Label fx:id="emailAddrEmpty" font="$x2" text="You must provide a valid e-mail address !" textFill="RED" visible="false" VBox.margin="$x3" />
+            <TextField fx:id="emailAddrTextField" prefWidth="200.0" promptText="E-mail Address" VBox.margin="$x4" />
           </children>
         </VBox>
       </left>

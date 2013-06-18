@@ -42,9 +42,9 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
         myController = screenParent;
     }
     
-    @FXML private Label errorMessage = new Label();
-    @FXML private TextField userName = new TextField();
-    @FXML private PasswordField userPassword = new PasswordField();
+    @FXML private final Label errorMessage = new Label();
+    @FXML private final TextField userName = new TextField();
+    @FXML private final PasswordField userPassword = new PasswordField();
 
     
     @FXML

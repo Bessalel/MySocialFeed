@@ -7,6 +7,7 @@ package org.mysocialfeed.services.implementations;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
@@ -61,7 +62,7 @@ public class SetupMySQLService implements MySQLService {
     }
     
     @Override
-    public boolean builDatabase() {
+    public boolean buildDatabase() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

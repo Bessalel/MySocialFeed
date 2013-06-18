@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -38,7 +39,12 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML private final Label passwordEmpty = new Label();
     @FXML private final Label confirmPwdEmpty = new Label();
     @FXML private final Label pwdDifferent = new Label();
-      
+    @FXML private final Label accountCreationFailed1 = new Label();
+    @FXML private final Label accountCreationFailed2 = new Label();
+    
+    // Success Messages
+    @FXML private final Label successMessage1 = new Label();
+    @FXML private final Label successMessage2 = new Label();
     
     // Field variables
     @FXML private TextField userNameTextField = new TextField();
@@ -47,6 +53,10 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML private TextField emailAddrTextField = new TextField();
     @FXML private PasswordField passwordField = new PasswordField();
     @FXML private PasswordField confirmPasswordField = new PasswordField();
+    
+    @FXML private final Button logNewUserIn = new Button();
+    @FXML private final Button endProgram = new Button();
+    @FXML private final Button startAllOver = new Button();
     
     private final UserService userService;
     
@@ -71,12 +81,13 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     }
     
     @Override
-    public void setScreenParent(ScreensController screenParent){
+    public void setScreenParent(ScreensController screenParent) {
         myController = screenParent;
     }
     
     @FXML
     public void createUserAccount(ActionEvent event) {
+        // Just checking if user did fill out all fields
         if (userNameTextField.getText().isEmpty()) {
             usernameEmpty.setVisible(true);
         } 
@@ -98,6 +109,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
         if (passwordField.getText().compareTo(confirmPasswordField.getText()) != 0){
             pwdDifferent.setVisible(true);
         } else if (
+            // Just making sure all fields were filled out by user
                !(userNameTextField.getText().isEmpty())
             && !(firstNameTextField.getText().isEmpty())
             && !(lastNameTextField.getText().isEmpty())
@@ -105,7 +117,19 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
             && !(passwordField.getText().isEmpty())
             && !(confirmPasswordField.getText().isEmpty())
             && !(passwordField.getText().compareTo(confirmPasswordField.getText()) != 0)) {
-            insertUserIntoDatabase();
+            
+            if (this.userService.insertNewUserIntoDatabase(userNameTextField.getText(), 
+                    passwordField.getText(), firstNameTextField.getText(), 
+                    lastNameTextField.getText(), emailAddrTextField.getText()) == true) {
+                this.successMessage1.setVisible(true);
+                this.successMessage2.setVisible(true);
+                this.logNewUserIn.setVisible(true);
+            } else {
+                this.accountCreationFailed1.setVisible(true);
+                this.accountCreationFailed2.setVisible(true);
+                this.endProgram.setVisible(true);
+                this.startAllOver.setVisible(true);
+            }
         }
     }
 
@@ -113,8 +137,25 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
         myController.setScreen(FXMLGetResourcer.welcomeScreenID);
     }
+
+    @FXML
+    private void startAccountCreationOver(ActionEvent e) {
+        this.userNameTextField.setText(null);
+        this.firstNameTextField.setText(null);
+        this.lastNameTextField.setText(null);
+        this.emailAddrTextField.setText(null);
+        this.passwordField.setText(null);
+        this.confirmPasswordField.setText(null);
+    }
     
-    private void insertUserIntoDatabase() {
-        
+    @FXML
+    private void endProgram(ActionEvent e) {
+        System.exit(0);
+    }
+    
+    @FXML
+    private void logNewUserIn(ActionEvent e) {
+        this.userService.authenticate(this.userNameTextField.getText(), this.passwordField.getText());
+        this.myController.setScreen(FXMLGetResourcer.userMainScreenID);
     }
 }
