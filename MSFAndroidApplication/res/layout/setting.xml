@@ -27,6 +27,7 @@
         android:layout_alignBaseline="@+id/TextView01"
         android:layout_alignBottom="@+id/TextView01"
         android:layout_alignLeft="@+id/button1"
+ 		android:onClick="onAddTwClick"
         android:text="Add one!" />
 
     <Button
@@ -38,6 +39,7 @@
         android:layout_alignBottom="@+id/textView2"
         android:layout_marginLeft="51dp"
         android:layout_toRightOf="@+id/textView2"
+      	android:onClick="onAddFbClick"
         android:text="Add one!" />
 
     <TextView
@@ -68,30 +70,32 @@
         android:layout_alignBaseline="@+id/TextView02"
         android:layout_alignBottom="@+id/TextView02"
         android:layout_alignLeft="@+id/Button01"
+      	android:onClick="onAddGoClick"
         android:text="Add one!" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewFb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
+        android:layout_alignLeft="@+id/TextViewTw"
         android:layout_marginRight="14dp"
         android:layout_toLeftOf="@+id/textView2"
-        android:text="1"
+        android:text="0"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/TextView03"
+        android:id="@+id/TextViewTw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/TextView01"
         android:layout_alignLeft="@+id/textView3"
-        android:text="1"
+        android:text="0"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/TextView04"
+        android:id="@+id/TextViewGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/TextView02"

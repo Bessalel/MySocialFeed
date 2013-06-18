@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/digitalClock1"
         android:layout_centerHorizontal="true"
+        android:onClick="saveFiltersButtonClick"
         android:text="Save" />
 
     <TextView

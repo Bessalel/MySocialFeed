@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    >
-  <EditText
-      android:id="@+id/send_message"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="4dip"
-      android:width="160sp"
-      android:inputType="textMultiLine"
-      android:imeActionId="1337"
-      android:imeOptions="actionDone"
-      />
+    android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/send_message"
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:layout_marginLeft="4dip"
+        android:layout_weight="0.97"
+        android:ems="10"
+        android:imeActionId="1337"
+        android:imeOptions="actionDone"
+        android:inputType="textMultiLine"
+        android:width="160sp" />
+
 </LinearLayout>

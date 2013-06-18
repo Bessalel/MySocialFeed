@@ -15,6 +15,9 @@ public class User {
     private int _nbFacebookAccount;
     private int _nbTwitterAccount;
     private int _nbGoogleAccount;
+    private boolean _hasFacebookFilter;
+    private boolean _hasTwitterFilter;
+    private boolean _hasGoogleFilter;
     
     /**
      * Class constructor. Variables initialization with parameters.
@@ -29,6 +32,27 @@ public class User {
     	this._nbFacebookAccount = nbFb;
     	this._nbTwitterAccount = nbTw;
     	this._nbGoogleAccount = nbGo;
+    	this._hasFacebookFilter = true;
+    	this._hasTwitterFilter = true;
+    	this._hasGoogleFilter = true;    	
+    }
+    
+    /**
+     * Class constructor. Variables initialization with parameters.
+     */
+    public User( int userId, String username, String name, String lastname, String email,
+    				int nbFb, int nbTw, int nbGo, boolean fbFilter, boolean twFilter, boolean goFilter ) {
+    	this._userID = userId;
+    	this._username = username;
+    	this._name = name;
+    	this._lastname = lastname;
+    	this._email = email;
+    	this._nbFacebookAccount = nbFb;
+    	this._nbTwitterAccount = nbTw;
+    	this._nbGoogleAccount = nbGo;
+    	this._hasFacebookFilter = fbFilter;
+    	this._hasTwitterFilter = twFilter;
+    	this._hasGoogleFilter = goFilter;    	
     }
 
 	public int get_userID() {
@@ -94,5 +118,31 @@ public class User {
 	public void set_nbGoogleAccount(int _nbGoogleAccount) {
 		this._nbGoogleAccount = _nbGoogleAccount;
 	}
+
+	public boolean get_hasFacebookFilter() {
+		return _hasFacebookFilter;
+	}
+
+	public void set_hasFacebookFilter(boolean _hasFacebookFilter) {
+		this._hasFacebookFilter = _hasFacebookFilter;
+	}
+
+	public boolean get_hasTwitterFilter() {
+		return _hasTwitterFilter;
+	}
+
+	public void set_hasTwitterFilter(boolean _hasTwitterFilter) {
+		this._hasTwitterFilter = _hasTwitterFilter;
+	}
+
+	public boolean get_hasGoogleFilter() {
+		return _hasGoogleFilter;
+	}
+
+	public void set_hasGoogleFilter(boolean _hasGoogleFilter) {
+		this._hasGoogleFilter = _hasGoogleFilter;
+	}
     
+	
+	
 }
