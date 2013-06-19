@@ -32,6 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/loginText"
         android:layout_below="@+id/loginText"
-        android:text="TextView" />
+        android:text="No post here!\nPlease check your filters and refresh!" />
 
 </RelativeLayout>

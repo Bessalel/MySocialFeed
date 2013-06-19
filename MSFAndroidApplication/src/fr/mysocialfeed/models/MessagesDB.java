@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 public class MessagesDB {
 	private static final int DATABASE_VERSION = 1;
@@ -63,7 +64,15 @@ public class MessagesDB {
 		values.put(COL_LIKE, msg.getLike());
 		values.put(COL_ILIKE, msg.getILike());
 		values.put(COL_TYPE, msg.getType());
-		return db.insert( TABLE_NAME, null, values );
+		
+		long l;
+		
+		try {
+			l = db.insert( TABLE_NAME, null, values );
+		} catch( Exception e ) {
+			l = 0;
+		}
+		return l;		
 	}
 	
 	public int removeMessagesFromId( int id ){
