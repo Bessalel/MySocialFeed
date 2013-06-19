@@ -40,9 +40,7 @@ public class TwitterOAuthServlet extends HttpServlet {
 		} else {
 			User user = (User) session.getAttribute("user");
 			Account account = (Account) session.getAttribute("account");
-			if (session.getAttribute("account") != null) {
-				request.setAttribute("statuses", getTimeline(account));
-			}
+
 			if (request.getParameter("oauth_token") != null
 					&& request.getParameter("oauth_verifier") != null) {
 				AccessToken accessToken = new AccessToken(
@@ -50,9 +48,20 @@ public class TwitterOAuthServlet extends HttpServlet {
 						request.getParameter("oauth_verifier"));
 				System.out.println(accessToken.getToken()
 						+ accessToken.getTokenSecret());
-				String createConnection = TwitterConnection.storeAccessToken(user.getUsername(), (String) session.getAttribute("accountName"), accessToken);
+				String createConnection = TwitterConnection.storeAccessToken(
+						user.getUsername(),
+						(String) session.getAttribute("accountName"),
+						accessToken);
 				request.setAttribute("createConnection", createConnection);
 				session.removeAttribute("accountName");
+				Key<User> keyUser = Key.create(user);
+				account = ofy().load().type(Account.class).ancestor(keyUser)
+						.first().now();
+				session.setAttribute("account", account);
+			}
+			
+			if (account != null) {
+				request.setAttribute("statuses", getTimeline(account));
 			}
 			// System.out.println("You have the following existing accounts :");
 			// List<Account> accounts = (List<Account>)
@@ -98,7 +107,7 @@ public class TwitterOAuthServlet extends HttpServlet {
 			// System.out.println(createConnection);
 			// request.setAttribute("createConnection", createConnection);
 		}
-		if (status != null && account !=null) {
+		if (status != null && account != null) {
 			String messagePosted = PostTwitter.PostToTwitter(account, status,
 					user);
 			request.setAttribute("messagePosted", messagePosted);

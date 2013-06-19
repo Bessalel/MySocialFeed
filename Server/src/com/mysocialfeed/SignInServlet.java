@@ -36,7 +36,7 @@ public class SignInServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		System.out.println(request.getParameter("username"));
-		if (session.getAttribute("username") == null) {
+		if (session.getAttribute("user") == null) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			if (username == null || password == null) {
@@ -46,12 +46,15 @@ public class SignInServlet extends HttpServlet {
 			} else {
 				User user = ObjectifyService.ofy().load().type(User.class)
 						.filter("username ", username).first().now();
-				if (user.getPassword().equals(password)) {
+				if (user !=null && user.getPassword().equals(password)) {
 					session.setAttribute("user", user);
 					Key<User> keyUser = Key.create(user);
 					Account account = ofy().load().type(Account.class)
 							.ancestor(keyUser).first().now();
-					session.setAttribute("account", account);
+					if (account != null){
+						session.setAttribute("account", account);
+					}
+					
 					// List<Account> accounts =
 					// ObjectifyService.ofy().load().type(Account.class).ancestor(keyUser).list();
 					// session.setAttribute("accounts", accounts);

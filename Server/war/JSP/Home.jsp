@@ -63,8 +63,8 @@
 	</div>
 	<div class="container">
 		<div class="hero-unit">
-			<h1>Bienvenu chez MSF ${sessionScope.user.username}!</h1>
-			<h3>Vous pouvez dés à présent vous <a href="/SignInServlet">connecter à MSF</a></h3>
+			<h1>Bienvenue chez MSF ${sessionScope.user.username}!</h1>
+			<h3>Vous pouvez des à présent vous <a href="/SignInServlet">connecter à MSF</a></h3>
 			<h3>Pour créer un compte <a href="/SignUpServlet">c'est par là !</a></h3>
 			<h3>Vous pourrez ensuite vous <a href="/TwitterOAuthServlet">connecter à Twitter</a></h3>
 		</div>

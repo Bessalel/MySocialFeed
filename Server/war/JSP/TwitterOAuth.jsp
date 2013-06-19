@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Connexion à Twitter</title>
+<title>Twitter</title>
 <!-- Bootstrap -->
 <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
