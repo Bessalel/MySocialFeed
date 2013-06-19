@@ -50,8 +50,8 @@ public class TwitterConnection {
 				}
 			}
 
-			return storeAccessToken(user.getUsername(), twitter
-					.verifyCredentials().getId(), accountName, accessToken);
+			return storeAccessToken(user.getUsername(), accountName,
+					accessToken);
 
 			// Key<User> keyUser2 = Key.create(User.class, user.getId());
 			// Account account = ofy().load().type(Account.class)
@@ -69,8 +69,8 @@ public class TwitterConnection {
 
 	}
 
-	private static String storeAccessToken(String username, long id,
-			String accountName, AccessToken accessToken) {
+	public static String storeAccessToken(String username, String accountName,
+			AccessToken accessToken) {
 		User user = ofy().load().type(User.class).filter("username ", username)
 				.first().now();
 		Key<User> keyUser = Key.create(User.class, user.getId());
@@ -88,11 +88,11 @@ public class TwitterConnection {
 			List<Account> accounts = ofy().load().type(Account.class)
 					.ancestor(keyUser).list();
 			for (Account accountInList : accounts) {
-				System.out.println(accountInList.getAccountName()
-						+ " " + accountInList.getAccountType()
-						+ " " + accountInList.getToken()
-						+ " " + accountInList.getTokenSecret()
-						+ " " + accountInList.getUser());
+				System.out.println(accountInList.getAccountName() + " "
+						+ accountInList.getAccountType() + " "
+						+ accountInList.getToken() + " "
+						+ accountInList.getTokenSecret() + " "
+						+ accountInList.getUser());
 			}
 			return "Le compte " + accountName + " à bien été enregistré.";
 		}
