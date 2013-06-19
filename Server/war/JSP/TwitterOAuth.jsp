@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>TwitterConnect</title>
+<title>Connexion à Twitter</title>
 <!-- Bootstrap -->
 <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
@@ -21,36 +21,49 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Project name</a>
+				<a class="brand" href="/">MySocialFeed</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a href="/">Home</a></li>
+						<li><a href="/">Accueil</a></li>
 						<li class="active"><a href="/TwitterOAuthServlet">Twitter</a></li>
-						<li><a href="#contact">Contact</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li class="nav-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
+						<li><a href="/FacebookServlet">Facebook</a></li>
+						<c:choose>
+							<c:when test="${sessionScope.user==null}">
+								<li><a href="/SignUpServlet">Inscription</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/LogOutServlet">Déconnexion</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
-					<form class="navbar-form pull-right">
-						<input class="span2" type="text" placeholder="Email"> <input
-							class="span2" type="password" placeholder="Password">
-						<button type="submit" class="btn">Sign in</button>
-					</form>
+					<c:choose>
+						<c:when test="${sessionScope.user==null}">
+							<form class="navbar-form pull-right" action="SignInServlet"
+								method="post">
+								<input class="span2" type="text" name="username"
+									placeholder="Pseudo"> <input class="span2"
+									name="password" type="password" placeholder="Mot de passe">
+								<button type="submit" class="btn">Connexion</button>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<ul class="nav">
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown"> Bienvenue
+										${sessionScope.user.username}<b class="caret"></b>
+								</a>
+									<ul class="dropdown-menu">
+										<li><a href="LogOutServlet">Se déconnecter</a></li>
+									</ul></li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
 	<div class="container">
-		<!-- Main hero unit for a primary marketing message or call to action -->
 		<div class="hero-unit">
 
 			<h2>Poster un message</h2>
@@ -58,6 +71,7 @@
 				<p>
 					<label for="status">Quoi de neuf ?</label><br />
 					<textarea name="status" id="status"></textarea>
+					<br />
 					<button type="submit" class="btn">Poster</button>
 					<%-- <c:choose>
 						<c:when test="${fn:length(sessionScope.accounts)} >1 ">
@@ -105,24 +119,14 @@
 				</c:when>
 			</c:choose>
 
-			<p>Vous souhaitez ajouter un compte Twitter à votre compte MSF ?
-
-
-
-
-
-
-
-
-
-
-
-			
+			<p>
+				Vous souhaitez ajouter un compte Twitter à votre compte MSF ?<br />
 			<form action="TwitterOAuthServlet" method="post">
 				Entrez un nom pour ce compte (ceci n'est pas l'identifiant du
 				compte, mais un nom de votre choix) : <input class="span2"
-					type="text" name="accountName" placeholder="Nom du compte">
+					type="text" name="accountName" placeholder="Nom du compte"><br />
 				<button type="submit" class="btn">Ajouter le compte</button>
+				<br />
 			</form>
 
 			</p>
