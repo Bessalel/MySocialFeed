@@ -40,10 +40,9 @@ public class TwitterOAuthServlet extends HttpServlet {
 		} else {
 			User user = (User) session.getAttribute("user");
 			Account account = (Account) session.getAttribute("account");
-//			if (session.getAttribute("account") != null) {
-				List<Status> statuses = GetTwitterTimeline.GetTimeline(account);
-				request.setAttribute("statuses", statuses);
-//			}
+			if (session.getAttribute("account") != null) {
+				request.setAttribute("statuses", getTimeline(account));
+			}
 			// System.out.println("You have the following existing accounts :");
 			// List<Account> accounts = (List<Account>)
 			// session.getAttribute("accounts");
@@ -53,10 +52,14 @@ public class TwitterOAuthServlet extends HttpServlet {
 			// + account.getAccountName() + " de "
 			// + account.getUser());
 			// }
-
 		}
 		this.getServletContext().getRequestDispatcher("/JSP/TwitterOAuth.jsp")
 				.forward(request, response);
+	}
+	
+	private List<Status> getTimeline(Account account){
+		List<Status> statuses = GetTwitterTimeline.GetTimeline(account);
+		return statuses;
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -73,11 +76,18 @@ public class TwitterOAuthServlet extends HttpServlet {
 					accountName);
 			System.out.println(createConnection);
 			request.setAttribute("createConnection", createConnection);
-		} else if (status != null) {
+		}
+		if (status != null) {
 			String messagePosted = PostTwitter.PostToTwitter(account, status,
 					user);
 			request.setAttribute("messagePosted", messagePosted);
 		}
+		
+		if (session.getAttribute("account") != null) {
+			request.setAttribute("statuses", getTimeline(account));
+		}
+		
+		
 		this.getServletContext().getRequestDispatcher("/JSP/TwitterOAuth.jsp")
 				.forward(request, response);
 	}
