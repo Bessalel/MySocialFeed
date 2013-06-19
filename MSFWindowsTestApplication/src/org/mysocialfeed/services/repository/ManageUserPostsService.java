@@ -45,8 +45,8 @@ public class ManageUserPostsService implements UserPostsService{
     }
     
     @Override
-    public void loadPosts(int userID, List<Integer>postsID, List<Integer> accountID, List<String> accountType, 
-    List<String> content, List<DateTime> DateTime) {
+    public void loadPosts(final int userID, final List<Integer>postsID, final List<Integer> accountID, 
+            final List<String> accountType, final List<String> content, final List<DateTime> DateTime) {
         this.userID = userID;
         this.postsID = postsID;
         this.accountID = accountID;
@@ -99,22 +99,22 @@ public class ManageUserPostsService implements UserPostsService{
     }
 
     @Override
-    public int getPostID(int index) {
+    public int getPostID(final int index) {
         return this.postsID.get(index);
     }
     
     @Override
-    public int getAccountID(int index) {
+    public int getAccountID(final int index) {
         return this.accountID.get(index);
     }
 
     @Override
-    public String getAccountType(int index) {
+    public String getAccountType(final int index) {
         return this.accountType.get(index);
     }
 
     @Override
-    public String getContent(int index) {
+    public String getContent(final int index) {
         return this.content.get(index);
     }
     
@@ -124,7 +124,7 @@ public class ManageUserPostsService implements UserPostsService{
     }
 
     @Override
-    public DateTime getTimeStamp(int index) {
+    public DateTime getTimeStamp(final int index) {
         return this.timeStamp.get(index);
     }
     
@@ -135,7 +135,7 @@ public class ManageUserPostsService implements UserPostsService{
     }
     
     @Override
-    public void addPost(int accountID, String accountType, String post, DateTime dt) {
+    public void addPost(final int accountID, final String accountType, final String post, final DateTime dt) {
         this.accountID.add(accountID);
         this.accountType.add(accountType);
         this.content.add(post);

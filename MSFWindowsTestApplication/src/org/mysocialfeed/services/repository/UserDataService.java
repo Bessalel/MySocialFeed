@@ -12,9 +12,9 @@ package org.mysocialfeed.services.repository;
 public interface UserDataService {
     // Equivalent of a constructor when first use
     public void loadUserData(
-            int userID, String userName, String userFirstName,
-            String userLastName, String userEmailAddress, int nbFacebook, 
-            int nbTwitter, int nbGooglePlus, int nbPinterest);
+            final int userID, final String userName, final String userFirstName,
+            final String userLastName, final String userEmailAddress, final int nbFacebook, 
+            final int nbTwitter, final int nbGooglePlus, final int nbPinterest);
     
     // To remove all data from current user
     public void unloadAllUserData();
@@ -40,12 +40,12 @@ public interface UserDataService {
     public int getNbTwAccount();
     
     // Update user infos & social account(s)
-    public void setUserName(String userName);
-    public void setUserFirstName(String userFirstName);
-    public void setUserLastName(String userLastName);
-    public void setUserEmailAddress(String userEmailAddress);
-    public void setNbFacebook(int nbFacebook);
-    public void setNbTwitter(int nbTwitter);
-    public void setNbGooglePlus(int nbGooglePlus);;
-    public void setNbPinterest(int nbPinterest);
+    public void setUserName(final String userName);
+    public void setUserFirstName(final String userFirstName);
+    public void setUserLastName(final String userLastName);
+    public void setUserEmailAddress(final String userEmailAddress);
+    public void setNbFacebook(final int nbFacebook);
+    public void setNbTwitter(final int nbTwitter);
+    public void setNbGooglePlus(final int nbGooglePlus);;
+    public void setNbPinterest(final int nbPinterest);
 }

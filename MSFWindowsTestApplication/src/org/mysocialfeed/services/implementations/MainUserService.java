@@ -9,16 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.joda.time.DateTime;
-import org.mysocialfeed.models.DatabaseManager;
 import org.mysocialfeed.services.interfaces.MySQLService;
 import org.mysocialfeed.services.interfaces.UserService;
 import org.mysocialfeed.services.repository.UserDataService;
 import org.mysocialfeed.services.repository.UserPostsService;
-import org.mysocialfeed.supportingfiles.MSFWindowsTestApplication;
 
 /**
  *
@@ -48,7 +45,7 @@ public class MainUserService implements UserService {
         return this.conn = this.mySQLService.connectToDatabase();
     }
     
-    private boolean loadUserData(ResultSet rs){
+    private boolean loadUserData(final ResultSet rs){
         try {
             userDataService.loadUserData(rs.getInt(1), rs.getString(2), rs.getString(4), 
                     rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8), 
@@ -111,8 +108,8 @@ public class MainUserService implements UserService {
     // User operations
     
     @Override
-    public boolean insertNewUserIntoDatabase(String userName, String password,
-            String firstName, String lastName, String emailAddr) {
+    public boolean insertNewUserIntoDatabase(final String userName, final String password,
+            final String firstName, final String lastName, final String emailAddr) {
         try {
              if (accessSQLService().isClosed() == true) {
                accessSQLService(); // putting a while here would freeze the program if always false... so only one try for the momment
@@ -146,7 +143,7 @@ public class MainUserService implements UserService {
     }
 
     @Override
-    public boolean authenticate(String userName, String passWord) {
+    public boolean authenticate(final String userName, final String passWord) {
       try {
            if (accessSQLService().isClosed() == true) {
                accessSQLService(); // putting a while here would freeze the program if always false... so only one try for the momment
