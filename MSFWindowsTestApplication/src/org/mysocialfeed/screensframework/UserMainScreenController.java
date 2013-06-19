@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.mysocialfeed.services.interfaces.UserService;
@@ -27,24 +28,35 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     
     ScreensController myController;
     
-    @FXML private Text welcomeMessage = new Text();
-    @FXML private Label userHasAccount = new Label();
+    @FXML private final Text welcomeMessage = new Text();
+    @FXML private final Label userHasAccount = new Label();
     
-    // List of action buttons :    
-    @FXML private Button accessFacebook = new Button();
-    @FXML private Button accessTwitter = new Button();
-    @FXML private Button accessGooglePlus = new Button();
-    @FXML private Button accessPinterest = new Button();
-    @FXML private Button addAccount = new Button();
-    @FXML private Button addFirstAccount = new Button();
+    // List of action buttons and labels :    
+    @FXML private final Button accessFacebook = new Button();
+    @FXML private final Label describeFb = new Label();
+    
+    @FXML private final Button accessTwitter = new Button();
+    @FXML private final Label describeTw = new Label();
+    
+    @FXML private final Button accessGooglePlus = new Button();
+    @FXML private final Label describeGplus = new Label();
+    
+    @FXML private final Button accessPinterest = new Button();
+    @FXML private final Label describePin = new Label();
+    
+    @FXML private final Button addAccount = new Button();
+    @FXML private final Label describeAddAccount = new Label();
+    
+    @FXML private final Button addFirstAccount = new Button();
     
     // No Social Account error messages :
-    @FXML private Label noAccountAvailable = new Label();
-    @FXML private Label noFacebookAccount = new Label();
-    @FXML private Label noTwitterAccount = new Label();
-    @FXML private Label noGooglePlusAccount = new Label();
-    @FXML private Label noPinterestAccount = new Label();
+    @FXML private final Label noAccountAvailable = new Label();
+    @FXML private final Label noFacebookAccount = new Label();
+    @FXML private final Label noTwitterAccount = new Label();
+    @FXML private final Label noGooglePlusAccount = new Label();
+    @FXML private final Label noPinterestAccount = new Label();
      
+    @FXML private final ImageView mainBanner = new ImageView();
     
     private final UserService userService;
     private final UserDataService userDataService;
@@ -77,14 +89,24 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     private void setDefaultProperties(){
         if (userService.isAuthenticated() == true) {
             this.welcomeMessage.setText("Welcome " + userDataService.getUserName() + "!");
-            System.out.println(this.welcomeMessage.getText());
                 if (userDataService.hasAccount() == false) {
                     this.noAccountAvailable.setVisible(true);
                     this.addFirstAccount.setVisible(true);
+                    
+                    this.addAccount.setVisible(false);
+                    this.describeAddAccount.setVisible(false);
+                    
                     this.accessFacebook.setVisible(false);
+                    this.describeFb.setVisible(false);
+                    
                     this.accessGooglePlus.setVisible(false);
+                    this.describeGplus.setVisible(false);
+                    
                     this.accessPinterest.setVisible(false);
+                    this.describePin.setVisible(false);
+                    
                     this.accessTwitter.setVisible(false);
+                    this.describeTw.setVisible(false);
                 } 
                 else if (userDataService.hasAccount() == true) {
                     this.userHasAccount.setVisible(true);
@@ -92,15 +114,19 @@ public class UserMainScreenController implements Initializable, ControlledScreen
                     this.addFirstAccount.setVisible(false);
                     if (userDataService.hasFacebook() == true) {
                         this.accessFacebook.setVisible(true);
+                        this.describeFb.setVisible(true);
                     }
                     if (userDataService.hasGooglePlus() == true) {
                         this.accessGooglePlus.setVisible(true);
+                        this.describeGplus.setVisible(true);
                     }
                     if (userDataService.hasPinterest() == true) {
                         this.accessPinterest.setVisible(true);
+                        this.describePin.setVisible(true);
                     }
                     if (userDataService.hasTwitter() == true) {
                         this.accessTwitter.setVisible(true);
+                        this.describeTw.setVisible(true);
                 }
             }
         } else if (userService.isAuthenticated() == false) {

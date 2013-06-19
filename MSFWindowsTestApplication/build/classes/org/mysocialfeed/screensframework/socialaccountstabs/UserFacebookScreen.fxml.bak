@@ -47,12 +47,12 @@
                 </TextArea>
                 <Button mnemonicParsing="false" onAction="#sendPost" prefWidth="48.9998779296875" text="Send">
                   <StackPane.margin>
-                    <Insets right="630.0" top="180.0" />
+                    <Insets right="630.0" top="150.0" />
                   </StackPane.margin>
                 </Button>
                 <Button mnemonicParsing="false" onAction="#resetField" text="Reset">
                   <StackPane.margin>
-                    <Insets left="235.0" top="180.0" />
+                    <Insets left="235.0" top="150.0" />
                   </StackPane.margin>
                 </Button>
               </children>

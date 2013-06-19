@@ -11,13 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
 import org.mysocialfeed.screensframework.ScreensController;
-import org.mysocialfeed.screensframework.UserMainScreenController;
-import org.mysocialfeed.screensframework.WelcomeScreenController;
 
 /**
  * FXML Controller class
@@ -28,51 +28,50 @@ public class UserAddAccountScreenController implements Initializable, Controlled
 
     ScreensController myController;
     
+    @FXML private final Label gPlusNotSupported = new Label();
+    @FXML private final Label twNotSupported = new Label();
+    @FXML private final Label pinNotSupported = new Label();
+    
+    
     @Inject
     public UserAddAccountScreenController(){
-        System.out.println("UAASC is OK");
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) { 
     }
     
+    @Override
     public void setScreenParent(ScreensController screenParent){
         myController = screenParent;
     }
     
-    public static boolean result = false;
     
     @FXML
     public void addFacebookAccount(MouseEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(615);
-        stage.setHeight(430);
-        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
         myController.setScreen(FXMLGetResourcer.addFacebookAccountScreenID);
     }
     
     @FXML
     private void addTwitterAccount(MouseEvent event) {
-        myController.setScreen(FXMLGetResourcer.addTwitterAccountScreenID);
+        this.twNotSupported.setVisible(false);
+       // myController.setScreen(FXMLGetResourcer.addTwitterAccountScreenID);
     }
     
     @FXML
     private void addGooglePlusAccount(MouseEvent event) {
-        myController.setScreen(FXMLGetResourcer.addGooglePlusAccountScreenID);
+        this.gPlusNotSupported.setVisible(false);
+        // myController.setScreen(FXMLGetResourcer.addGooglePlusAccountScreenID);
     }
     
     @FXML
     private void addPinterestAccount(MouseEvent event) {
-        myController.setScreen(FXMLGetResourcer.addPinterestAccountScreenID);
+        this.pinNotSupported.setVisible(false);
+       // myController.setScreen(FXMLGetResourcer.addPinterestAccountScreenID);
     }
     
     @FXML
     private void backToUserMainScreen(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(515);
-        stage.setHeight(440);
-        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
         myController.setScreen(FXMLGetResourcer.userMainScreenID);
     }
     

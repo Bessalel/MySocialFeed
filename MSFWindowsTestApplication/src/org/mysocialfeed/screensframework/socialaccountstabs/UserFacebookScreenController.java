@@ -32,9 +32,9 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
 
     ScreensController myController;
     
-    private UserDataService userDataService;
-    private UserPostsService userPostsService;
-    private int FbAccountID = 1;
+    private final UserDataService userDataService;
+    private final UserPostsService userPostsService;
+    private final int FbAccountID = 1; // need to be dynamically implemented
     private String backGroundStyle = new String();
     
     @FXML private TextArea userPost = new TextArea();

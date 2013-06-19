@@ -2,38 +2,107 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddFacebookAccountScreenController">
+<AnchorPane id="AnchorPane" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddFacebookAccountScreenController">
   <children>
-    <ImageView id="Facebook-banner.png" fitHeight="150.0" fitWidth="495.0" layoutX="53.0" layoutY="29.0">
-      <image>
-        <Image url="@Facebook-banner.png" preserveRatio="true" smooth="true" />
-      </image>
-    </ImageView>
-    <TextField fx:id="userFirstName" layoutX="55.0" layoutY="249.0" prefWidth="200.0" promptText="fistname in your Facebook account" />
-    <TextField fx:id="userLastName" layoutX="348.0" layoutY="249.0" prefWidth="200.0" promptText="last name in your Facebook account" />
-    <TextField fx:id="userEmailAddr" layoutX="200.0" layoutY="331.0" onAction="#addUserFacebookAccount" prefWidth="200.0" promptText="e-mail address of your Facebook account" />
-    <Button layoutX="523.0" layoutY="365.0" mnemonicParsing="false" onAction="#addUserFacebookAccount" text="Confirm" />
-    <Button layoutX="14.0" layoutY="365.0" mnemonicParsing="false" text="Cancel" />
-    <Label id="noFirstName" layoutX="55.0" layoutY="231.0" text="Insert your First Name" />
-    <Label id="noLastName" layoutX="348.0" layoutY="228.0" text="Insert your Last Name" />
-    <Label layoutX="201.0" layoutY="308.0" text="Insert your E-mail Address" />
-    <Label fx:id="noFirstName" layoutX="56.0" layoutY="271.0" text="You must insert a valid First Name !" textFill="RED" visible="false">
-      <font>
-        <Font name="System Bold Italic" size="12.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label id="userLastName" fx:id="noLastName" font="$x1" layoutX="348.0" layoutY="271.0" text="You must insert a valid Last Name !" textFill="RED" visible="false" />
-    <Label fx:id="noEmailAddr" font="$x1" layoutX="201.0" layoutY="346.0" text="You must insert E-mail Address !" textFill="RED" visible="false" />
-    <Label layoutX="140.0" layoutY="192.0" text="Please fill up these fields in order to add a Facebook account">
-      <font>
-        <Font name="System Italic" size="12.0" />
-      </font>
-    </Label>
+    <BorderPane prefHeight="785.5" prefWidth="1321.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <StackPane prefHeight="150.0" prefWidth="200.0">
+          <children>
+            <Button mnemonicParsing="false" onAction="#userCancelled" text="Cancel" StackPane.alignment="BOTTOM_LEFT">
+              <StackPane.margin>
+                <Insets bottom="20.0" left="20.0" />
+              </StackPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#addUserFacebookAccount" text="Confirm" StackPane.alignment="BOTTOM_RIGHT">
+              <StackPane.margin>
+                <Insets bottom="20.0" right="20.0" />
+              </StackPane.margin>
+            </Button>
+          </children>
+        </StackPane>
+      </bottom>
+      <center>
+        <StackPane prefHeight="150.0" prefWidth="200.0">
+          <children>
+            <Label text="Please fill up these fields in order to add a Facebook account">
+              <font>
+                <Font name="System Bold Italic" size="25.0" />
+              </font>
+              <StackPane.margin>
+                <Insets bottom="250.0" />
+              </StackPane.margin>
+            </Label>
+            <Label id="noFirstName" text="Insert your First Name">
+              <font>
+                <Font name="System Bold" size="20.0" fx:id="x1" />
+              </font>
+              <StackPane.margin>
+                <Insets bottom="55.0" right="640.0" />
+              </StackPane.margin>
+            </Label>
+            <TextField fx:id="userFirstName" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="fistname in your Facebook account">
+              <StackPane.margin>
+                <Insets right="600.0" />
+              </StackPane.margin>
+            </TextField>
+            <Label fx:id="noFirstName" text="You must insert a valid First Name !" textFill="RED" visible="true">
+              <font>
+                <Font name="System Bold Italic" size="14.0" fx:id="x2" />
+              </font>
+              <StackPane.margin>
+                <Insets right="615.0" top="50.0" />
+              </StackPane.margin>
+            </Label>
+            <Label id="noLastName" font="$x1" text="Insert your Last Name">
+              <StackPane.margin>
+                <Insets bottom="55.0" left="560.0" />
+              </StackPane.margin>
+            </Label>
+            <TextField fx:id="userLastName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" promptText="last name in your Facebook account">
+              <StackPane.margin>
+                <Insets left="600.0" />
+              </StackPane.margin>
+            </TextField>
+            <Label id="userLastName" fx:id="noLastName" font="$x2" text="You must insert a valid Last Name !" textFill="RED" visible="true">
+              <StackPane.margin>
+                <Insets left="585.0" top="50.0" />
+              </StackPane.margin>
+            </Label>
+            <Label font="$x1" text="Insert your E-mail Address">
+              <StackPane.margin>
+                <Insets top="130.0" />
+              </StackPane.margin>
+            </Label>
+            <TextField fx:id="userEmailAddr" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addUserFacebookAccount" prefHeight="25.0" prefWidth="250.0" promptText="e-mail address of your Facebook account">
+              <StackPane.margin>
+                <Insets top="200.0" />
+              </StackPane.margin>
+            </TextField>
+            <Label fx:id="noEmailAddr" font="$x2" text="You must insert E-mail Address !" textFill="RED" visible="true">
+              <StackPane.margin>
+                <Insets top="250.0" />
+              </StackPane.margin>
+            </Label>
+          </children>
+        </StackPane>
+      </center>
+      <top>
+        <ImageView id="Facebook-banner.png" fitHeight="218.0" fitWidth="859.5" BorderPane.alignment="CENTER">
+          <image>
+            <Image url="@Facebook-banner.png" preserveRatio="true" smooth="true" />
+          </image>
+          <BorderPane.margin>
+            <Insets top="20.0" />
+          </BorderPane.margin>
+        </ImageView>
+      </top>
+    </BorderPane>
   </children>
 </AnchorPane>

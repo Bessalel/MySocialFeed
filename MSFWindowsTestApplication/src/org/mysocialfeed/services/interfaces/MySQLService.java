@@ -12,7 +12,7 @@ import java.sql.Connection;
  */
 public interface MySQLService {
     public Connection connectToDatabase();
-    public boolean builDatabase();
+    public boolean buildDatabase();
     
     //getters for SQL statements:
     public String getCREATE_TABLE_USERS_SQL();
