@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +10,7 @@
 <!-- Bootstrap -->
 <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	media="screen">
+<link href="CSS/Design.css" rel="stylesheet" media="screen">
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -50,21 +52,78 @@
 	<div class="container">
 		<!-- Main hero unit for a primary marketing message or call to action -->
 		<div class="hero-unit">
+
+			<h2>Poster un message</h2>
+			<form method="post" action="/TwitterOAuthServlet">
+				<p>
+					<label for="status">Quoi de neuf ?</label><br />
+					<textarea name="status" id="status"></textarea>
+					<button type="submit" class="btn">Poster</button>
+					<%-- <c:choose>
+						<c:when test="${fn:length(sessionScope.accounts)} >1 ">
+							<c:forEach var="account" items="${sessionScope.accounts}">
+								
+							</c:forEach>
+						</c:when>
+					</c:choose> --%>
+
+				</p>
+			</form>
+			<c:choose>
+				<c:when test="${requestScope.messagePosted!=null}">
+					<div class="alert">
+						<h3>${requestScope.messagePosted}</h3>
+					</div>
+				</c:when>
+			</c:choose>
+
+			<h2>Timeline</h2>
+			<table class="table table-hover">
+				<c:forEach var="status" items="${requestScope.statuses}">
+					<tbody>
+						<tr>
+							<td><img alt="Profile pic"
+								src="${status.user.biggerProfileImageURL}"></td>
+							<td><a href="${status.user.URL}">${status.user.name}</a></td>
+							<td>${status.text}</td>
+							<td>${status.createdAt}</td>
+						</tr>
+					</tbody>
+				</c:forEach>
+			</table>
+
+
+
+
 			<h2>Connexion à Twitter !</h2>
 
-			<p>
+			<c:choose>
+				<c:when test="${requestScope.createConnection!=null}">
+					<div class="alert">
+						<h3>${requestScope.createConnection}</h3>
+					</div>
+				</c:when>
+			</c:choose>
 
-				<c:choose>
-					<c:when test="${requestScope.connectedToTwitter==null}">
-						Cliquez sur le lien suivant, puis acceptez l'invitation afin de
-						connecter Twitter à MSF :<br>
-						<a href="${requestScope.authUrl}">Connectez vous à Twitter !</a><br>
-					</c:when>
-					<c:otherwise>
-						Voici votre Access Token : ${requestScope.yop}<br>
-						Voici votre Access Secret : ${requestScope.yop2}<br>
-					</c:otherwise>
-				</c:choose>
+			<p>Vous souhaitez ajouter un compte Twitter à votre compte MSF ?
+
+
+
+
+
+
+
+
+
+
+
+			
+			<form action="TwitterOAuthServlet" method="post">
+				Entrez un nom pour ce compte (ceci n'est pas l'identifiant du
+				compte, mais un nom de votre choix) : <input class="span2"
+					type="text" name="accountName" placeholder="Nom du compte">
+				<button type="submit" class="btn">Ajouter le compte</button>
+			</form>
 
 			</p>
 

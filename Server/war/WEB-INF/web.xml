@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Server</servlet-name>
 		<servlet-class>com.mysocialfeed.ServerServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>Server</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -22,7 +22,39 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>TwitterOAuthServlet</servlet-name>
 		<url-pattern>/TwitterOAuthServlet</url-pattern>
 	</servlet-mapping>
-	
+	<servlet>
+		<servlet-name>SignUpServlet</servlet-name>
+		<servlet-class>com.mysocialfeed.SignUpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SignUpServlet</servlet-name>
+		<url-pattern>/SignUpServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>LogOutServlet</servlet-name>
+		<servlet-class>com.mysocialfeed.LogOutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogOutServlet</servlet-name>
+		<url-pattern>/LogOutServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>SignInServlet</servlet-name>
+		<servlet-class>com.mysocialfeed.SignInServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SignInServlet</servlet-name>
+		<url-pattern>/SignInServlet</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>FacebookServlet</servlet-name>
+		<servlet-class>com.mysocialfeed.FacebookServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacebookServlet</servlet-name>
+		<url-pattern>/FacebookServlet</url-pattern>
+	</servlet-mapping>
+
 	<welcome-file-list>
 		<welcome-file>ServerServlet.java</welcome-file>
 	</welcome-file-list>

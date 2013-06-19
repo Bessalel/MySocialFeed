@@ -19,13 +19,20 @@
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Project name</a>
+				<a class="brand" href="#">MySocialFeed</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="#">Accueil</a></li>
 						<li><a href="/TwitterOAuthServlet">Twitter</a></li>
-						<li><a href="#contact">Contact</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
+						<c:choose>
+							<c:when test="${sessionScope.user==null}">
+								<li><a href="/SignUpServlet">Inscription</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/LogOutServlet">Déconnexion</a></li>
+							</c:otherwise>
+						</c:choose>
+						<!-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Action</a></li>
@@ -35,13 +42,30 @@
 								<li class="nav-header">Nav header</li>
 								<li><a href="#">Separated link</a></li>
 								<li><a href="#">One more separated link</a></li>
-							</ul></li>
+							</ul></li> -->
 					</ul>
-					<form class="navbar-form pull-right">
-						<input class="span2" type="text" placeholder="Email"> <input
-							class="span2" type="password" placeholder="Password">
-						<button type="submit" class="btn">Sign in</button>
-					</form>
+					<c:choose>
+						<c:when test="${sessionScope.user==null}">
+							<form class="navbar-form pull-right" action="SignInServlet"
+								method="post">
+								<input class="span2" type="text" name="username"
+									placeholder="Pseudo"> <input class="span2"
+									name="password" type="password" placeholder="Mot de passe">
+								<button type="submit" class="btn">Connexion</button>
+							</form>
+						</c:when>
+						<c:otherwise>
+							<ul class="nav">
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown"> Bienvenue ${sessionScope.user.username}<b
+										class="caret"></b>
+								</a>
+									<ul class="dropdown-menu">
+										<li><a href="LogOutServlet">Se déconnecter</a></li>
+									</ul></li>
+							</ul>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
@@ -50,28 +74,38 @@
 	<div class="container">
 		<!-- Main hero unit for a primary marketing message or call to action -->
 		<div class="hero-unit">
-			<h1>Bienvenu chez MSF !</h1>
-			<c:choose>
-				<c:when test="${requestScope.test!=null}">
-					<p>
-						You like this website ? Rate ${requestScope.test} it on the <a
-							href="http://apple.com">Apple Store</a> !<br> Thank's you !<br>
-						${requestScope.authUrl}<br> ${requestScope.text2}<br>
-						${requestScope.text3}<br>
-					<p>
-						<a href="#" class="btn btn-primary btn-large">Learn more
-							&raquo;</a>
-					</p>
-				</c:when>
-				<c:otherwise>
-					<form class="navbar-form pull-right" action="server" method="post">
-						<input class="span2" type="text" name="username"
-							placeholder="Username"> <input class="span2"
-							type="password" name="password" placeholder="Password">
-						<button type="submit" class="btn">Se connecter</button>
-					</form>
-				</c:otherwise>
-			</c:choose>
+			<h1>Bienvenu chez MSF ${sessionScope.user.username}!</h1>
+
+			<p>
+				<%-- You like this website ? Rate ${requestScope.test} it on the <a
+					href="http://apple.com">Apple Store</a> !<br> Thank's you !<br>
+				${requestScope.authUrl}<br> ${requestScope.text2}<br>
+				${requestScope.text3}<br> --%>
+			<p>
+				<a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a>
+			</p>
+			Cliquez sur le lien suivant, puis acceptez l'invitation afin de
+			connecter Twitter à MSF :<br> <a href="${requestScope.authUrl}">Connectez
+				vous à Twitter !</a><br>
+
+			<table>
+				<c:forEach var="user" items="${requestScope.users}">
+					<tr>
+						<td><c:out value="${user.username}" /></td>
+						<td><c:out value="${user.password}" /></td>
+						<td><c:out value="${user.email}" /></td>
+					</tr>
+				</c:forEach>
+			</table>
+
+
+			<form class="navbar-form pull-right" action="TwitterOAuthServlet"
+				method="post">
+				Entrez le PIN : <input class="span2" type="text" name="pin"
+					placeholder="PIN">
+				<button type="submit" class="btn">Valider le PIN</button>
+			</form>
+
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery.js"></script>
