@@ -23,9 +23,9 @@ public class ManageUserDataService implements UserDataService {
 
     @Override
     public void loadUserData(
-            int userID, String userName, String userFirstName,
-            String userLastName, String userEmailAddress, int nbFacebook, 
-            int nbTwitter, int nbGooglePlus, int nbPinterest) {
+            final int userID, final String userName, final String userFirstName,
+            final String userLastName, final String userEmailAddress, final int nbFacebook, 
+            final int nbTwitter, final int nbGooglePlus, final int nbPinterest) {
         
         this.userID = userID;
         this.userName = userName;
@@ -129,42 +129,42 @@ public class ManageUserDataService implements UserDataService {
     
     // update user infos & social account(s)
     @Override
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
         this.userName = userName;
     }
 
     @Override
-    public void setUserFirstName(String userFirstName) {
+    public void setUserFirstName(final String userFirstName) {
         this.userFirstName = userFirstName;
     }
 
     @Override
-    public void setUserLastName(String userLastName) {
+    public void setUserLastName(final String userLastName) {
         this.userLastName = userLastName;
     }
 
     @Override
-    public void setUserEmailAddress(String userEmailAddress) {
+    public void setUserEmailAddress(final String userEmailAddress) {
         this.userEmailAddress = userEmailAddress;
     }
 
     @Override
-    public void setNbFacebook(int nbFacebook) {
+    public void setNbFacebook(final int nbFacebook) {
         this.nbFacebook = nbFacebook;
     }
 
     @Override
-    public void setNbTwitter(int nbTwitter) {
+    public void setNbTwitter(final int nbTwitter) {
         this.nbTwitter = nbTwitter;
     }
 
     @Override
-    public void setNbGooglePlus(int nbGooglePlus) {
+    public void setNbGooglePlus(final int nbGooglePlus) {
         this.nbGooglePlus = nbGooglePlus;
     }
 
     @Override
-    public void setNbPinterest(int nbPinterest) {
+    public void setNbPinterest(final int nbPinterest) {
         this.nbPinterest = nbPinterest;
     }
 }
