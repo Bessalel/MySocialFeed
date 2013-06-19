@@ -43,7 +43,7 @@ public class LoginDisplayActivity extends Activity {
         msgDB.open();
 
         // Insert a message on the db
-        /*
+        
         Messages msg = new Messages();
         msg.setDate("19-06-2013 15h31");
         msg.setAccountName("Twitter 1");
@@ -102,7 +102,7 @@ public class LoginDisplayActivity extends Activity {
         msg6.setILike(0);
         msg6.setLike(3);
         msg6.setType("tw");
-        msgDB.insertMessage( msg6 ); */
+        msgDB.insertMessage( msg6 );
         
         //for( int i = 0 ; i < 22 ; i++ )
         //	msgDB.removeMessagesFromId( i );

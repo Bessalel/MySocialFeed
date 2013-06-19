@@ -299,7 +299,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		            	EditText retrieveTextSenT = (EditText)addView.findViewById(R.id.send_message);
 						
 						DateFormat shortDateFormatEN = DateFormat.getDateTimeInstance(DateFormat.SHORT,	DateFormat.SHORT, new Locale("EN","en"));
-						System.out.println(shortDateFormatEN.format(time));
 						
 				        msg.setDate(shortDateFormatEN.format(time));
 				        msg.setAccountName("Twitter 1");
@@ -309,9 +308,9 @@ public class MainActivity extends FragmentActivity implements TabListener {
 				        msg.setLike(1);
 				        msg.setType("tw");		        
 				        
-						Toast.makeText(getApplicationContext(), "Data date : " + msg.getDate(), Toast.LENGTH_SHORT).show();	
-						Toast.makeText(getApplicationContext(), "Data message : " + msg.getMessage(), Toast.LENGTH_SHORT).show();	
-						Toast.makeText(getApplicationContext(), "Data sender : " + msg.getSender(), Toast.LENGTH_SHORT).show();	
+						//Toast.makeText(getApplicationContext(), "Data date : " + msg.getDate(), Toast.LENGTH_SHORT).show();	
+						//Toast.makeText(getApplicationContext(), "Data message : " + msg.getMessage(), Toast.LENGTH_SHORT).show();	
+						//Toast.makeText(getApplicationContext(), "Data sender : " + msg.getSender(), Toast.LENGTH_SHORT).show();	
 
 				        long l = msgDB.insertMessage(msg);
 				        if( l == 0 )
