@@ -90,6 +90,8 @@ public class UserMainScreenController implements Initializable, ControlledScreen
         if (userService.isAuthenticated() == true) {
             this.welcomeMessage.setText("Welcome " + userDataService.getUserName() + "!");
                 if (userDataService.hasAccount() == false) {
+                    this.userHasAccount.setVisible(false);
+                    
                     this.noAccountAvailable.setVisible(true);
                     this.addFirstAccount.setVisible(true);
                     

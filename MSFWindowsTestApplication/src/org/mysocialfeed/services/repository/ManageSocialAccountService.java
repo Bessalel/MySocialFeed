@@ -7,7 +7,6 @@ package org.mysocialfeed.services.repository;
 import com.google.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.mysocialfeed.services.interfaces.MySQLService;
 import org.mysocialfeed.services.interfaces.SocialAccountService;
@@ -36,8 +35,6 @@ public class ManageSocialAccountService implements SocialAccountService {
     @Override
     public boolean insertNewAccountIntoDatabase(
             final String firstName, final String lastName, final String emailAddr, final String type) {
-        
-        boolean result = false;
         try {
             if (accessSQLService().isClosed() == true) {
                accessSQLService(); // putting a while here would freeze the program if always false... so only one attempt for the momment
@@ -51,7 +48,7 @@ public class ManageSocialAccountService implements SocialAccountService {
                                 insertNewAccount.setString(2, firstName);
                                 insertNewAccount.setString(3, lastName);
                                 insertNewAccount.setString(4, emailAddr);
-                                result = insertNewAccount.execute();
+                                insertNewAccount.execute();
                         }
                         break;
                     case "G+" :
@@ -62,7 +59,7 @@ public class ManageSocialAccountService implements SocialAccountService {
                                 insertNewAccount.setString(2, firstName);
                                 insertNewAccount.setString(3, lastName);
                                 insertNewAccount.setString(4, emailAddr);
-                                result = insertNewAccount.execute();
+                                insertNewAccount.execute();
                         }
                         break;
                     case "Tw" :
@@ -73,7 +70,7 @@ public class ManageSocialAccountService implements SocialAccountService {
                                 insertNewAccount.setString(2, firstName);
                                 insertNewAccount.setString(3, lastName);
                                 insertNewAccount.setString(4, emailAddr);
-                                result = insertNewAccount.execute();
+                                insertNewAccount.execute();
                         }
                         break;
                     case "Pin" :
@@ -84,7 +81,7 @@ public class ManageSocialAccountService implements SocialAccountService {
                                 insertNewAccount.setString(2, firstName);
                                 insertNewAccount.setString(3, lastName);
                                 insertNewAccount.setString(4, emailAddr);
-                                result = insertNewAccount.execute();
+                                insertNewAccount.execute();
                         }
                         break;
                 } 
@@ -93,7 +90,8 @@ public class ManageSocialAccountService implements SocialAccountService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-        return result;
+        return true;
     }
 }
