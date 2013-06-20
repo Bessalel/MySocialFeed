@@ -2,6 +2,9 @@ package fr.mysocialfeed.supportingfiles;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Locale;
+import java.util.Date;
+import java.text.DateFormat;
 
 import fr.mysocialfeed.models.AccountDB;
 import fr.mysocialfeed.models.Messages;
@@ -126,7 +129,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			
 			MessagesDB msgDB = new MessagesDB( this ); 
 	        msgDB.open();
-			Messages msgFromDB = msgDB.getMessagesById( 4 );
 			
 			Map<Integer, Messages> arrayMap = new HashMap<Integer, Messages>();
 			if( usr.get_hasFacebookFilter() )
@@ -224,7 +226,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			Toast.makeText(getApplicationContext(), "Refresh, please wait a moment...", Toast.LENGTH_LONG).show();
 			return true;
 		case R.id.menu_send:
-			sendAMessage();
+	        MessagesDB msgDB = new MessagesDB( this ); 
+			sendAMessage( msgDB );			
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -282,7 +285,9 @@ public class MainActivity extends FragmentActivity implements TabListener {
     	//finish(); We not closing this activity because the user can back here after this disconnection.
     }
 	
-	private void sendAMessage() {
+	private void sendAMessage( final MessagesDB msgDB ) {
+		final Messages msg = new Messages();
+		
 		final View addView = getLayoutInflater().inflate(R.layout.send_layout, null);
 		new AlertDialog.Builder(this).setTitle("Send a message").setView(addView)
 				.setPositiveButton("Post it!", new DialogInterface.OnClickListener() {
@@ -290,11 +295,27 @@ public class MainActivity extends FragmentActivity implements TabListener {
 						// TODO : créer la fonction d'envoie sur les réseaux sociaux filtrés !
 						// postMessage((TextView) addView.findViewById(R.id.send_message));
 						
+						Date time = new Date();
 		            	EditText retrieveTextSenT = (EditText)addView.findViewById(R.id.send_message);
-						Toast.makeText(getApplicationContext(), "Data: "+retrieveTextSenT.getText(), Toast.LENGTH_LONG).show();
+						
+						DateFormat shortDateFormatEN = DateFormat.getDateTimeInstance(DateFormat.SHORT,	DateFormat.SHORT, new Locale("EN","en"));
+						
+				        msg.setDate(shortDateFormatEN.format(time));
+				        msg.setAccountName("Twitter 1");
+				        msg.setMessage( retrieveTextSenT.getText().toString() );
+				        msg.setSender(usr.get_username());
+				        msg.setILike(1);
+				        msg.setLike(1);
+				        msg.setType("tw");		        
+				        
+						//Toast.makeText(getApplicationContext(), "Data date : " + msg.getDate(), Toast.LENGTH_SHORT).show();	
+						//Toast.makeText(getApplicationContext(), "Data message : " + msg.getMessage(), Toast.LENGTH_SHORT).show();	
+						//Toast.makeText(getApplicationContext(), "Data sender : " + msg.getSender(), Toast.LENGTH_SHORT).show();	
+
+				        long l = msgDB.insertMessage(msg);
+				        if( l == 0 )
+							Toast.makeText(getApplicationContext(), "Send failed! Your message is empty?", Toast.LENGTH_SHORT).show();	
 					}
 				}).setNegativeButton("Cancel", null).show();
 	}
-	
-	
 }

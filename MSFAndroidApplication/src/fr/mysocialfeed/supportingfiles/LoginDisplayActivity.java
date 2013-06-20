@@ -43,56 +43,69 @@ public class LoginDisplayActivity extends Activity {
         msgDB.open();
 
         // Insert a message on the db
-        /*
+        
         Messages msg = new Messages();
-        msg.setDate("10-06-2013");
-        msg.setAccountName("Twitter#1");
-        msg.setMessage("Salut à tous, c'est mon premier tweet !");
-        msg.setSender("Bessalel");
+        msg.setDate("19-06-2013 15h31");
+        msg.setAccountName("Twitter 1");
+        msg.setMessage("Premier tweet !");
+        msg.setSender("Julien");
         msg.setILike(1);
         msg.setLike(12);
         msg.setType("tw");
         msgDB.insertMessage( msg );
         
         Messages msg2 = new Messages();
-        msg2.setDate("12-06-2013");
-        msg2.setAccountName("Twitter#1");
-        msg2.setMessage("Ça c'est mon deuxième tweet lol !");
-        msg2.setSender("Bessalel");
+        msg2.setDate("19-06-2013 15h40");
+        msg2.setAccountName("Twitter 1");
+        msg2.setMessage("Deuxième tweet, on est des fous :)");
+        msg2.setSender("Julien");
         msg2.setILike(0);
         msg2.setLike(4);
         msg2.setType("tw");
         msgDB.insertMessage( msg2 );
         
         Messages msg3 = new Messages();
-        msg3.setDate("14-06-2013");
-        msg3.setAccountName("Facebook#1");
-        msg3.setMessage("Bienvenue sur mon compte Facebook !");
+        msg3.setDate("19-06-2013 15:46");
+        msg3.setAccountName("Twitter 1");
+        msg3.setMessage("Arrête de #spam Julien !!");
         msg3.setSender("Bessalel");
         msg3.setILike(1);
         msg3.setLike(4);
-        msg3.setType("fb");
+        msg3.setType("tw");
         msgDB.insertMessage( msg3 );
         
         Messages msg4 = new Messages();
-        msg4.setDate("13-06-2013");
-        msg4.setAccountName("Twitter#1");
-        msg4.setMessage("Salut Bessalel, alors tu aimes bien ?");
+        msg4.setDate("19-06-2013 15:48");
+        msg4.setAccountName("Facebook 1");
+        msg4.setMessage("Je suis aussi sur Facebook...");
         msg4.setSender("Julien");
         msg4.setILike(0);
         msg4.setLike(7);
-        msg4.setType("tw");
-        msgDB.insertMessage( msg4 );   */
+        msg4.setType("fb");
+        msgDB.insertMessage( msg4 );
         
-        // msgDB.removeMessagesFromId(0);
+        Messages msg5 = new Messages();
+        msg5.setDate("19-06-2013 15:49");
+        msg5.setAccountName("Google 1");
+        msg5.setMessage("Et sur google+ !!!");
+        msg5.setSender("Julien");
+        msg5.setILike(1);
+        msg5.setLike(2);
+        msg5.setType("go");
+        msgDB.insertMessage( msg5 );
         
-        Messages msgFromDB = msgDB.getMessagesById( 4 ); 
-        if( msgFromDB != null ){
-        	Toast.makeText(this, "Message trouvé : " + msgFromDB.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-        else {
-        	Toast.makeText(this, "Ce message n'existe pas dans la BDD", Toast.LENGTH_SHORT).show();
-        }
+        Messages msg6 = new Messages();
+        msg6.setDate("19-06-2013 15:51");
+        msg6.setAccountName("Twitter 1");
+        msg6.setMessage("... mais je préfère Twitter.");
+        msg6.setSender("Julien");
+        msg6.setILike(0);
+        msg6.setLike(3);
+        msg6.setType("tw");
+        msgDB.insertMessage( msg6 );
+        
+        //for( int i = 0 ; i < 22 ; i++ )
+        //	msgDB.removeMessagesFromId( i );
         
 		msgDB.close();
     }
