@@ -24,9 +24,7 @@ import org.mysocialfeed.services.repository.UserDataService;
  *
  * @author Vincent
  */
-public class UserMainScreenController implements Initializable, ControlledScreen {
-    
-    ScreensController myController;
+public class UserMainScreenController extends ControlledScreen implements Initializable {
     
     @FXML private final Text welcomeMessage = new Text();
     @FXML private final Label userHasAccount = new Label();
@@ -73,9 +71,8 @@ public class UserMainScreenController implements Initializable, ControlledScreen
     }
     
     @Override
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-        
+    protected void onActivated() {
+        setDefaultProperties();
     }
     
     private void resetErrorMessages() {
@@ -142,7 +139,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
             this.noFacebookAccount.setVisible(true);
         } else {
             resetErrorMessages();
-            myController.setScreen(FXMLGetResourcer.userFacebookScreenID);
+            this.getScreenController().setScreen(FXMLGetResourcer.userFacebookScreenID);
         }
     }
     
@@ -152,7 +149,7 @@ public class UserMainScreenController implements Initializable, ControlledScreen
             this.noTwitterAccount.setVisible(true);
         } else {
             resetErrorMessages();
-            myController.setScreen(FXMLGetResourcer.userTwitterScreenID);
+            this.getScreenController().setScreen(FXMLGetResourcer.userTwitterScreenID);
         }
     }
     
@@ -181,13 +178,13 @@ public class UserMainScreenController implements Initializable, ControlledScreen
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setWidth(605);
         stage.setHeight(430);
-        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userAddAccountScreenID);
     }
     
     @FXML
     private void logUserOff(ActionEvent event) {
         userService.userSignOff();
         resetErrorMessages();
-        myController.setScreen(FXMLGetResourcer.welcomeScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 }

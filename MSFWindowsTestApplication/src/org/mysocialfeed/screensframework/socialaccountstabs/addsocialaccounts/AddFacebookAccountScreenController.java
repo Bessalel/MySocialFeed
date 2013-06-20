@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
-import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.services.interfaces.SocialAccountService;
 import org.mysocialfeed.services.repository.UserDataService;
 
@@ -25,9 +24,7 @@ import org.mysocialfeed.services.repository.UserDataService;
  *
  * @author Windows
  */
-public class AddFacebookAccountScreenController implements Initializable, ControlledScreen {
-
-    ScreensController myController;
+public class AddFacebookAccountScreenController extends ControlledScreen implements Initializable {
     
     private final UserDataService userDataService;
     private final SocialAccountService socialAccountService;
@@ -66,14 +63,9 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
     @FXML final private Button tryAgain = new Button();
     
     
-    @Override
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
-    }
-    
     @FXML
     private void userCancelled(ActionEvent event) {
-        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userAddAccountScreenID);
     }
     
     @FXML
@@ -124,12 +116,12 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
     
     @FXML
     private void addAnotherFbAccount(ActionEvent e) {
-        this.myController.setScreen(FXMLGetResourcer.addFacebookAccountScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.addFacebookAccountScreenID);
     }
     
     @FXML
     private void goToMainScreen(ActionEvent e) {
-        this.myController.setScreen(FXMLGetResourcer.userMainScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userMainScreenID);
     }
     
     @FXML
@@ -137,5 +129,9 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
         this.userFirstName.setText(null);
         this.userLastName.setText(null);
         this.userEmailAddr.setText(null);
+        
+        this.failureMessage1.setVisible(false);
+        this.failureMessage1.setVisible(false);
+        this.tryAgain.setVisible(false);
     }
 }

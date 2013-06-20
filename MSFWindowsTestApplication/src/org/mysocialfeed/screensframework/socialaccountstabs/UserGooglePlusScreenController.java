@@ -16,21 +16,15 @@ import org.mysocialfeed.screensframework.ScreensController;
  *
  * @author Windows
  */
-public class UserGooglePlusScreenController implements Initializable, ControlledScreen {
-
-    ScreensController myController;
+public class UserGooglePlusScreenController extends ControlledScreen implements Initializable {
     
     @Inject
     public UserGooglePlusScreenController(){
-        System.out.println("UGPSC is OK");
+        
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-    }
 }

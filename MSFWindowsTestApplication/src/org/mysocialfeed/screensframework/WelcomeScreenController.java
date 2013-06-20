@@ -19,11 +19,7 @@ import org.mysocialfeed.services.interfaces.UserService;
  *
  * @author Vincent
  */
-public class WelcomeScreenController implements Initializable, ControlledScreen {
-    
-    ScreensController myController;
-    
-    //Our constructor to implement Injection Dependancies
+public class WelcomeScreenController extends ControlledScreen implements Initializable {
     
     private final UserService userService;
     
@@ -37,15 +33,15 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
 
     } 
     
-    @Override
-    public void setScreenParent(ScreensController screenParent){   
-        myController = screenParent;
-    }
-    
     @FXML private final Label errorMessage = new Label();
     @FXML private final TextField userName = new TextField();
     @FXML private final PasswordField userPassword = new PasswordField();
 
+    @Override
+    protected void onDeActivated() {
+        this.userName.setText(null);
+        this.userPassword.setText(null);
+    }
     
     @FXML
     private void SignUserIn(ActionEvent event) {
@@ -57,13 +53,13 @@ public class WelcomeScreenController implements Initializable, ControlledScreen 
                 this.errorMessage.setText("Error : something went wrong or \nyour Username and/or Password do not match !");
                 this.errorMessage.setVisible(true);
             } else {
-                this.myController.setScreen(FXMLGetResourcer.userMainScreenID);
+                this.getScreenController().setScreen(FXMLGetResourcer.userMainScreenID);
             }
         }     
     }
     
     @FXML
     private void SignUserUp(ActionEvent event) {
-        myController.setScreen(FXMLGetResourcer.userSignUpScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userSignUpScreenID);
     }
 }

@@ -20,6 +20,8 @@ import javafx.util.Callback;
 public class ScreensController extends StackPane {
     //Contains the screens to be displayed in a HasMap collection
 
+    private ControlledScreen currentScreenController;
+    
     private final HashMap<String, Object> screens = new HashMap<>();
     private final Injector injector;
     
@@ -42,6 +44,7 @@ public class ScreensController extends StackPane {
             return null;
         }
         if (urlOrNode instanceof Node){
+            
             return (Node) urlOrNode;
         }
         try {
@@ -50,14 +53,15 @@ public class ScreensController extends StackPane {
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
                 public Object call(Class<?> paramClass) {
+                    
                     return injector.getInstance(paramClass);
                 }
             });
 
             Parent loadScreen = (Parent)loader.load();
-            ControlledScreen myScreenController = ((ControlledScreen) loader.getController());
-            myScreenController.setScreenParent(this);
-            screens.put(name, loadScreen);
+            this.currentScreenController = ((ControlledScreen) loader.getController());
+            this.currentScreenController.setScreenParent(this);
+            this.screens.put(name, loadScreen);
             
             return loadScreen;
         } catch (Exception e) {
@@ -74,8 +78,10 @@ public class ScreensController extends StackPane {
         Node screen = loadOrFindScreen(name);
         if (screen != null) {   //if screen(s) are loaded
             if (!getChildren().isEmpty()) {    //if there is more than one screen already displayed
+                this.currentScreenController.onDeActivated();
                 getChildren().remove(0);                    //remove the displayed screen
                 getChildren().add(0, screen);     //add the screen
+                this.currentScreenController.onActivated();
             }
             else { // if no screen displayed yet
                 getChildren().add(screen);       

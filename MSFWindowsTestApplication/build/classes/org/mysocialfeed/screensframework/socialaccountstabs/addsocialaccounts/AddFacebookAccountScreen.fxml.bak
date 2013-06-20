@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddFacebookAccountScreenController">
@@ -25,6 +26,39 @@
                 <Insets bottom="20.0" right="20.0" />
               </StackPane.margin>
             </Button>
+            <Label id="sucessMessage1" fx:id="successMessage1" text="Congratulations! You have successfully added a Facebook account!" visible="false" StackPane.alignment="TOP_CENTER">
+              <font>
+                <Font name="System Bold" size="20.0" fx:id="x1" />
+              </font>
+              <textFill>
+                <Color blue="0.129" green="0.800" red="0.000" fx:id="x4" />
+              </textFill>
+              <StackPane.margin>
+                <Insets />
+              </StackPane.margin>
+            </Label>
+            <Label fx:id="successMessage2" font="$x1" text="Do you want to add another one or go back to main tab?" textFill="$x4" visible="false" StackPane.alignment="TOP_CENTER">
+              <StackPane.margin>
+                <Insets top="40.0" fx:id="x3" />
+              </StackPane.margin>
+            </Label>
+            <Button fx:id="addAnotherFbAccount" mnemonicParsing="false" onAction="#addAnotherFbAccount" text="Add another account" visible="false" StackPane.alignment="BOTTOM_CENTER">
+              <StackPane.margin>
+                <Insets bottom="20.0" right="300.0" />
+              </StackPane.margin>
+            </Button>
+            <Button fx:id="goToUserMainScreen" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToMainScreen" prefWidth="132.0" text="Go to main tab" visible="false" StackPane.alignment="BOTTOM_CENTER">
+              <StackPane.margin>
+                <Insets bottom="20.0" left="300.0" />
+              </StackPane.margin>
+            </Button>
+            <Label id="accountCreationFailed" font="$x1" text="Oops, something went unfortunately wrong!" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER" />
+            <Label id="accountCreationFailed2" font="$x1" text="Please try again!" textFill="RED" visible="false" StackPane.alignment="TOP_CENTER" StackPane.margin="$x3" />
+            <Button mnemonicParsing="false" text="Try again" StackPane.alignment="BOTTOM_CENTER">
+              <StackPane.margin>
+                <Insets bottom="20.0" />
+              </StackPane.margin>
+            </Button>
           </children>
         </StackPane>
       </bottom>
@@ -39,10 +73,7 @@
                 <Insets bottom="250.0" />
               </StackPane.margin>
             </Label>
-            <Label id="noFirstName" text="Insert your First Name">
-              <font>
-                <Font name="System Bold" size="20.0" fx:id="x1" />
-              </font>
+            <Label id="noFirstName" font="$x1" text="Insert your First Name">
               <StackPane.margin>
                 <Insets bottom="55.0" right="640.0" />
               </StackPane.margin>
@@ -52,7 +83,7 @@
                 <Insets right="600.0" />
               </StackPane.margin>
             </TextField>
-            <Label fx:id="noFirstName" text="You must insert a valid First Name !" textFill="RED" visible="true">
+            <Label fx:id="noFirstName" text="You must insert a valid First Name !" textFill="RED" visible="false">
               <font>
                 <Font name="System Bold Italic" size="14.0" fx:id="x2" />
               </font>
@@ -70,7 +101,7 @@
                 <Insets left="600.0" />
               </StackPane.margin>
             </TextField>
-            <Label id="userLastName" fx:id="noLastName" font="$x2" text="You must insert a valid Last Name !" textFill="RED" visible="true">
+            <Label id="userLastName" fx:id="noLastName" font="$x2" text="You must insert a valid Last Name !" textFill="RED" visible="false">
               <StackPane.margin>
                 <Insets left="585.0" top="50.0" />
               </StackPane.margin>
@@ -85,7 +116,7 @@
                 <Insets top="200.0" />
               </StackPane.margin>
             </TextField>
-            <Label fx:id="noEmailAddr" font="$x2" text="You must insert E-mail Address !" textFill="RED" visible="true">
+            <Label fx:id="noEmailAddr" font="$x2" text="You must insert E-mail Address !" textFill="RED" visible="false">
               <StackPane.margin>
                 <Insets top="250.0" />
               </StackPane.margin>

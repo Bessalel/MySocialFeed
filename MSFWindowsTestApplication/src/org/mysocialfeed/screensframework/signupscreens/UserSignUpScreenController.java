@@ -27,9 +27,7 @@ import org.mysocialfeed.services.interfaces.UserService;
  *
  * @author Windows
  */
-public class UserSignUpScreenController implements Initializable, ControlledScreen {
-
-    ScreensController myController;
+public class UserSignUpScreenController extends ControlledScreen implements Initializable {
     
     // Error Messages labels
     @FXML private final Label usernameEmpty = new Label();
@@ -78,11 +76,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
         passwordEmpty.setVisible(false);
         confirmPwdEmpty.setVisible(false);  
         pwdDifferent.setVisible(false);
-    }
-    
-    @Override
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
     }
     
     @FXML
@@ -135,7 +128,7 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
 
     @FXML
     public void returnUserBackToWelcomeScreen(ActionEvent event) {
-        myController.setScreen(FXMLGetResourcer.welcomeScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.welcomeScreenID);
     }
 
     @FXML
@@ -156,6 +149,6 @@ public class UserSignUpScreenController implements Initializable, ControlledScre
     @FXML
     private void logNewUserIn(ActionEvent e) {
         this.userService.authenticate(this.userNameTextField.getText(), this.passwordField.getText());
-        this.myController.setScreen(FXMLGetResourcer.userMainScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userMainScreenID);
     }
 }
