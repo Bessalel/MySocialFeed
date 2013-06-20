@@ -23,18 +23,18 @@ public class LoginDisplayActivity extends Activity {
     public void onLoginClick(View v) {
         EditText login = (EditText) findViewById(R.id.loginEditText);
         EditText password = (EditText) findViewById(R.id.passwordEditText);
-
+        
     	if( login.getText().toString().equals("") || password.getText().toString().equals("") ) {
     		Toast.makeText(getApplicationContext(), "Fields need to be not null!", Toast.LENGTH_SHORT).show();
     	}
     	else {
     		Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_SHORT).show();
         	Intent intent = new Intent(LoginDisplayActivity.this, MainActivity.class);
-        	
+        	        	
         	intent.putExtra("login", login.getText().toString());
         	intent.putExtra("password", password.getText().toString());
         	startActivity(intent);
-        	//finish(); We not closing this activity because the user can back here after this disconnection.
+        	finish();
     	}
     }
     
@@ -43,7 +43,7 @@ public class LoginDisplayActivity extends Activity {
         msgDB.open();
 
         // Insert a message on the db
-        
+        /*
         Messages msg = new Messages();
         msg.setDate("19-06-2013 15h31");
         msg.setAccountName("Twitter 1");
@@ -57,7 +57,7 @@ public class LoginDisplayActivity extends Activity {
         Messages msg2 = new Messages();
         msg2.setDate("19-06-2013 15h40");
         msg2.setAccountName("Twitter 1");
-        msg2.setMessage("Deuxième tweet, on est des fous :)");
+        msg2.setMessage("Deuxiï¿½me tweet, on est des fous :)");
         msg2.setSender("Julien");
         msg2.setILike(0);
         msg2.setLike(4);
@@ -67,7 +67,7 @@ public class LoginDisplayActivity extends Activity {
         Messages msg3 = new Messages();
         msg3.setDate("19-06-2013 15:46");
         msg3.setAccountName("Twitter 1");
-        msg3.setMessage("Arrête de #spam Julien !!");
+        msg3.setMessage("Arrï¿½te de #spam Julien !!");
         msg3.setSender("Bessalel");
         msg3.setILike(1);
         msg3.setLike(4);
@@ -97,13 +97,13 @@ public class LoginDisplayActivity extends Activity {
         Messages msg6 = new Messages();
         msg6.setDate("19-06-2013 15:51");
         msg6.setAccountName("Twitter 1");
-        msg6.setMessage("... mais je préfère Twitter.");
+        msg6.setMessage("... mais je prï¿½fï¿½re Twitter.");
         msg6.setSender("Julien");
         msg6.setILike(0);
         msg6.setLike(3);
         msg6.setType("tw");
         msgDB.insertMessage( msg6 );
-        
+        */
         //for( int i = 0 ; i < 22 ; i++ )
         //	msgDB.removeMessagesFromId( i );
         
