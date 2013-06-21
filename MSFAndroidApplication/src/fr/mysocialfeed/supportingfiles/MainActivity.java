@@ -48,6 +48,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 	private String userLogin;
 	private User usr;
+	private Map<Integer, Messages> arrayMap = new HashMap<Integer, Messages>();
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +132,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			MessagesDB msgDB = new MessagesDB( this ); 
 	        msgDB.open();
 			
-			Map<Integer, Messages> arrayMap = new HashMap<Integer, Messages>();
 			if( usr.get_hasFacebookFilter() )
 				msgDB.getMessagesFromType(arrayMap, "fb");
 			if( usr.get_hasTwitterFilter() )

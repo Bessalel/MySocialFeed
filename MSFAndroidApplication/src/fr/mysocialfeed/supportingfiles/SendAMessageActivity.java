@@ -11,14 +11,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SendAMessageActivity extends Activity {
 
 	private String username;
+	private boolean hasFb;
+	private boolean hasTw;
+	private boolean hasGo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,9 @@ public class SendAMessageActivity extends Activity {
 		// Recovery data send with the intent method
 		Bundle bundle = getIntent().getExtras();
 		this.username = bundle.getString("username");
+		this.hasFb = false;
+		this.hasTw = false;
+		this.hasGo = false;
 	}
 	
 	@Override
@@ -57,21 +66,73 @@ public class SendAMessageActivity extends Activity {
 		Date time = new Date();
     	EditText retrieveTextSenT = (EditText) findViewById(R.id.sendEditText);
 		
+    	CheckBox fbBox = (CheckBox) findViewById(R.id.fbChoice);
+		CheckBox twBox = (CheckBox) findViewById(R.id.twChoice);
+		CheckBox goBox = (CheckBox) findViewById(R.id.goChoice);
+		if( fbBox.isChecked() )
+			this.hasFb = true;
+		else
+			this.hasFb = false;
+		
+		if( twBox.isChecked() )
+			this.hasTw = true;
+		else
+			this.hasTw = false;
+		
+		if( goBox.isChecked() )
+			this.hasGo = true;
+		else
+			this.hasGo = false;
+    	
     	MessagesDB msgDBSend = new MessagesDB( this ); 
         msgDBSend.open();
         
 		DateFormat shortDateFormatEN = DateFormat.getDateTimeInstance(DateFormat.SHORT,	DateFormat.SHORT, new Locale("EN","en"));
-        Messages msg = new Messages();
-        msg.setDate(shortDateFormatEN.format(time));
-        msg.setAccountName("Twitter 1");
-        msg.setMessage( retrieveTextSenT.getText().toString() );
-        msg.setSender( this.username );
-        msg.setILike(1);
-        msg.setLike(1);
-        msg.setType("tw");
-        
-        msgDBSend.insertMessage(msg);
+		
+		Messages msg = new Messages();
+		if( this.hasFb )
+		{
+	        msg.setDate(shortDateFormatEN.format(time));
+	        msg.setAccountName("Facebook");
+	        msg.setMessage( retrieveTextSenT.getText().toString() );
+	        msg.setSender( this.username );
+	        msg.setILike(0);
+	        msg.setLike(0);
+	        msg.setType("fb");
+	        msgDBSend.insertMessage(msg);
+	        msg.rebuild();
+		}
+		if( this.hasTw )
+		{
+	        msg.setDate(shortDateFormatEN.format(time));
+	        msg.setAccountName("Twitter");
+	        msg.setMessage( retrieveTextSenT.getText().toString() );
+	        msg.setSender( this.username );
+	        msg.setILike(0);
+	        msg.setLike(0);
+	        msg.setType("tw");
+	        msgDBSend.insertMessage(msg);
+		}
+		if( this.hasGo )
+		{
+	        msg.setDate(shortDateFormatEN.format(time));
+	        msg.setAccountName("Google");
+	        msg.setMessage( retrieveTextSenT.getText().toString() );
+	        msg.setSender( this.username );
+	        msg.setILike(0);
+	        msg.setLike(0);
+	        msg.setType("go");
+	        msgDBSend.insertMessage(msg);
+		}
+		// Error, nothing send!
+		if( this.hasFb == false && this.hasTw == false && this.hasGo == false )
+			Toast.makeText(getApplicationContext(), "Are you sure to send a post? Zero network were selected!", Toast.LENGTH_SHORT).show();	
+		else
+			Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_SHORT).show();
+
         msgDBSend.close();
+        
+    	finish();	// We closing this activity.
 	}
 
 }
