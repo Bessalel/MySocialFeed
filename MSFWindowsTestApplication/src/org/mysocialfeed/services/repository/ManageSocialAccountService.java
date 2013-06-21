@@ -32,59 +32,22 @@ public class ManageSocialAccountService implements SocialAccountService {
         return this.conn = this.mySQLService.connectToDatabase();
     }
     
-    @Override
-    public boolean insertNewAccountIntoDatabase(
-            final String firstName, final String lastName, final String emailAddr, final String type) {
+    private boolean insertAccount(
+            final String firstName, final String lastName, final String emailAddr, final String table) {
         try {
             if (accessSQLService().isClosed() == true) {
                accessSQLService(); // putting a while here would freeze the program if always false... so only one attempt for the momment
             } else {
-                switch (type) {
-                    case "Fb" :
-                        try(PreparedStatement insertNewAccount =
+                try(PreparedStatement insertNewAccount = 
                         this.conn.prepareStatement(
-                            this.mySQLService.getINSERT_FACEBOOK_ACCOUNT())) {
-                                insertNewAccount.setInt(1, this.userDataService.getUserID());
-                                insertNewAccount.setString(2, firstName);
-                                insertNewAccount.setString(3, lastName);
-                                insertNewAccount.setString(4, emailAddr);
-                                insertNewAccount.execute();
-                        }
-                        break;
-                    case "G+" :
-                        try(PreparedStatement insertNewAccount =
-                        this.conn.prepareStatement(
-                            this.mySQLService.getINSERT_GOOGLEPLUS_ACCOUNT())) {
-                                insertNewAccount.setInt(1, this.userDataService.getUserID());
-                                insertNewAccount.setString(2, firstName);
-                                insertNewAccount.setString(3, lastName);
-                                insertNewAccount.setString(4, emailAddr);
-                                insertNewAccount.execute();
-                        }
-                        break;
-                    case "Tw" :
-                        try(PreparedStatement insertNewAccount =
-                        this.conn.prepareStatement(
-                            this.mySQLService.getINSERT_TWITTER_ACCOUNT())) {
-                                insertNewAccount.setInt(1, this.userDataService.getUserID());
-                                insertNewAccount.setString(2, firstName);
-                                insertNewAccount.setString(3, lastName);
-                                insertNewAccount.setString(4, emailAddr);
-                                insertNewAccount.execute();
-                        }
-                        break;
-                    case "Pin" :
-                        try(PreparedStatement insertNewAccount =
-                        this.conn.prepareStatement(
-                            this.mySQLService.getINSERT_PINTEREST_ACCOUNT())) {
-                                insertNewAccount.setInt(1, this.userDataService.getUserID());
-                                insertNewAccount.setString(2, firstName);
-                                insertNewAccount.setString(3, lastName);
-                                insertNewAccount.setString(4, emailAddr);
-                                insertNewAccount.execute();
-                        }
-                        break;
-                } 
+                        "INSERT INTO " + table + "(" + 
+                        this.mySQLService.getINSERT_ANY_ACCOUNT())) {
+                            insertNewAccount.setInt(1, this.userDataService.getUserID());
+                            insertNewAccount.setString(2, firstName);
+                            insertNewAccount.setString(3, lastName);
+                            insertNewAccount.setString(4, emailAddr);
+                            insertNewAccount.execute();
+                }
                 this.conn.commit();
                 this.conn.close();
             }
@@ -93,5 +56,50 @@ public class ManageSocialAccountService implements SocialAccountService {
             return false;
         }
         return true;
+    }
+    
+    private boolean updateUserData(final String table) {
+        try {
+            if (accessSQLService().isClosed() == true) {
+               accessSQLService(); // putting a while here would freeze the program if always false... so only one attempt for the momment
+            } else {
+                try(PreparedStatement updateUserData = 
+                        this.conn.prepareStatement(
+                        "UPDATE users SET " + table + this.mySQLService.getUPDATE_USER_ANY_NB_ACCOUNT())) {
+                            
+                            switch (table) {
+                                case "facebook" :
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbFbAccount()));
+                                    break;
+                                case "googleplus" :
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbGpAccount()));
+                                    break;
+                                case "twitter" :
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbTwAccount()));
+                                    break;
+                                case "pinterest" :
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbPnAccount()));
+                                    break;
+                            }
+                            updateUserData.setInt(2, this.userDataService.getUserID());
+                            updateUserData.execute();
+                }
+                this.conn.commit();
+                this.conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
+    public boolean insertNewAccountIntoDatabase(
+            final String firstName, final String lastName, final String emailAddr, final String table) {
+        if (insertAccount(firstName, lastName, emailAddr, table)) {
+            return updateUserData(table);
+        }
+        return false;
     }
 }

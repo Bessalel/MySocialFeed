@@ -106,6 +106,11 @@ public class SetupMySQLService implements MySQLService {
     }
 
     @Override
+    public String getINSERT_ANY_ACCOUNT() {
+        return this.INSERT_ANY_ACCOUNT;
+    }
+    
+    @Override
     public String getINSERT_FACEBOOK_ACCOUNT() {
         return INSERT_FACEBOOK_ACCOUNT;
     }
@@ -130,6 +135,11 @@ public class SetupMySQLService implements MySQLService {
         return INSERT_POST;
     }
 
+    @Override
+    public String getUPDATE_USER_ANY_NB_ACCOUNT() {
+        return UPDATE_USER_NB_ACCOUNT;
+    }
+    
     @Override
     public String getUPDATE_USER_ACCOUNT() {
         return UPDATE_USER_ACCOUNT;
@@ -306,6 +316,11 @@ public class SetupMySQLService implements MySQLService {
             + ")"
             + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
+    private final String INSERT_ANY_ACCOUNT = ""
+            + "userid, firstname, lastname, email"
+            + ")"
+            + " VALUES(?, ?, ?, ?);";
+    
     private final String INSERT_FACEBOOK_ACCOUNT = "" 
             + "INSERT INTO facebook("
             + "userid, firstname, lastname, email"
@@ -337,7 +352,6 @@ public class SetupMySQLService implements MySQLService {
             + ")"
             + " VALUES (?, ?, ?, ?, ?);";
 
-
     // Update statements
     private final String UPDATE_USER_ACCOUNT = "" // no password change !
             + "UPDATE users "
@@ -348,6 +362,10 @@ public class SetupMySQLService implements MySQLService {
             + "googleplus = ?, pinterest = ? "
             + "WHERE id = ?";
 
+    private final String UPDATE_USER_NB_ACCOUNT = ""
+            + " = ? "
+            + "WHERE id = ?";
+    
 
     // Listing statements
     private final String LIST_USER = 

@@ -22,11 +22,13 @@ public interface MySQLService {
     public String getCREATE_TABLE_PINTEREST_SQL();
     public String getCREATE_TABLE_POSTS_SQL();
     public String getINSERT_USER();
+    public String getINSERT_ANY_ACCOUNT();
     public String getINSERT_FACEBOOK_ACCOUNT();
     public String getINSERT_TWITTER_ACCOUNT();
     public String getINSERT_GOOGLEPLUS_ACCOUNT();
     public String getINSERT_PINTEREST_ACCOUNT();
     public String getINSERT_POST();
+    public String getUPDATE_USER_ANY_NB_ACCOUNT();
     public String getUPDATE_USER_ACCOUNT();
     public String getLIST_USER();
     public String getLIST_USER_FACEBOOK_ACCOUNTS();
