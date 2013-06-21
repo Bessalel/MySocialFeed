@@ -11,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 /**
  *
@@ -22,7 +21,7 @@ public class ScreensController extends StackPane {
 
     private ControlledScreen currentScreenController;
     
-    private final HashMap<String, Object> screens = new HashMap<>();
+    private final HashMap<String, NodeController> screens = new HashMap<>();
     private final Injector injector;
     
     public ScreensController(Injector injector) {
@@ -31,7 +30,7 @@ public class ScreensController extends StackPane {
     }
     
     public void registerScreen(String name, URL url){
-        screens.put(name, url);
+        screens.put(name, new NodeController(url, null));
     }
     
   
@@ -39,16 +38,15 @@ public class ScreensController extends StackPane {
     //Loads the fxml file, add the screen to the screens collection and
     //finally injects the screenPane to the controller.
     private Node loadOrFindScreen(String name) {
-        Object urlOrNode = screens.get(name);
-        if (urlOrNode == null){
+        NodeController nc = screens.get(name);
+        if (nc == null){
             return null;
         }
-        if (urlOrNode instanceof Node){
-            
-            return (Node) urlOrNode;
+        if (nc.urlOrNode instanceof Node){
+            return (Node) nc.urlOrNode;
         }
         try {
-            FXMLLoader loader = new FXMLLoader((URL)urlOrNode);
+            FXMLLoader loader = new FXMLLoader((URL)nc.urlOrNode);
             
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
@@ -58,10 +56,10 @@ public class ScreensController extends StackPane {
                 }
             });
 
-            Parent loadScreen = (Parent)loader.load();
+            Parent loadScreen = (Parent)loader.load();    
             this.currentScreenController = ((ControlledScreen) loader.getController());
             this.currentScreenController.setScreenParent(this);
-            this.screens.put(name, loadScreen);
+            this.screens.put(name, new NodeController(loadScreen, (ControlledScreen)loader.getController()));
             
             return loadScreen;
         } catch (Exception e) {
@@ -79,9 +77,10 @@ public class ScreensController extends StackPane {
         if (screen != null) {   //if screen(s) are loaded
             if (!getChildren().isEmpty()) {    //if there is more than one screen already displayed
                 this.currentScreenController.onDeActivated();
-                getChildren().remove(0);                    //remove the displayed screen
-                getChildren().add(0, screen);     //add the screen
+                getChildren().remove(0);                 //remove the displayed screen
+                this.currentScreenController = screens.get(name).currentNodController;
                 this.currentScreenController.onActivated();
+                getChildren().add(0, screen);     //add the screen
             }
             else { // if no screen displayed yet
                 getChildren().add(screen);       

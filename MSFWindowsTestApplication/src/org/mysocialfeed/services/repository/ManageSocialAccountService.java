@@ -69,16 +69,16 @@ public class ManageSocialAccountService implements SocialAccountService {
                             
                             switch (table) {
                                 case "facebook" :
-                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbFbAccount()));
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbFbAccount() + 1));
                                     break;
                                 case "googleplus" :
-                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbGpAccount()));
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbGpAccount() + 1));
                                     break;
                                 case "twitter" :
-                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbTwAccount()));
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbTwAccount() + 1));
                                     break;
                                 case "pinterest" :
-                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbPnAccount()));
+                                    updateUserData.setByte(1, (byte)(this.userDataService.getNbPnAccount() + 1));
                                     break;
                             }
                             updateUserData.setInt(2, this.userDataService.getUserID());

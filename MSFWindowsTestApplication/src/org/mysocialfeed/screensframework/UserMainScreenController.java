@@ -175,9 +175,6 @@ public class UserMainScreenController extends ControlledScreen implements Initia
     
     @FXML
     private void addUserAccount(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setWidth(605);
-        stage.setHeight(430);
         this.getScreenController().setScreen(FXMLGetResourcer.userAddAccountScreenID);
     }
     
