@@ -44,7 +44,7 @@ public class UserAddAccountScreenController extends ControlledScreen implements 
     @FXML
     private void addTwitterAccount(MouseEvent event) {
         this.twNotSupported.setVisible(false);
-       // this.getScreenController().setScreen(FXMLGetResourcer.addTwitterAccountScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.addTwitterAccountScreenID);
     }
     
     @FXML
