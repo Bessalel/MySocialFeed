@@ -28,9 +28,7 @@ import org.mysocialfeed.services.repository.UserPostsService;
  *
  * @author Windows
  */
-public class UserFacebookScreenController implements Initializable, ControlledScreen {
-
-    ScreensController myController;
+public class UserFacebookScreenController extends ControlledScreen implements Initializable {
     
     private final UserDataService userDataService;
     private final UserPostsService userPostsService;
@@ -89,11 +87,6 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
         }
     }
     
-    @Override
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
-    }
-    
     @FXML
     private void resetField(ActionEvent e) {
         this.userPost.setText(null);
@@ -118,6 +111,6 @@ public class UserFacebookScreenController implements Initializable, ControlledSc
     
     @FXML
     private void leaveFacebookTab(ActionEvent e) {
-        this.myController.setScreen(FXMLGetResourcer.userMainScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userMainScreenID);
     }
 }

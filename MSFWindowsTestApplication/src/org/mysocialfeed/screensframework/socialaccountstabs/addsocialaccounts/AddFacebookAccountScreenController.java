@@ -10,27 +10,28 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
-import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.services.interfaces.SocialAccountService;
+import org.mysocialfeed.services.repository.UserDataService;
 
 /**
  * FXML Controller class
  *
  * @author Windows
  */
-public class AddFacebookAccountScreenController implements Initializable, ControlledScreen {
-
-    ScreensController myController;
+public class AddFacebookAccountScreenController extends ControlledScreen implements Initializable {
     
+    private final UserDataService userDataService;
     private final SocialAccountService socialAccountService;
     
     @Inject
-    public AddFacebookAccountScreenController(SocialAccountService socialAccountService){
+    public AddFacebookAccountScreenController(UserDataService userDataService, SocialAccountService socialAccountService){
+        this.userDataService = userDataService;
         this.socialAccountService = socialAccountService;
     }
     
@@ -50,14 +51,21 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
     @FXML final private Label noEmailAddr = new Label();;
     
     
-    @Override
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
-    }
+    // Success messages :
+    @FXML final private Label successMessage1 = new Label();
+    @FXML final private Label successMessage2 = new Label();
+    @FXML final private Button addAnotherFbAccount = new Button();
+    @FXML final private Button goToUserMainScreen = new Button();
+    
+    // Failure messages :
+    @FXML final private Label failureMessage1 = new Label();
+    @FXML final private Label failureMessage2 = new Label();
+    @FXML final private Button tryAgain = new Button();
+    
     
     @FXML
     private void userCancelled(ActionEvent event) {
-        myController.setScreen(FXMLGetResourcer.userAddAccountScreenID);
+        this.getScreenController().setScreen(FXMLGetResourcer.userAddAccountScreenID);
     }
     
     @FXML
@@ -81,8 +89,49 @@ public class AddFacebookAccountScreenController implements Initializable, Contro
         if (!(this.userFirstName.getText().isEmpty())
               && !(this.userLastName.getText().isEmpty())
               && !(this.userEmailAddr.getText().isEmpty())) {
-            this.socialAccountService.insertNewAccountIntoDatabase(
-                    userFirstName.getText(), userLastName.getText(), this.userEmailAddr.getText(), "Fb");
+            if (this.socialAccountService.insertNewAccountIntoDatabase(
+                    userFirstName.getText(), userLastName.getText(), this.userEmailAddr.getText(), "facebook") ) {
+                this.userDataService.setNbFacebook(this.userDataService.getNbFbAccount() + 1);
+                this.successMessage1.setVisible(true);
+                this.successMessage2.setVisible(true);
+                this.addAnotherFbAccount.setVisible(true);
+                this.goToUserMainScreen.setVisible(true);
+                
+                this.failureMessage1.setVisible(false);
+                this.failureMessage1.setVisible(false);
+                this.tryAgain.setVisible(false);
+                
+            } else {
+                this.successMessage1.setVisible(false);
+                this.successMessage2.setVisible(false);
+                this.addAnotherFbAccount.setVisible(false);
+                this.goToUserMainScreen.setVisible(false);
+                
+                this.failureMessage1.setVisible(true);
+                this.failureMessage1.setVisible(true);
+                this.tryAgain.setVisible(true);
+            }
         }
+    }
+    
+    @FXML
+    private void addAnotherFbAccount(ActionEvent e) {
+        this.getScreenController().setScreen(FXMLGetResourcer.addFacebookAccountScreenID);
+    }
+    
+    @FXML
+    private void goToMainScreen(ActionEvent e) {
+        this.getScreenController().setScreen(FXMLGetResourcer.userMainScreenID);
+    }
+    
+    @FXML
+    private void userTryAgain(ActionEvent e) {
+        this.userFirstName.setText(null);
+        this.userLastName.setText(null);
+        this.userEmailAddr.setText(null);
+        
+        this.failureMessage1.setVisible(false);
+        this.failureMessage1.setVisible(false);
+        this.tryAgain.setVisible(false);
     }
 }

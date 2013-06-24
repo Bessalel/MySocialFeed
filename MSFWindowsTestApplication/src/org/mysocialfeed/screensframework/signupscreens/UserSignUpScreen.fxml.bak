@@ -28,7 +28,7 @@
                     <Insets right="20.0" top="150.0" />
                   </StackPane.margin>
                 </Button>
-                <Label id="sucessMessage1" fx:id="successMessage1" text="Congratulations ! You have successfully creater your account!" visible="false">
+                <Label id="sucessMessage1" fx:id="successMessage1" text="Congratulations! You have successfully created your account!" visible="false">
                   <font>
                     <Font name="System Bold" size="20.0" fx:id="x8" />
                   </font>

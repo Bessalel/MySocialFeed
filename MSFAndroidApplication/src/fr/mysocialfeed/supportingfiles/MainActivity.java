@@ -2,6 +2,9 @@ package fr.mysocialfeed.supportingfiles;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Locale;
+import java.util.Date;
+import java.text.DateFormat;
 
 import fr.mysocialfeed.models.AccountDB;
 import fr.mysocialfeed.models.Messages;
@@ -45,6 +48,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 	private String userLogin;
 	private User usr;
+	private Map<Integer, Messages> arrayMap = new HashMap<Integer, Messages>();
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -126,9 +131,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			
 			MessagesDB msgDB = new MessagesDB( this ); 
 	        msgDB.open();
-			Messages msgFromDB = msgDB.getMessagesById( 4 );
 			
-			Map<Integer, Messages> arrayMap = new HashMap<Integer, Messages>();
 			if( usr.get_hasFacebookFilter() )
 				msgDB.getMessagesFromType(arrayMap, "fb");
 			if( usr.get_hasTwitterFilter() )
@@ -224,7 +227,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			Toast.makeText(getApplicationContext(), "Refresh, please wait a moment...", Toast.LENGTH_LONG).show();
 			return true;
 		case R.id.menu_send:
-			sendAMessage();
+			sendAMessage();			
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -265,36 +268,23 @@ public class MainActivity extends FragmentActivity implements TabListener {
     	intent.putExtra("typeAccount", "fb");
     	intent.putExtra("userId", usr.get_userID());
     	startActivity(intent);
-    	//finish(); We not closing this activity because the user can back here after this disconnection.
     }
 	public void onAddTwClick(View v) {
     	Intent intent = new Intent(MainActivity.this, AddNetworkActivity.class);
     	intent.putExtra("typeAccount", "tw");
     	intent.putExtra("userId", usr.get_userID());
     	startActivity(intent);
-    	//finish(); We not closing this activity because the user can back here after this disconnection.
     }
 	public void onAddGoClick(View v) {
     	Intent intent = new Intent(MainActivity.this, AddNetworkActivity.class);
     	intent.putExtra("typeAccount", "go");
     	intent.putExtra("userId", usr.get_userID());
     	startActivity(intent);
-    	//finish(); We not closing this activity because the user can back here after this disconnection.
     }
 	
-	private void sendAMessage() {
-		final View addView = getLayoutInflater().inflate(R.layout.send_layout, null);
-		new AlertDialog.Builder(this).setTitle("Send a message").setView(addView)
-				.setPositiveButton("Post it!", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int whichButton) {
-						// TODO : créer la fonction d'envoie sur les réseaux sociaux filtrés !
-						// postMessage((TextView) addView.findViewById(R.id.send_message));
-						
-		            	EditText retrieveTextSenT = (EditText)addView.findViewById(R.id.send_message);
-						Toast.makeText(getApplicationContext(), "Data: "+retrieveTextSenT.getText(), Toast.LENGTH_LONG).show();
-					}
-				}).setNegativeButton("Cancel", null).show();
+	public void sendAMessage() {
+		Intent intent = new Intent(MainActivity.this, SendAMessageActivity.class);
+    	intent.putExtra("username", usr.get_username());
+    	startActivity(intent);
 	}
-	
-	
 }

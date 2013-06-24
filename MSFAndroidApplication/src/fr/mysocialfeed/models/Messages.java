@@ -31,6 +31,17 @@ public class Messages {
     	this._iLike = 0;
     	this._type = null;
     }
+    
+    public void rebuild() {
+    	this._date = null;
+    	this._accountName = null;
+    	this._message = null;
+    	this._sender = null;
+    	this._share = null;
+    	this._like = 0;
+    	this._iLike = 0;
+    	this._type = null;
+    }
 
 	public int getId() {
 		return _id;

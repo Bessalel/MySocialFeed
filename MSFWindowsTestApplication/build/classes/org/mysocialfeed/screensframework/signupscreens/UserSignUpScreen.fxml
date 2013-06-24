@@ -46,7 +46,7 @@
                     <Insets top="110.0" />
                   </StackPane.margin>
                 </Button>
-                <Label id="accountCreationFailed" fx:id="accountCreationFailed1" font="$x8" text="Oops, something went unfortunately wrong," textFill="RED" visible="false">
+                <Label id="accountCreationFailed" fx:id="accountCreationFailed1" font="$x8" text="Oops, something went unfortunately wrong!" textFill="RED" visible="false">
                   <StackPane.margin>
                     <Insets left="50.0" />
                   </StackPane.margin>

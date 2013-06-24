@@ -9,28 +9,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import org.mysocialfeed.screensframework.ControlledScreen;
-import org.mysocialfeed.screensframework.ScreensController;
 
 /**
  * FXML Controller class
  *
  * @author Windows
  */
-public class AddPinterestAccountScreenController implements Initializable, ControlledScreen {
-
-    ScreensController myController;
+public class AddPinterestAccountScreenController extends ControlledScreen implements Initializable {
     
     @Inject
     public AddPinterestAccountScreenController(){
-        System.out.println("APASC is OK");
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
     }
 }
