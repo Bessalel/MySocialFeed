@@ -5,6 +5,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -48,16 +49,13 @@ public class SignInServlet extends HttpServlet {
 						.filter("username ", username).first().now();
 				if (user !=null && user.getPassword().equals(password)) {
 					session.setAttribute("user", user);
-					Key<User> keyUser = Key.create(user);
-					Account account = ofy().load().type(Account.class)
-							.ancestor(keyUser).first().now();
-					if (account != null){
-						session.setAttribute("account", account);
+					Key<User> keyUser = Key.create(User.class, user.getId());
+					List<Account> accounts = ofy().load().type(Account.class)
+							.ancestor(keyUser).list();
+					ArrayList<Account> arrayAccounts = new ArrayList<>(accounts);
+					if (accounts != null){
+						session.setAttribute("accounts", arrayAccounts );
 					}
-					
-					// List<Account> accounts =
-					// ObjectifyService.ofy().load().type(Account.class).ancestor(keyUser).list();
-					// session.setAttribute("accounts", accounts);
 					response.sendRedirect("/ServerServlet");
 				} else {
 					this.getServletContext()

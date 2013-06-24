@@ -31,6 +31,7 @@
 								<li><a href="/SignUpServlet">Inscription</a></li>
 							</c:when>
 							<c:otherwise>
+								<li><a href="/AccountsServlet">Mes comptes</a></li>
 								<li><a href="/LogOutServlet">Déconnexion</a></li>
 							</c:otherwise>
 						</c:choose>
@@ -48,8 +49,8 @@
 						<c:otherwise>
 							<ul class="nav">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown"> Bienvenue ${sessionScope.user.username}<b
-										class="caret"></b>
+									data-toggle="dropdown"> Bienvenue
+										${sessionScope.user.username}<b class="caret"></b>
 								</a>
 									<ul class="dropdown-menu">
 										<li><a href="LogOutServlet">Se déconnecter</a></li>
@@ -64,9 +65,17 @@
 	<div class="container">
 		<div class="hero-unit">
 			<h1>Bienvenue chez MSF ${sessionScope.user.username}!</h1>
-			<h3>Vous pouvez des à présent vous <a href="/SignInServlet">connecter à MSF</a></h3>
-			<h3>Pour créer un compte <a href="/SignUpServlet">c'est par là !</a></h3>
-			<h3>Vous pourrez ensuite vous <a href="/TwitterOAuthServlet">connecter à Twitter</a></h3>
+			<h3>
+				Vous pouvez des à présent vous <a href="/SignInServlet">connecter
+					à MSF</a>
+			</h3>
+			<h3>
+				Pour créer un compte <a href="/SignUpServlet">c'est par là !</a>
+			</h3>
+			<h3>
+				Vous pourrez ensuite vous <a href="/TwitterOAuthServlet">connecter
+					à Twitter</a>
+			</h3>
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery.js"></script>
