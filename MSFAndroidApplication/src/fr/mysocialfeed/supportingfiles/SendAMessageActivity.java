@@ -66,20 +66,20 @@ public class SendAMessageActivity extends Activity {
 		Date time = new Date();
     	EditText retrieveTextSenT = (EditText) findViewById(R.id.sendEditText);
 		
-    	CheckBox fbBox = (CheckBox) findViewById(R.id.fbChoice);
-		CheckBox twBox = (CheckBox) findViewById(R.id.twChoice);
-		CheckBox goBox = (CheckBox) findViewById(R.id.goChoice);
-		if( fbBox.isChecked() )
+    	CheckBox fbChoice = (CheckBox) findViewById(R.id.fbChoice);
+		CheckBox twChoice = (CheckBox) findViewById(R.id.twChoice);
+		CheckBox goChoice = (CheckBox) findViewById(R.id.goChoice);
+		if( fbChoice.isChecked() )
 			this.hasFb = true;
 		else
 			this.hasFb = false;
 		
-		if( twBox.isChecked() )
+		if( twChoice.isChecked() )
 			this.hasTw = true;
 		else
 			this.hasTw = false;
 		
-		if( goBox.isChecked() )
+		if( goChoice.isChecked() )
 			this.hasGo = true;
 		else
 			this.hasGo = false;
@@ -131,6 +131,14 @@ public class SendAMessageActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_SHORT).show();
 
         msgDBSend.close();
+        
+        // Reinitialization
+        fbChoice.setChecked(false);
+        twChoice.setChecked(false);
+        goChoice.setChecked(false);
+        this.hasFb = false;
+        this.hasTw = false;
+        this.hasGo = false;
         
     	finish();	// We closing this activity.
 	}

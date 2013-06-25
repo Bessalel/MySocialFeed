@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 public class AccountDB {
 	private static final int DATABASE_VERSION = 1;
@@ -36,7 +37,7 @@ public class AccountDB {
 	}
 	
 	public int countByAccountType( String type ) {
-		Cursor c = dbAccount.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_TYPE + " = \"" + type + "\"", null);	
+		Cursor c = dbAccount.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_TYPE + " = '" + type + "'", null);
 		return c.getCount();
 	}
 	

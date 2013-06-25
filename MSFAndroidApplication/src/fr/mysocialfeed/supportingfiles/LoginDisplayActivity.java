@@ -39,8 +39,8 @@ public class LoginDisplayActivity extends Activity {
     }
     
     public void test() {
-        MessagesDB msgDB = new MessagesDB( this ); 
-        msgDB.open();
+        //MessagesDB msgDB = new MessagesDB( this ); 
+        //msgDB.open();
 
         // Insert a message on the db
         /*
@@ -107,6 +107,6 @@ public class LoginDisplayActivity extends Activity {
         //for( int i = 0 ; i < 22 ; i++ )
         //	msgDB.removeMessagesFromId( i );
         
-		msgDB.close();
+		//msgDB.close();
     }
 }

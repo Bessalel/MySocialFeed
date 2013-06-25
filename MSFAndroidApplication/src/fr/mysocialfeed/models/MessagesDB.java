@@ -70,7 +70,7 @@ public class MessagesDB {
 		try {
 			l = db.insert( TABLE_NAME, null, values );
 		} catch( Exception e ) {
-			l = 0;
+			l = -1;
 		}
 		return l;		
 	}
