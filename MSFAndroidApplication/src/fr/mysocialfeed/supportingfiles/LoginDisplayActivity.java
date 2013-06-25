@@ -34,7 +34,7 @@ public class LoginDisplayActivity extends Activity {
         	intent.putExtra("login", login.getText().toString());
         	intent.putExtra("password", password.getText().toString());
         	startActivity(intent);
-        	//finish(); We not closing this activity because the user can back here after this disconnection.
+        	finish(); // NO (We not closing this activity because the user can back here after this disconnection.)
     	}
     }
     
