@@ -26,12 +26,17 @@
         android:text="Hi!"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textZoneHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/loginText"
-        android:layout_below="@+id/loginText"
-        android:text="No post here!\nPlease check your filters and refresh!" />
-
+    <ScrollView
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" > 
+	    <TextView
+	        android:id="@+id/textZoneHome"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/loginText"
+	        android:layout_below="@+id/loginText"
+	        android:text="No post here!\nPlease check your filters and refresh!" />
+	</ScrollView>
 </RelativeLayout>

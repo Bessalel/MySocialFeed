@@ -36,6 +36,11 @@
             android:name="fr.mysocialfeed.supportingfiles.AddNetworkActivity"
             android:label="@string/title_activity_add_network" >
         </activity>
+        <activity
+            android:name="fr.mysocialfeed.supportingfiles.SendAMessageActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_acronym">
+        </activity>
     </application>
 
 </manifest>
