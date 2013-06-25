@@ -134,6 +134,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			
 			TextView zoneText = (TextView) findViewById(R.id.textZoneHome);
 
+			takePost();
+			
 			if( arrayMap.size() != 0 ){
 	        	String s = "";
 	        	for( int i = 0 ; i < arrayMap.size() ; i++ ) {

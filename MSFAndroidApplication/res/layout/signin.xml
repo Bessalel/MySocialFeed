@@ -72,7 +72,8 @@
         android:layout_above="@+id/textView3"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignRight="@+id/textView4"
-        android:ems="10" >
+        android:ems="10"
+        android:inputType="textPersonName" >
         
         <requestFocus />
     </EditText>
