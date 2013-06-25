@@ -16,21 +16,14 @@ import org.mysocialfeed.screensframework.ScreensController;
  *
  * @author Windows
  */
-public class UserPinterestScreenController implements Initializable, ControlledScreen {
+public class UserPinterestScreenController extends ControlledScreen implements Initializable {
 
-    ScreensController myController;
-    
     @Inject
     public UserPinterestScreenController(){
-        System.out.println("UPSC is OK");
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
+        
     }
 }

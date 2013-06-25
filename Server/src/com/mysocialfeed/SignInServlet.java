@@ -5,6 +5,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class SignInServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		System.out.println(request.getParameter("username"));
-		if (session.getAttribute("username") == null) {
+		if (session.getAttribute("user") == null) {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			if (username == null || password == null) {
@@ -46,15 +47,15 @@ public class SignInServlet extends HttpServlet {
 			} else {
 				User user = ObjectifyService.ofy().load().type(User.class)
 						.filter("username ", username).first().now();
-				if (user.getPassword().equals(password)) {
+				if (user !=null && user.getPassword().equals(password)) {
 					session.setAttribute("user", user);
-					Key<User> keyUser = Key.create(user);
-					Account account = ofy().load().type(Account.class)
-							.ancestor(keyUser).first().now();
-					session.setAttribute("account", account);
-					// List<Account> accounts =
-					// ObjectifyService.ofy().load().type(Account.class).ancestor(keyUser).list();
-					// session.setAttribute("accounts", accounts);
+					Key<User> keyUser = Key.create(User.class, user.getId());
+					List<Account> accounts = ofy().load().type(Account.class)
+							.ancestor(keyUser).list();
+					ArrayList<Account> arrayAccounts = new ArrayList<>(accounts);
+					if (accounts != null){
+						session.setAttribute("accounts", arrayAccounts );
+					}
 					response.sendRedirect("/ServerServlet");
 				} else {
 					this.getServletContext()

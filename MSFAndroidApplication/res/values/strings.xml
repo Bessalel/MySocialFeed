@@ -20,5 +20,6 @@
     <string name="title_activity_add_network">Add a network</string>
     <string name="hello_world">Hello world!</string>
     <string name="AddAccount">ADD A NETWORK</string>
+    <string name="title_activity_send_amessage">SendAMessageActivity</string>
 
 </resources>

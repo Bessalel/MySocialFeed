@@ -6,6 +6,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddTwitterAccountScreenController">
-    
+<AnchorPane id="AnchorPane" fx:id="ap" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddTwitterAccountScreenController">
+  <children>
+    <Button layoutX="633.0" layoutY="751.0" mnemonicParsing="false" onAction="#load" text="Button" />
+  </children>
 </AnchorPane>
