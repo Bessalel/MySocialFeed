@@ -1,15 +1,12 @@
 package fr.mysocialfeed.models;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import android.R.array;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 public class MessagesDB {
 	private static final int DATABASE_VERSION = 1;

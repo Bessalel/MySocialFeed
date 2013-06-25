@@ -25,4 +25,8 @@ public class Account {
     	this._type = null;
     	this._userId = 1;
     }
+    
+    public int getId() {
+    	return this._id;
+    }
 }

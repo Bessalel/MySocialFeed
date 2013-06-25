@@ -248,6 +248,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	
 	public void refresh() {
 		// To do : fonction de refresh avec check réseau, insertion des 100 derniers messages dans arraymap et affichage des 100 derniers post.
+		takePost(); // for now, refresh from the local database
 	}
 	
 	public void onLogoutClick(View v) {
