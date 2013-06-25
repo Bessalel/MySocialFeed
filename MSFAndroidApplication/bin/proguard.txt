@@ -1,0 +1,45 @@
+# view AndroidManifest.xml #generated:30
+-keep class com.google.android.gcm.GCMBroadcastReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:25
+-keep class fr.mysocialfeed.supportingfiles.AddNetworkActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:23
+-keep class fr.mysocialfeed.supportingfiles.ErrorActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:29
+-keep class fr.mysocialfeed.supportingfiles.GCMIntentService { <init>(...); }
+
+# view AndroidManifest.xml #generated:16
+-keep class fr.mysocialfeed.supportingfiles.LoginDisplayActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:14
+-keep class fr.mysocialfeed.supportingfiles.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:41
+-keep class fr.mysocialfeed.supportingfiles.RegisterActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:27
+-keep class fr.mysocialfeed.supportingfiles.SendAMessageActivity { <init>(...); }
+
+# onClick res/layout/setting.xml #generated:33
+-keepclassmembers class * { *** onAddFbClick(...); }
+
+# onClick res/layout/setting.xml #generated:65
+-keepclassmembers class * { *** onAddGoClick(...); }
+
+# onClick res/layout/setting.xml #generated:22
+-keepclassmembers class * { *** onAddTwClick(...); }
+
+# onClick res/layout/signin.xml #generated:40
+-keepclassmembers class * { *** onLoginClick(...); }
+
+# onClick res/layout/setting.xml #generated:123
+-keepclassmembers class * { *** onLogoutClick(...); }
+
+# onClick res/layout/send.xml #generated:29
+-keepclassmembers class * { *** onSendClick(...); }
+
+# onClick res/layout/filters.xml #generated:50
+-keepclassmembers class * { *** saveFiltersButtonClick(...); }
+
