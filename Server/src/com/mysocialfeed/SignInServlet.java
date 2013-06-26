@@ -25,7 +25,7 @@ public class SignInServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("username") == null) {
+		if (session.getAttribute("user") == null) {
 			this.getServletContext().getRequestDispatcher("/JSP/SignIn.jsp")
 					.forward(request, response);
 		} else {
@@ -65,6 +65,7 @@ public class SignInServlet extends HttpServlet {
 
 			}
 		}
+		else response.sendRedirect("/ServerServlet");
 
 	}
 }
