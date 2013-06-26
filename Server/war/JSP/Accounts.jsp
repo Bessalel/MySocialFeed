@@ -47,32 +47,29 @@
 	</div>
 	<div class="container">
 		<div class="hero-unit">
-			<c:forEach var="instances" items="${requestScope.instancesMap}">
-				<c:choose>
-					<c:when test="${instances.key == \"Twitter\"}">
-						<c:forEach var="twitter" items="${instances.value }">
-						<c:set var="user" value="twitter.showUser(twitter.id)"/>
-							<p>
-								<tbody>
+			<table class="table table-hover">
+				<tbody>
+					<c:forEach var="instances" items="${requestScope.instancesMap}">
+						<c:choose>
+							<c:when test="${instances.key == \"Twitter\"}">
+								<c:forEach var="twitter" items="${instances.value }">
 									<tr>
-									${user}
-									<!-- User user = (User) twitter.showUser(twitter.getId()); -->
-										<%-- <td><img alt="Profile pic"
-											src="${user.biggerProfileImageURL}"></td> --%>
-										<%-- <td><a href="${status.user.URL}">${status.user.name}</a></td>
-										<td>${status.text}</td>
-										<td>${status.createdAt}</td> --%>
+										<td>@${twitter.screenName}</td>
+										<td><form action="AccountsServlet" method="post">
+												<button type="submit" name="accountId"
+													value="${twitter.id}" class="btn btn-primary btn-large"> Délier ce compte</button>
+											</form></td>
 									</tr>
-								</tbody>
-								${twitter.screenName}<br>
-							</p>
-						</c:forEach>
-
-					</c:when>
-				</c:choose>
-			</c:forEach>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
+
+
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="Bootstrap/js/bootstrap.min.js"></script>
 </body>

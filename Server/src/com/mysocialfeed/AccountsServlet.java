@@ -40,9 +40,9 @@ public class AccountsServlet extends HttpServlet {
 					if (account.getAccountType().equals("Twitter")) {
 						Twitter twitter = GetTwitterInstance(account);
 						List<Object> listTwitter = instancesMap.get("Twitter");
-						if(listTwitter != null){
+						if (listTwitter != null) {
 							listTwitter.add(twitter);
-						}else{
+						} else {
 							List<Object> newListTwitter = new ArrayList<Object>();
 							newListTwitter.add(twitter);
 							instancesMap.put("Twitter", newListTwitter);
@@ -68,7 +68,17 @@ public class AccountsServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("user") == null) {
+			System.out.println("pas connecté");
+			response.sendRedirect("/SignInServlet");
+		} else {
+			@SuppressWarnings("unchecked")
+			String accountId = request.getParameter("accountId");
+			System.out.println(accountId);
+			Account account = ofy().load().type(Account.class).filter("accountId", accountId).first().now();
 
+		}
 	}
 
 }
