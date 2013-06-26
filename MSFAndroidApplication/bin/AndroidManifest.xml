@@ -1,41 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="fr.mysocialfeed.supportingfiles"
-    android:versionCode="1"
-    android:versionName="1.0" >
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="fr.mysocialfeed.supportingfiles">
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17"/>
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="fr.mysocialfeed.supportingfiles.MainActivity"
-            android:icon="@drawable/ic_launcher"
-            android:label="@string/app_acronym"
-            android:uiOptions="splitActionBarWhenNarrow" >
+    <uses-permission android:name="android.permission.INTERNET"/>
+   <permission android:name="fr.mysocialfeed.supportingfiles.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
+
+   <uses-permission android:name="fr.mysocialfeed.supportingfiles.permission.C2D_MESSAGE"/>
+   <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+   <uses-permission android:name="android.permission.WAKE_LOCK"/>
+   <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+   <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+   <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:icon="@drawable/ic_launcher" android:label="@string/app_acronym" android:name="fr.mysocialfeed.supportingfiles.MainActivity" android:uiOptions="splitActionBarWhenNarrow">
         </activity>
-        <activity
-            android:name="fr.mysocialfeed.supportingfiles.LoginDisplayActivity"
-            android:label="@string/app_name" >
+        <activity android:label="@string/app_name" android:name="fr.mysocialfeed.supportingfiles.LoginDisplayActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name="fr.mysocialfeed.supportingfiles.ErrorActivity"
-            android:label="@string/title_activity_error" >
+        <activity android:label="@string/title_activity_error" android:name="fr.mysocialfeed.supportingfiles.ErrorActivity">
         </activity>
-        <activity
-            android:name="fr.mysocialfeed.supportingfiles.AddNetworkActivity"
-            android:label="@string/title_activity_add_network" >
+        <activity android:label="@string/title_activity_add_network" android:name="fr.mysocialfeed.supportingfiles.AddNetworkActivity">
         </activity>
-    </application>
+        <activity android:icon="@drawable/ic_launcher" android:label="@string/app_acronym" android:name="fr.mysocialfeed.supportingfiles.SendAMessageActivity">
+        </activity>
+        <service android:name=".GCMIntentService"/>
+        <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <category android:name="fr.mysocialfeed.supportingfiles"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+                <category android:name="fr.mysocialfeed.supportingfiles"/>
+            </intent-filter>
+        </receiver>
+    
+        <activity android:launchMode="singleTop" android:name=".RegisterActivity"/>
+</application>
 
 </manifest>

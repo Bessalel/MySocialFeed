@@ -40,7 +40,7 @@
         android:id="@+id/sendEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/fbChoice"
+        android:layout_above="@+id/letters"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
@@ -79,5 +79,13 @@
         android:layout_alignRight="@+id/button2"
         android:text="Google+"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/letters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/goChoice"
+        android:layout_alignRight="@+id/goChoice"
+        android:text="0" />
 
 </RelativeLayout>

@@ -30,18 +30,6 @@
  		android:onClick="onAddTwClick"
         android:text="Add one!" />
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_marginLeft="51dp"
-        android:layout_toRightOf="@+id/textView2"
-      	android:onClick="onAddFbClick"
-        android:text="Add one!" />
-
     <TextView
         android:id="@+id/TextView02"
         android:layout_width="wrap_content"
@@ -128,5 +116,16 @@
         android:layout_centerHorizontal="true"
         android:onClick="onLogoutClick"
         android:text="Logout" />
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toRightOf="@+id/digitalClock1"
+        android:onClick="onAddFbClick"
+        android:text="Add one!" />
 
 </RelativeLayout>

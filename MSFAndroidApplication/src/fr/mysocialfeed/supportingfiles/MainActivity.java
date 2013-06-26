@@ -64,6 +64,9 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		// Now, put some dummy data for test ...
 		usr = new User( 1, this.userLogin, "Name", "LastName", "Email", 0, 0, 0);
 		
+		// Refresh from the local database : taking the last 100 posts
+		takePost();
+		
 		// Set up the action bar to show tabs.
 	    final ActionBar actionBar = getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -129,31 +132,17 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			TextView login = (TextView) findViewById(R.id.loginText);
 			login.setText("Your TimeLine, " + this.userLogin + "!");
 			
-			MessagesDB msgDB = new MessagesDB( this ); 
-	        msgDB.open();
-			
-			if( usr.get_hasFacebookFilter() )
-				msgDB.getMessagesFromType(arrayMap, "fb");
-			if( usr.get_hasTwitterFilter() )
-				msgDB.getMessagesFromType(arrayMap, "tw");
-			if( usr.get_hasGoogleFilter() )
-				msgDB.getMessagesFromType(arrayMap, "go");
-
 			TextView zoneText = (TextView) findViewById(R.id.textZoneHome);
+
+			takePost();
 			
-	        if( arrayMap.size() != 0 ){
+			if( arrayMap.size() != 0 ){
 	        	String s = "";
 	        	for( int i = 0 ; i < arrayMap.size() ; i++ ) {
-        			s += "<br/><b>[" + arrayMap.get(i).getType() + "] Post send by " + arrayMap.get(i).getSender() + " at " + arrayMap.get(i).getDate() + "</b><br/>" + arrayMap.get(i).getMessage() + "<br/>";
+	    			s += "<br/><b>[" + arrayMap.get(i).getType() + "] Post send by " + arrayMap.get(i).getSender() + " at " + arrayMap.get(i).getDate() + "</b><br/>" + arrayMap.get(i).getMessage() + "<br/>";
 	        	}
-        		zoneText.setText( Html.fromHtml(s) );
-	        }
-	        
-	        if( arrayMap.size() != 0 ) {
-				Toast.makeText(getApplicationContext(), "Size map : " + arrayMap.size(), Toast.LENGTH_SHORT).show();	
-	        }
-	        
-	        msgDB.close();
+	    		zoneText.setText( Html.fromHtml(s) );
+	        }	        
 		}
 		else if( tab.getPosition() == 2 ) {
 			setContentView(R.layout.setting);
@@ -165,8 +154,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			fbAccount.setText( "" + accountDB.countByAccountType( "fb" ) + "" );
 			twAccount.setText( "" + accountDB.countByAccountType( "tw" ) + "" );
 			goAccount.setText( "" + accountDB.countByAccountType( "go" ) + "");
-			
-			Toast.makeText(getApplicationContext(), "Tw count: " + accountDB.countByAccountType( "tw" ), Toast.LENGTH_SHORT).show();
 			accountDB.close();
 		}
 		else { // Error!
@@ -224,6 +211,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 			onBackPressed();
 			return true;
 		case R.id.menu_refresh:
+			refresh();
 			Toast.makeText(getApplicationContext(), "Refresh, please wait a moment...", Toast.LENGTH_LONG).show();
 			return true;
 		case R.id.menu_send:
@@ -232,6 +220,37 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	public void takePost() {
+		MessagesDB msgDB = new MessagesDB( this ); 
+        msgDB.open();
+        
+        arrayMap.clear();
+        
+		if( usr.get_hasFacebookFilter() )
+			msgDB.getMessagesFromType(arrayMap, "fb");
+		if( usr.get_hasTwitterFilter() )
+			msgDB.getMessagesFromType(arrayMap, "tw");
+		if( usr.get_hasGoogleFilter() )
+			msgDB.getMessagesFromType(arrayMap, "go");
+		
+		msgDB.close();
+		
+		TextView zoneText = (TextView) findViewById(R.id.textZoneHome);
+
+		if( arrayMap.size() != 0 ){
+        	String s = "";
+        	for( int i = 0 ; i < arrayMap.size() ; i++ ) {
+    			s += "<br/><b>[" + arrayMap.get(i).getType() + "] Post send by " + arrayMap.get(i).getSender() + " at " + arrayMap.get(i).getDate() + "</b><br/>" + arrayMap.get(i).getMessage() + "<br/>";
+        	}
+    		zoneText.setText( Html.fromHtml(s) );
+        }
+	}
+	
+	public void refresh() {
+		// To do : fonction de refresh avec check réseau, insertion des 100 derniers messages dans arraymap et affichage des 100 derniers post.
+		takePost(); // for now, refresh from the local database
 	}
 	
 	public void onLogoutClick(View v) {
