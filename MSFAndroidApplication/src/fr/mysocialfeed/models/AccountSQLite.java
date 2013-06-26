@@ -11,16 +11,16 @@ public class AccountSQLite extends SQLiteOpenHelper {
 	private static final String TABLE_NAME = "accounts";
 	private static final String COL_ID = "id";
 	private static final String COL_NAME = "name";
-	private static final String COL_LOGIN = "login";
-	private static final String COL_PASSWORD = "lastname";
+	private static final String COL_TOKEN = "token";
+	private static final String COL_TOKENSECRET = "tokenSecret";
 	private static final String COL_TYPE = "type";
 	private static final String COL_USERID = "userId";		// On the server
 	private static final String CREATE_DB = "CREATE TABLE "
 			+ TABLE_NAME  + " ("
 			+ COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ COL_NAME + " TEXT NOT NULL, "
-			+ COL_LOGIN + " TEXT NOT NULL, "
-			+ COL_PASSWORD + " TEXT NOT NULL, "
+			+ COL_TOKEN + " TEXT NOT NULL, "
+			+ COL_TOKENSECRET + " TEXT NOT NULL, "
 			+ COL_TYPE + " TEXT NOT NULL, "
 			+ COL_USERID + " INTEGER NOT NULL);";
 	

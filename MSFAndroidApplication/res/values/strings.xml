@@ -18,6 +18,9 @@
     <string name="action_settings">Settings</string>
     <string name="error_page">Sorry, an error has been detected! Please retry later or contact the developpers.</string>
     <string name="title_activity_add_network">Add a network</string>
+    <string name="title_activity_add_network_twitter">New account on Twitter</string>
+    <string name="title_activity_add_network_facebook">New account on Twitter</string>
+    <string name="title_activity_add_network_google">New account on Twitter</string>
     <string name="hello_world">Hello world!</string>
     <string name="AddAccount">ADD A NETWORK</string>
     <string name="title_activity_send_amessage">SendAMessageActivity</string>

@@ -84,7 +84,7 @@ public class MessagesDB {
 	 */
 	@SuppressLint("UseSparseArrays")	// For better performance (for arrayMap)
 	public void getMessagesFromType( Map<Integer, Messages> arrayMap, String type ) {
-		Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_TYPE + " = '" + type + "'", null);
+		Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + COL_TYPE + " = '" + type + "' ORDER BY "+ COL_DATE +"", null);
 
 		int arraySize = arrayMap.size();
 		

@@ -108,7 +108,7 @@ public class SendAMessageActivity extends Activity {
 		if( retrieveTextSenT.length() > 140 )
 		{
 			twChoice.setChecked(false);
-			Toast.makeText(getApplicationContext(), "TWCHOICE false !", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Your post exceeds 140 characters. It won't be sent on Twitter.", Toast.LENGTH_SHORT).show();
 		}
 		
 		if( fbChoice.isChecked() )
