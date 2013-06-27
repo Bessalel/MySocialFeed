@@ -29,8 +29,8 @@ public class MainTwitterService implements TwitterService {
     
     public MainTwitterService() {
         this.cb.setDebugEnabled(true);
-        this.cb.setOAuthConsumerKey("cARhnMxZ6HHZsdNRzI1SWQ");
-        this.cb.setOAuthConsumerSecret("UZloxdl2NtxLLAzDXZ2kRpPsFYkRNWQruyllVEFIXi0");
+        this.cb.setOAuthConsumerKey("u7P0tV8EfS9xYrlQBM1JQ");
+        this.cb.setOAuthConsumerSecret("OysElIcFmFpV9RmKB3b6XPB8yZ8GMpRXQWQuNWnbmI");
         
         this.tf = new TwitterFactory(cb.build());
         this.twitter = tf.getInstance();
