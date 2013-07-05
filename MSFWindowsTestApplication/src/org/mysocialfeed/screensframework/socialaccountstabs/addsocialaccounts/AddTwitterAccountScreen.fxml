@@ -2,12 +2,96 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="ap" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddTwitterAccountScreenController">
   <children>
-    <Button layoutX="633.0" layoutY="751.0" mnemonicParsing="false" onAction="#load" text="Button" />
+    <BorderPane fx:id="bp" prefHeight="785.5" prefWidth="1321.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <StackPane prefHeight="150.0" prefWidth="200.0">
+          <children>
+            <Button mnemonicParsing="false" onAction="#hideWebBrowser" text="OK" StackPane.alignment="BOTTOM_LEFT">
+              <StackPane.margin>
+                <Insets bottom="20.0" left="20.0" />
+              </StackPane.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goBack" text="Cancel" StackPane.alignment="BOTTOM_RIGHT">
+              <StackPane.margin>
+                <Insets bottom="20.0" right="20.0" />
+              </StackPane.margin>
+            </Button>
+          </children>
+        </StackPane>
+      </bottom>
+      <left>
+        <StackPane fx:id="stackPane" prefHeight="536.0" prefWidth="1321.0" BorderPane.alignment="CENTER">
+          <children>
+            <Label text="Insert the authenfication pin code here :" StackPane.alignment="TOP_LEFT">
+              <font>
+                <Font name="System Bold" size="20.0" />
+              </font>
+              <StackPane.margin>
+                <Insets left="20.0" top="150.0" />
+              </StackPane.margin>
+            </Label>
+            <TextField fx:id="pin" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="insert pin code here" StackPane.alignment="TOP_LEFT">
+              <StackPane.margin>
+                <Insets left="20.0" top="180.0" />
+              </StackPane.margin>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#authenticate" text="Go !" StackPane.alignment="TOP_LEFT">
+              <StackPane.margin>
+                <Insets left="20.0" top="210.0" />
+              </StackPane.margin>
+            </Button>
+            <Label fx:id="successMsg1" text="Congratulations ! You have successfully authentificate this application." textFill="#00cc21" visible="false">
+              <font>
+                <Font name="System Bold" size="18.0" fx:id="x1" />
+              </font>
+            </Label>
+            <Label fx:id="successMsg2" font="$x1" text="Shall we display your timeline ?" textFill="#00cc21" visible="false">
+              <StackPane.margin>
+                <Insets top="50.0" fx:id="x2" />
+              </StackPane.margin>
+            </Label>
+            <Button fx:id="goToTimeline" mnemonicParsing="false" text="Yes !" visible="false">
+              <StackPane.margin>
+                <Insets right="210.0" top="120.0" />
+              </StackPane.margin>
+            </Button>
+            <Button id="goToMainpage" fx:id="goToMainPage" mnemonicParsing="false" text="No !" visible="false">
+              <StackPane.margin>
+                <Insets left="210.0" top="120.0" />
+              </StackPane.margin>
+            </Button>
+            <Label fx:id="failureMsg1" font="$x1" text="Oops something went wrong while authentificating this application." textFill="RED" visible="false" />
+            <Label fx:id="failureMsg2" font="$x1" text="Could you try again ? A new link has been generated." textFill="RED" visible="false" StackPane.margin="$x2" />
+            <Label fx:id="emptyPin" text="Error : pin code cannot be empty or less than 6 digits" textFill="RED" textOverrun="ELLIPSIS" visible="false" StackPane.alignment="TOP_LEFT">
+              <font>
+                <Font name="System Bold Italic" size="13.0" />
+              </font>
+              <StackPane.margin>
+                <Insets left="80.0" top="212.0" />
+              </StackPane.margin>
+            </Label>
+          </children>
+        </StackPane>
+      </left>
+      <top>
+        <ImageView id="[MSF] Twitter Bannex.jpg" BorderPane.alignment="CENTER">
+          <image>
+            <Image url="@../%5BMSF%5D%20Twitter%20Bannex.jpg" preserveRatio="true" smooth="true" />
+          </image>
+          <BorderPane.margin>
+            <Insets top="20.0" />
+          </BorderPane.margin>
+        </ImageView>
+      </top>
+    </BorderPane>
   </children>
 </AnchorPane>

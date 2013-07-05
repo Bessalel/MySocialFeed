@@ -18,6 +18,8 @@ import org.mysocialfeed.services.repository.ManageUserDataService;
 import org.mysocialfeed.services.repository.ManageUserPostsService;
 import org.mysocialfeed.services.repository.UserDataService;
 import org.mysocialfeed.services.repository.UserPostsService;
+import org.mysocialfeed.services.socialservices.MainTwitterService;
+import org.mysocialfeed.services.socialservices.TwitterService;
 /**
  *
  * @author Vincent
@@ -31,6 +33,7 @@ public class MainServiceModule extends AbstractModule{
         bind(UserDataService.class).to(ManageUserDataService.class).in(Singleton.class);
         bind(UserPostsService.class).to(ManageUserPostsService.class).in(Singleton.class);
         bind(SocialAccountService.class).to(ManageSocialAccountService.class).in(Singleton.class);
+        bind(TwitterService.class).to(MainTwitterService.class).in(Singleton.class);
     }
     
 }

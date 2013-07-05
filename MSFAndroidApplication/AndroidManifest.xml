@@ -24,6 +24,8 @@
         </activity>
         <activity android:label="@string/title_activity_add_network" android:name="fr.mysocialfeed.supportingfiles.AddNetworkActivity">
         </activity>
+        <activity android:label="@string/title_activity_add_network_twitter" android:name="fr.mysocialfeed.supportingfiles.AddNetworkTwitterActivity">
+        </activity>
         <activity android:icon="@drawable/ic_launcher" android:label="@string/app_acronym" android:name="fr.mysocialfeed.supportingfiles.SendAMessageActivity">
         </activity>
         <service android:name=".GCMIntentService"/>

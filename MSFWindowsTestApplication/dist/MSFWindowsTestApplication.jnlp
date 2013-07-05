@@ -11,13 +11,14 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="MSFWindowsTestApplication.jar" size="788373" download="eager" />
+    <jar href="MSFWindowsTestApplication.jar" size="817293" download="eager" />
     <jar href="lib/aopalliance.jar" size="4467" download="eager" />
     <jar href="lib/guice-3.0.jar" size="710683" download="eager" />
     <jar href="lib/javax.inject.jar" size="2497" download="eager" />
     <jar href="lib/joda-time-2.2-javadoc.jar" size="2551939" download="eager" />
     <jar href="lib/joda-time-2.2.jar" size="573912" download="eager" />
     <jar href="lib/mysql-connector-java-5.1.23-bin.jar" size="843090" download="eager" />
+    <jar href="lib/twitter4j-core-3.0.3.jar" size="284059" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="MSFWindowsTestApplication" >
     <param name="requiredFXVersion" value="2.2+"/>

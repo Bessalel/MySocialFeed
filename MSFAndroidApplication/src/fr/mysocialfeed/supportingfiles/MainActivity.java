@@ -289,7 +289,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
     	startActivity(intent);
     }
 	public void onAddTwClick(View v) {
-    	Intent intent = new Intent(MainActivity.this, AddNetworkActivity.class);
+    	Intent intent = new Intent(MainActivity.this, AddNetworkTwitterActivity.class);
     	intent.putExtra("typeAccount", "tw");
     	intent.putExtra("userId", usr.get_userID());
     	startActivity(intent);
