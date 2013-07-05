@@ -56,8 +56,8 @@
 									<tr>
 										<td>@${twitter.screenName}</td>
 										<td><form action="AccountsServlet" method="post">
-												<button type="submit" name="accountId"
-													value="${twitter.id}" class="btn btn-primary btn-large"> Délier ce compte</button>
+												<button type="submit" name="screenName"
+													value="${twitter.screenName}" class="btn btn-primary btn-large"> Délier ce compte</button>
 											</form></td>
 									</tr>
 								</c:forEach>

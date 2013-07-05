@@ -64,7 +64,7 @@
 	</div>
 	<div class="container">
 		<div class="hero-unit">
-			<h1>Bienvenue chez MSF ${sessionScope.user.username}!</h1>
+			<h1>Bienvenue sur MySocialFeed</h1>
 			<h3>
 				Vous pouvez des à présent vous <a href="/SignInServlet">connecter
 					à MSF</a>

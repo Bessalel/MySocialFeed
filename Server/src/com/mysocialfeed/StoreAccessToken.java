@@ -7,14 +7,14 @@ import com.googlecode.objectify.Key;
 
 public class StoreAccessToken {
 	public static String storeTwitterAccessToken(User user, String accountName,
-			AccessToken accessToken) {
+			AccessToken accessToken, String screenName) {
 		Key<User> keyUser = Key.create(User.class, user.getId());
 		if (ofy().load().type(Account.class).ancestor(keyUser)
 				.filter("token", accessToken.getToken()).first().now() != null) {
 			return "Ce compte Twitter est déja enregistré sous un autre nom.";
 		} else {
 			Account account = new Account(keyUser, "Twitter", accountName,
-					accessToken.getToken(), accessToken.getTokenSecret());
+					accessToken.getToken(), accessToken.getTokenSecret(), screenName);
 			ofy().save().entity(account).now();
 			List<Account> accounts = ofy().load().type(Account.class)
 					.ancestor(keyUser).list();

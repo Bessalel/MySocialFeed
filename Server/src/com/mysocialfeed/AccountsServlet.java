@@ -73,10 +73,44 @@ public class AccountsServlet extends HttpServlet {
 			System.out.println("pas connecté");
 			response.sendRedirect("/SignInServlet");
 		} else {
-			@SuppressWarnings("unchecked")
-			String accountId = request.getParameter("accountId");
-			System.out.println(accountId);
-			Account account = ofy().load().type(Account.class).filter("accountId", accountId).first().now();
+			String screenName = request.getParameter("screenName");
+			System.out.println(screenName);
+			Account account = ofy().load().type(Account.class)
+					.filter("screenName", screenName).first().now();
+			if (account != null) {
+				ofy().delete().entity(account).now();
+			} else {
+				System.out.println("pas marché");
+			}
+			User user = (User) session.getAttribute("user");
+			Key<User> keyUser = Key.create(User.class, user.getId());
+			List<Account> accounts = ofy().load().type(Account.class)
+					.ancestor(keyUser).list();
+			ArrayList<Account> arrayAccounts = new ArrayList<>(accounts);
+			if (accounts != null){
+				session.setAttribute("accounts", arrayAccounts );
+			}
+			if (accounts != null) {
+				Map<String, List<Object>> instancesMap = new HashMap<String, List<Object>>();
+				for (Account account1 : accounts) {
+					if (account1.getAccountType().equals("Twitter")) {
+						Twitter twitter = GetTwitterInstance(account1);
+						List<Object> listTwitter = instancesMap.get("Twitter");
+						if (listTwitter != null) {
+							listTwitter.add(twitter);
+						} else {
+							List<Object> newListTwitter = new ArrayList<Object>();
+							newListTwitter.add(twitter);
+							instancesMap.put("Twitter", newListTwitter);
+						}
+					}
+					request.setAttribute("instancesMap", instancesMap);
+					System.out.println(account1.getAccountName());
+				}
+			} else
+				System.out.println("pas de compte");
+			this.getServletContext().getRequestDispatcher("/JSP/Accounts.jsp")
+					.forward(request, response);
 
 		}
 	}
