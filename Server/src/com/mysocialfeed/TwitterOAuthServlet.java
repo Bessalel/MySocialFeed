@@ -43,7 +43,7 @@ public class TwitterOAuthServlet extends HttpServlet {
 					twitter.setOAuthAccessToken(accessToken);
 					String createConnection = StoreAccessToken
 							.storeTwitterAccessToken(user, (String) session
-									.getAttribute("accountName"), accessToken);
+									.getAttribute("accountName"), accessToken, twitter.getScreenName());
 					request.setAttribute("createConnection", createConnection);
 				} catch (TwitterException e1) {
 					e1.printStackTrace();
@@ -68,16 +68,6 @@ public class TwitterOAuthServlet extends HttpServlet {
 				List<Status> statuses = GetTwitterTimeline.GetTimeline(account);
 				request.setAttribute("statuses", statuses);
 			}
-
-			// System.out.println("You have the following existing accounts :");
-			// List<Account> accounts = (List<Account>)
-			// session.getAttribute("accounts");
-			// for (Account account : accounts) {
-			// System.out
-			// .println(account.getAccountType() + " : "
-			// + account.getAccountName() + " de "
-			// + account.getUser());
-			// }
 		}
 		this.getServletContext().getRequestDispatcher("/JSP/TwitterOAuth.jsp")
 				.forward(request, response);
@@ -94,7 +84,7 @@ public class TwitterOAuthServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String accountName = (String) request.getParameter("accountName");
 		String status = (String) request.getParameter("status");
-		Key<User> keyUser = Key.create(User.class, user.getId());	
+		Key<User> keyUser = Key.create(User.class, user.getId());
 		if (accountName != null) {
 			if (ofy().load().type(Account.class).ancestor(keyUser)
 					.filter("accountName", accountName).first().now() != null) {
@@ -113,12 +103,9 @@ public class TwitterOAuthServlet extends HttpServlet {
 					te.printStackTrace();
 				}
 			}
-
 		}
-
 		Account account = ofy().load().type(Account.class).ancestor(keyUser)
 				.first().now();
-
 		if (status != null && account != null) {
 			String messagePosted = PostTwitter.PostToTwitter(account, status,
 					user);
@@ -129,7 +116,6 @@ public class TwitterOAuthServlet extends HttpServlet {
 			System.out.println("le compte est : " + account.getAccountName());
 			session.setAttribute("account", account);
 		}
-
 		this.getServletContext().getRequestDispatcher("/JSP/TwitterOAuth.jsp")
 				.forward(request, response);
 	}
