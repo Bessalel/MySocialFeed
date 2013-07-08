@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -38,6 +37,8 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
     @FXML private Button goToTimeline = new Button();
     @FXML private Button goToMainPage = new Button();
     
+    @FXML private Button hideOrShow = new Button();
+    
     @FXML private Label failureMsg1 = new Label();
     @FXML private Label failureMsg2 = new Label();
     
@@ -46,9 +47,9 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
     @FXML private final WebView wv = new WebView();
     @FXML private final WebEngine wb = wv.getEngine();
     
-    @FXML private final BorderPane bp = new BorderPane();
     @FXML private StackPane stackPane = new StackPane();
     
+    private boolean status;
     private final TwitterService twitterService;
 
     
@@ -63,7 +64,8 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
     }
     
     private void setDefaultProperties() {
-        this.url.setText(this.twitterService.setUpAuthentification());
+        this.url.setText(this.twitterService.setUpAuthentication());
+        System.out.println(this.url.getText());
         this.wv.setVisible(true);
         this.wb.setJavaScriptEnabled(true);
         this.wb.load(this.url.getText());
@@ -75,10 +77,21 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
         this.goToMainPage.setVisible(false);
         this.failureMsg1.setVisible(false);
         this.failureMsg2.setVisible(false);
+        
+        this.status = true;
+    }
+    
+    @Override
+    protected void onActivated() {
+        if (this.status == false) {
+            setDefaultProperties();
+        }
     }
     
     @Override
     protected void onDeActivated() {
+        this.stackPane.getChildren().remove(this.wv);
+        this.wb.load(null);
         this.url.setText(null);
         this.successMsg1.setVisible(false);
         this.successMsg2.setVisible(false);
@@ -86,6 +99,7 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
         this.goToMainPage.setVisible(false);
         this.failureMsg1.setVisible(false);
         this.failureMsg2.setVisible(false);
+        this.status = false;
     }
     
     @FXML
@@ -102,7 +116,7 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
                 this.goToTimeline.setVisible(true);
                 this.goToMainPage.setVisible(true);
           } else {
-                this.url.setText(this.twitterService.setUpAuthentification());
+                this.url.setText(this.twitterService.setUpAuthentication());
                 this.failureMsg1.setVisible(true);
                 this.failureMsg2.setVisible(true);
             }
@@ -110,8 +124,13 @@ public class AddTwitterAccountScreenController extends ControlledScreen implemen
     }
     
     @FXML
-    private void hideWebBrowser(ActionEvent e) {
-        this.wv.setVisible(false);  
+    private void hideOrShowWebBrowser(ActionEvent e) {
+        if (this.wv.isVisible()) {
+            this.wv.setVisible(false);
+            this.hideOrShow.setText("Show web browser");
+        } else
+            this.wv.setVisible(true);
+            this.hideOrShow.setText("Done");
     }
     
     @FXML

@@ -12,7 +12,7 @@ import twitter4j.auth.AccessToken;
  */
 public interface TwitterService {
     
-    public String setUpAuthentification();
+    public String setUpAuthentication();
     public boolean authenticate();
     public void setPin(final String pin);
     public AccessToken getAccessToek();

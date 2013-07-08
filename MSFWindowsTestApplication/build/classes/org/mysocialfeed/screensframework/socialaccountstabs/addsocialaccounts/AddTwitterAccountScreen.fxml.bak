@@ -31,15 +31,10 @@
       <left>
         <StackPane fx:id="stackPane" prefHeight="536.0" prefWidth="1321.0" BorderPane.alignment="CENTER">
           <children>
-            <Label text="Please, click on this link in order to authorize this application to access your Twitter account" StackPane.alignment="TOP_LEFT">
+            <Label text="Insert the authenfication pin code here :" StackPane.alignment="TOP_LEFT">
               <font>
-                <Font name="System Bold" size="20.0" fx:id="x1" />
+                <Font name="System Bold" size="20.0" />
               </font>
-              <StackPane.margin>
-                <Insets left="20.0" top="50.0" />
-              </StackPane.margin>
-            </Label>
-            <Label font="$x1" text="Insert the authenfication pin code here :" StackPane.alignment="TOP_LEFT">
               <StackPane.margin>
                 <Insets left="20.0" top="150.0" />
               </StackPane.margin>
@@ -56,12 +51,12 @@
             </Button>
             <Label fx:id="successMsg1" text="Congratulations ! You have successfully authentificate this application." textFill="#00cc21" visible="false">
               <font>
-                <Font name="System Bold" size="18.0" fx:id="x2" />
+                <Font name="System Bold" size="18.0" fx:id="x1" />
               </font>
             </Label>
-            <Label fx:id="successMsg2" font="$x2" text="Shall we display your timeline ?" textFill="#00cc21" visible="false">
+            <Label fx:id="successMsg2" font="$x1" text="Shall we display your timeline ?" textFill="#00cc21" visible="false">
               <StackPane.margin>
-                <Insets top="50.0" fx:id="x3" />
+                <Insets top="50.0" fx:id="x2" />
               </StackPane.margin>
             </Label>
             <Button fx:id="goToTimeline" mnemonicParsing="false" text="Yes !" visible="false">
@@ -74,8 +69,8 @@
                 <Insets left="210.0" top="120.0" />
               </StackPane.margin>
             </Button>
-            <Label fx:id="failureMsg1" font="$x2" text="Oops something went wrong while authentificating this application." textFill="RED" visible="false" />
-            <Label fx:id="failureMsg2" font="$x2" text="Could you try again ? A new link has been generated." textFill="RED" visible="false" StackPane.margin="$x3" />
+            <Label fx:id="failureMsg1" font="$x1" text="Oops something went wrong while authentificating this application." textFill="RED" visible="false" />
+            <Label fx:id="failureMsg2" font="$x1" text="Could you try again ? A new link has been generated." textFill="RED" visible="false" StackPane.margin="$x2" />
             <Label fx:id="emptyPin" text="Error : pin code cannot be empty or less than 6 digits" textFill="RED" textOverrun="ELLIPSIS" visible="false" StackPane.alignment="TOP_LEFT">
               <font>
                 <Font name="System Bold Italic" size="13.0" />
@@ -84,11 +79,6 @@
                 <Insets left="80.0" top="212.0" />
               </StackPane.margin>
             </Label>
-            <Hyperlink fx:id="url" text="" StackPane.alignment="TOP_LEFT">
-              <StackPane.margin>
-                <Insets left="20.0" top="100.0" />
-              </StackPane.margin>
-            </Hyperlink>
           </children>
         </StackPane>
       </left>

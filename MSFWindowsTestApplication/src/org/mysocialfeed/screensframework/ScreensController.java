@@ -20,6 +20,7 @@ public class ScreensController extends StackPane {
     //Contains the screens to be displayed in a HasMap collection
 
     private ControlledScreen currentScreenController;
+    private String previous;
     
     private final HashMap<String, NodeController> screens = new HashMap<>();
     private final Injector injector;
@@ -76,7 +77,7 @@ public class ScreensController extends StackPane {
         Node screen = loadOrFindScreen(name);
         if (screen != null) {   //if screen(s) are loaded
             if (!getChildren().isEmpty()) {    //if there is more than one screen already displayed
-                this.currentScreenController.onDeActivated();
+                screens.get(this.previous).currentNodController.onDeActivated();
                 getChildren().remove(0);                 //remove the displayed screen
                 this.currentScreenController = screens.get(name).currentNodController;
                 this.currentScreenController.onActivated();
@@ -85,6 +86,7 @@ public class ScreensController extends StackPane {
             else { // if no screen displayed yet
                 getChildren().add(screen);       
             }
+            this.previous = name;
             return true;
         } else {
             System.err.println("screen hasn't been registered. Screen name : " + screens.get(name) + "\n");

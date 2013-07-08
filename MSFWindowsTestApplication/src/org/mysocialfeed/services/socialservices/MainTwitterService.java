@@ -4,6 +4,9 @@
  */
 package org.mysocialfeed.services.socialservices;
 
+import com.google.inject.Inject;
+import org.mysocialfeed.services.interfaces.SocialAccountService;
+import org.mysocialfeed.services.repository.UserDataService;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -27,17 +30,26 @@ public class MainTwitterService implements TwitterService {
     
     private String pin;
     
-    public MainTwitterService() {
+    private final SocialAccountService socialAccountService;
+    private final UserDataService userDataService;
+    
+    @Inject
+    public MainTwitterService(SocialAccountService socialAccountService, UserDataService userDataService) {
+        this.socialAccountService = socialAccountService;
+        this.userDataService = userDataService;
+        
         this.cb.setDebugEnabled(true);
         this.cb.setOAuthConsumerKey("u7P0tV8EfS9xYrlQBM1JQ");
         this.cb.setOAuthConsumerSecret("OysElIcFmFpV9RmKB3b6XPB8yZ8GMpRXQWQuNWnbmI");
         
-        this.tf = new TwitterFactory(cb.build());
+        
+        this.tf = new TwitterFactory();
         this.twitter = tf.getInstance();
+        this.twitter.setOAuthConsumer("u7P0tV8EfS9xYrlQBM1JQ", "OysElIcFmFpV9RmKB3b6XPB8yZ8GMpRXQWQuNWnbmI");
     }
     
     @Override
-    public String setUpAuthentification() {
+    public String setUpAuthentication() {
          try {
             this.requestToken = this.twitter.getOAuthRequestToken();
             return this.requestToken.getAuthorizationURL();
@@ -50,7 +62,15 @@ public class MainTwitterService implements TwitterService {
     @Override
     public boolean authenticate() {
        try {
+            System.out.println(this.requestToken.getToken() + "\n" + this.requestToken.getTokenSecret());
+            System.out.println(this.pin);
             this.accessToken = this.twitter.getOAuthAccessToken(this.requestToken, this.pin);
+            System.out.println("token = " + this.accessToken.getToken());
+            System.out.println("secret token = " + this.accessToken.getTokenSecret());
+//            this.socialAccountService.insertNewAccountIntoDatabase(
+//                    this.userDataService.getUserFirstName(), this.userDataService.getUserLastName(), 
+//                    this.accessToken.getToken(), this.accessToken.getTokenSecret(), this.userDataService.getUserEmailAddress(), "twitter");
+
        } catch (TwitterException te) {
            te.printStackTrace();
            return false;

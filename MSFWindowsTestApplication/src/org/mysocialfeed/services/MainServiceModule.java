@@ -33,7 +33,7 @@ public class MainServiceModule extends AbstractModule{
         bind(UserDataService.class).to(ManageUserDataService.class).in(Singleton.class);
         bind(UserPostsService.class).to(ManageUserPostsService.class).in(Singleton.class);
         bind(SocialAccountService.class).to(ManageSocialAccountService.class).in(Singleton.class);
-        bind(TwitterService.class).to(MainTwitterService.class).in(Singleton.class);
+        bind(TwitterService.class).to(MainTwitterService.class);
     }
     
 }

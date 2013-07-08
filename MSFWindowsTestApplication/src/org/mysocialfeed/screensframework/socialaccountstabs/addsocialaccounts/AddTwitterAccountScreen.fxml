@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" fx:id="ap" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.5" prefWidth="1321.0" xmlns:fx="http://javafx.com/fxml" fx:controller="org.mysocialfeed.screensframework.socialaccountstabs.addsocialaccounts.AddTwitterAccountScreenController">
@@ -15,7 +16,7 @@
       <bottom>
         <StackPane prefHeight="150.0" prefWidth="200.0">
           <children>
-            <Button mnemonicParsing="false" onAction="#hideWebBrowser" text="OK" StackPane.alignment="BOTTOM_LEFT">
+            <Button fx:id="hideOrShow" mnemonicParsing="false" onAction="#hideOrShowWebBrowser" text="OK" StackPane.alignment="BOTTOM_LEFT">
               <StackPane.margin>
                 <Insets bottom="20.0" left="20.0" />
               </StackPane.margin>
@@ -49,12 +50,15 @@
                 <Insets left="20.0" top="210.0" />
               </StackPane.margin>
             </Button>
-            <Label fx:id="successMsg1" text="Congratulations ! You have successfully authentificate this application." textFill="#00cc21" visible="false">
+            <Label fx:id="successMsg1" text="Congratulations ! You have successfully authentificate this application." visible="false">
               <font>
                 <Font name="System Bold" size="18.0" fx:id="x1" />
               </font>
+              <textFill>
+                <Color blue="0.129" green="0.800" red="0.000" fx:id="x3" />
+              </textFill>
             </Label>
-            <Label fx:id="successMsg2" font="$x1" text="Shall we display your timeline ?" textFill="#00cc21" visible="false">
+            <Label fx:id="successMsg2" font="$x1" text="Shall we display your timeline ?" textFill="$x3" visible="false">
               <StackPane.margin>
                 <Insets top="50.0" fx:id="x2" />
               </StackPane.margin>

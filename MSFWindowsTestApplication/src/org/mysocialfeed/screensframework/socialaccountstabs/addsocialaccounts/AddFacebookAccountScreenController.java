@@ -90,7 +90,7 @@ public class AddFacebookAccountScreenController extends ControlledScreen impleme
               && !(this.userLastName.getText().isEmpty())
               && !(this.userEmailAddr.getText().isEmpty())) {
             if (this.socialAccountService.insertNewAccountIntoDatabase(
-                    userFirstName.getText(), userLastName.getText(), this.userEmailAddr.getText(), "facebook") ) {
+                    userFirstName.getText(), userLastName.getText(), this.userEmailAddr.getText(), null, null, "facebook") ) {
                 this.userDataService.setNbFacebook(this.userDataService.getNbFbAccount() + 1);
                 this.successMessage1.setVisible(true);
                 this.successMessage2.setVisible(true);

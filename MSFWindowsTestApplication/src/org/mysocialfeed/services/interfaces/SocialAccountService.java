@@ -11,5 +11,6 @@ package org.mysocialfeed.services.interfaces;
 
 public interface SocialAccountService {
     public boolean insertNewAccountIntoDatabase(final String firstName, 
-            final String lastName, final String emailAddr, final String type);
+            final String lastName, final String emailAddr, 
+            final String token, final String tokenSecret, final String table);
 }

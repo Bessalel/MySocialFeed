@@ -262,6 +262,8 @@ public class SetupMySQLService implements MySQLService {
             + "firstname VARCHAR(255), "
             + "lastname VARCHAR(255), "
             + "email VARCHAR(255), "
+            + "token VARCHAR(255), "
+            + "tokensecret VARCHAR(255), "
             + "CONSTRAINT users_fk FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
             + ");";
 
@@ -273,6 +275,8 @@ public class SetupMySQLService implements MySQLService {
             + "firstname VARCHAR(255), "
             + "lastname VARCHAR(255), "
             + "email VARCHAR(255), "
+            + "token VARCHAR(255), "
+            + "tokensecret VARCHAR(255), "
             + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
             + ");";
 
@@ -283,6 +287,8 @@ public class SetupMySQLService implements MySQLService {
             + "firstname VARCHAR(255), "
             + "lastname VARCHAR(255), "
             + "email VARCHAR(255), "
+            + "token VARCHAR(255), "
+            + "tokensecret VARCHAR(255), "
             + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
             + ");";
 
@@ -293,6 +299,8 @@ public class SetupMySQLService implements MySQLService {
             + "firstname VARCHAR(255), "
             + "lastname VARCHAR(255), "
             + "email VARCHAR(255), "
+            + "token VARCHAR(255), "
+            + "tokensecret VARCHAR(255), "
             + "FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE"
             + ");";
 
@@ -317,9 +325,9 @@ public class SetupMySQLService implements MySQLService {
             + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     private final String INSERT_ANY_ACCOUNT = ""
-            + "userid, firstname, lastname, email"
+            + "userid, firstname, lastname, email, token, tokensecret"
             + ")"
-            + " VALUES(?, ?, ?, ?);";
+            + " VALUES(?, ?, ?, ?, ?, ?);";
     
     private final String INSERT_FACEBOOK_ACCOUNT = "" 
             + "INSERT INTO facebook("

@@ -33,7 +33,8 @@ public class ManageSocialAccountService implements SocialAccountService {
     }
     
     private boolean insertAccount(
-            final String firstName, final String lastName, final String emailAddr, final String table) {
+            final String firstName, final String lastName, final String emailAddr, 
+            final String token, final String tokenSecret, final String table) {
         try {
             if (accessSQLService().isClosed() == true) {
                accessSQLService(); // putting a while here would freeze the program if always false... so only one attempt for the momment
@@ -46,6 +47,8 @@ public class ManageSocialAccountService implements SocialAccountService {
                             insertNewAccount.setString(2, firstName);
                             insertNewAccount.setString(3, lastName);
                             insertNewAccount.setString(4, emailAddr);
+                            insertNewAccount.setString(5, token);
+                            insertNewAccount.setString(6, tokenSecret);
                             insertNewAccount.execute();
                 }
                 this.conn.commit();
@@ -96,8 +99,9 @@ public class ManageSocialAccountService implements SocialAccountService {
     
     @Override
     public boolean insertNewAccountIntoDatabase(
-            final String firstName, final String lastName, final String emailAddr, final String table) {
-        if (insertAccount(firstName, lastName, emailAddr, table)) {
+            final String firstName, final String lastName, final String emailAddr, 
+            final String token, final String tokenSecret, final String table) {
+        if (insertAccount(firstName, lastName, emailAddr, token, tokenSecret, table)) {
             return updateUserData(table);
         }
         return false;

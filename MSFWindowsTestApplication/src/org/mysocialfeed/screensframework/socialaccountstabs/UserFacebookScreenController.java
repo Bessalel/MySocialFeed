@@ -19,7 +19,6 @@ import org.joda.time.DateTime;
 
 import org.mysocialfeed.screensframework.ControlledScreen;
 import org.mysocialfeed.screensframework.FXMLGetResourcer;
-import org.mysocialfeed.screensframework.ScreensController;
 import org.mysocialfeed.services.repository.UserDataService;
 import org.mysocialfeed.services.repository.UserPostsService;
 
@@ -48,7 +47,7 @@ public class UserFacebookScreenController extends ControlledScreen implements In
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         setDefaultProperties();
-    }    
+    }
     
     
     private Label formatMessage(String message, DateTime dt) {
@@ -56,7 +55,9 @@ public class UserFacebookScreenController extends ControlledScreen implements In
         DateTime.Property pDoW = dt.dayOfWeek();
         DateTime.Property pMoY = dt.monthOfYear();
         Label temp = new Label(message + "\n\nwrote on " + pDoW.getAsText(Locale.ENGLISH)
-                + " " + pMoY.getAsText(Locale.ENGLISH) + " " + dt.getYear()
+                + " " + dt.dayOfMonth().getAsShortText(Locale.ENGLISH) + " " 
+                + dt.monthOfYear().getAsText(Locale.ENGLISH) + " " + dt.getYear() + " "
+                + "at " + dt.hourOfDay().getAsString() + "H" + dt.minuteOfHour().getAsText(Locale.ENGLISH)
                 + " by " + this.userDataService.getUserName() + "\n\n");
         
         if (this.backGroundStyle.isEmpty() || this.backGroundStyle == "-fx-background-color: #F8F8FF;") {
@@ -71,10 +72,13 @@ public class UserFacebookScreenController extends ControlledScreen implements In
     }
     
     private void addMessagesToTimeline(int iterator) {
+        
         for (int it = iterator ; it > 0; it-- ) { // to display messages from most recent to oldest
                 this.vb.getChildren().add(formatMessage(
                         this.userPostsService.getContent(it), this.userPostsService.getTimeStamp(it)));
             }
+        this.backGroundStyle = this.vb.getChildrenUnmodifiable().get(this.vb.getChildrenUnmodifiable().size() -1).getStyle();
+        System.out.println(this.backGroundStyle = this.vb.getChildrenUnmodifiable().get(this.vb.getChildrenUnmodifiable().size() - 1).getStyle());
     }
     
     private void setDefaultProperties() {
