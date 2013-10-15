@@ -4,9 +4,6 @@
  */
 package org.mysocialfeed.screensframework;
 
-import java.net.URL;
-import javafx.scene.Node;
-
 /**
  *
  * @author Vincent
